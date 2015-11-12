@@ -91,7 +91,7 @@ router.post('/create_tournament', passport.authenticate('local'), function(req, 
 					riot.createTournament(req.body.name, response.providerId, function(err, response) {
 						if (!err) {
 							// update the correct item
-							tournaments.update({"tournamentId": response}, {"spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name ,"region": req.body.region, "teamSize": req.body.teamSize}, function (err, numAffected) {});
+							tournaments.update({"tournamentId": response}, {"spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name ,"region": req.body.region, "teamSize": req.body.teamSize, "ownerId": req.session.username}, function (err, numAffected) {});
 							data.success = true;
 						} else {
 							data.success = false;
@@ -109,11 +109,11 @@ router.post('/create_tournament', passport.authenticate('local'), function(req, 
 		res.json(data);
 	});
 
-router.route('/createTeamsAndMatches').post(function(req,  res) {
+router.post('/createTeamsAndMatches', passport.authenticate('local'), function(req,  res)) {
 	var data = {};
 	// make sure tournament exists
 	var participants = req.body.participants.split(", ");
-	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, response) {
+	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region, "ownerId": req.session.username}, function(err, response) {
 		if (!err) {
 			// now do the algorithm stuff
 			var numberOfParticipants = participants.length;
