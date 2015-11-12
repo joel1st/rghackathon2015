@@ -14,8 +14,8 @@ var tournamentEndpoint = baseUrl + "tournament/";
 var providerEndpoint = baseUrl + "provider/";
 var lobbyEventsEndpoint = baseUrl + "lobby/events/by-code/";
 
-var matchUrl = 'api.pvp.net/api/lol/';
-var matchEndpoint = 'v2.2/match/';
+var matchUrl = '.api.pvp.net/api/lol/';
+var matchEndpoint = '/v2.2/match/';
 var matchByTournamentEndpoint = "by-tournament/";
 
 
@@ -185,7 +185,8 @@ module.exports = {
 	},
 
 	getMatchIds: function(region, tournamentCode, callback){
-		
+		var url = protocal + region + matchUrl + region + matchEndpoint + 
+				matchByTournamentEndpoint + tournamentCode + '/ids?api_key=' + config.apiKey;
 		GET({
 			region: region,
 			url: url,
