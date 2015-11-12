@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="GVLegendsApp" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>Laker Legends</title>
+  <!-- JQuery/Bootstrap/AngularJS -->
+  <link rel="stylesheet" href="Scripts/Bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="Scripts/FontAwesome/css/font-awesome.min.css">
+  <script src="Scripts/JQuery/jquery-2.0.3.min.js"></script>
+  <script src="Scripts/AngularJS/angular.js"></script>
+  <script src="Scripts/AngularJS/angular-cookies.js"></script>
+  <script src="Scripts/AngularJS/angular-route.js"></script>
+  <script src="Scripts/Bootstrap/bootstrap.min.js"></script>
+  <script src="Scripts/ChartJS/Chart.min.js"></script>
+  <script src="Scripts/AngularChart/angular-chart.js"></script>
+  <script src="Scripts/SmartTable/smart-table.min.js"></script>
+  <script src="Scripts/SmartTable/smart-table.debug.js"></script>
+
+  <!-- Index CSS and app.js -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="Scripts/AngularChart/angular-chart.css">
+  <script src="Scripts/app.js"></script>
+
+  <!-- Contollers (pages) -->
+  <script src="Modules/admin/adminController.js"></script>
+  <script src="Modules/authentication/controllers.js"></script>
+  <script src="Modules/account/accountController.js"></script>
+  <script src="Modules/events/eventsController.js"></script>
+  <script src="Modules/home/homeController.js"></script>
+  <script src="Modules/register/registerController.js"></script>
+  <script src="Modules/roster/rosterController.js"></script>
+  <script src="Modules/staff/staffController.js"></script>
+  <script src="Modules/streams/streamsController.js"></script>
+  <script src="Modules/teams/teamsController.js"></script>
+  <script src="Modules/calendar/calendarController.js"></script>
+
+  <!-- Factories -->
+
+  <!-- Services -->
+  <script src="Modules/admin/services.js"></script>
+  <script src="Modules/account/services.js"></script>
+  <script src="Modules/authentication/services.js"></script>
+  <script src="Modules/register/services.js"></script>
+</head>
+
+<body ng-controller="HomeController">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <span class="navbar-brand" href="#/home">
+    <img src="./Content/Other/Logos/Logo.png">
+  </span>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="#/home">Home</a></li>
+        <li ng-class="{ 'hidden': !$root.globals.currentUser}"><a href="#/roster">Roster</a></li>
+        <li ng-class="{ 'hidden': !$root.globals.currentUser}" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            Info<b class="caret"></b>
+         </a>
+          <ul class="dropdown-menu">
+            <li><a href="#/events">Events</a></li>
+            <li><a href="#/teams">Teams</a></li>
+            <li><a href="#/streams">Streams</a></li>
+            <li><a href="#/calendar">Calendar</a></li>
+          </ul>
+        </li>
+        <li ng-class="{ 'hidden': !$root.globals.currentUser}"><a href="#/staff">Staff</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right btn-group">
+        <a class="btn btn-warning" href="#/admin" style="width:80px; margin-right:5px" ng-class="{ 'hidden': !$root.globals.currentUser.officer || $root.globals.currentUser.officer == 0}">Admin</a>
+        <a class="btn btn-primary" href="#/account" style="width:80px; margin-right:5px" ng-class="{ 'hidden': !$root.globals.currentUser}">Account</a>
+        <a class="btn btn-danger" ng-click="logout()" style="width:80px; margin-right:15px" ng-class="{ 'hidden': !$root.globals.currentUser}">Logout</a>
+      </ul>
+      <ul class="nav navbar-nav navbar-right btn-group">
+        <a class="btn btn-info" href="#/register" style="width:80px; margin-right:5px" ng-class="{ 'hidden': $root.globals.currentUser}">Register</a>
+        <a class="btn btn-success" href="#/login" style="width:80px; margin-right:15px" ng-class="{ 'hidden': $root.globals.currentUser}">Login</a>
+      </ul>
+    </div>
+  </nav>
+  <div class="col-xs-12" id="view" ng-view=""></div>
+</body>
+
+</html>

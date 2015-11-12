@@ -1,0 +1,73 @@
+a {
+  padding-left:15px;
+  padding-right:0px;
+  vertical-align:middle;
+}
+.btn {
+
+}
+.form-actions {
+  text-align:left;
+}
+span#basic-addon2 {
+  padding-right: 15px;
+}
+.loginForm, .input-group-addon {
+  font-size: 25px;
+}
+.input-group, .form-actions {
+  max-width: 300px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.form-control {
+  height: auto;
+}
+#loginImage {
+  background-image: url('/hackathon/Content/login.png');
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height:90vh;
+}
+#loginContainer{
+  min-width:350px;
+  max-width: 350px;
+  background:rgba(255,255,255, 0.8);
+  border-radius: 25px;
+  border: 2px solid black;
+  padding-right:5px;
+  padding-left:5px;
+  padding-top:20px;
+  padding-bottom:20px;
+  margin: 0 auto;
+}
+.form-actions > a {
+  color:black;
+}
+.form-actions > a:hover {
+  text-decoration: none;
+  color:deepskyblue;
+}
+#loginPadding {
+  padding-top:100px;
+}
+#view {
+  padding-right:0px;
+  padding-left: 0px;
+}
+input.ng-invalid {
+  border:1px solid #ccc;
+}
+input.ng-valid {
+  border:1px solid limegreen;
+}
+.help-block {
+  margin-top:0px;
+  margin-bottom:0px;
+  color:white;
+  background-color:red;
+  border:2px solid red;
+}

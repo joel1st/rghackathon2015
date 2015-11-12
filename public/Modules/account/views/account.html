@@ -1,0 +1,322 @@
+<link rel="stylesheet" href="./modules/account/style.css" />
+<br />
+  <div class="col-sm-2">
+    <img src="http://fc05.deviantart.net/fs70/f/2012/230/2/9/astronaut_teemo_by_fazie69-d5bmbam.png" width=200 />
+  </div>
+  <div class="col-sm-offset-1 col-sm-9">
+    <div>
+      <div class="alert alert-success" id="success-alert">
+        <strong>Success! </strong>
+        {{good}}
+      </div>
+      <div class="alert alert-danger" id="failure-alert">
+        <strong>Failure! </strong>
+        {{error}}
+      </div>
+      <h1>Welcome,
+        <strong>{{userData.name}}</strong>!</h1>
+      <br />
+      <div>
+        <h3>What would you like to edit?</h3>
+      </div>
+      <br />
+
+      <!-- Personal Information -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span class="panel-title">Personal Info</span>
+          <div class="pull-right" style="margin-top:-4px">
+            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal1" ng-disabled="edited">Edit</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tr>
+              <th class="col-sm-6">Name
+              </th>
+              <td class="col-sm-6">{{userData.name}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Summoner
+              </th>
+              <td class="col-sm-6">{{userData.summoner}} ({{userData.summonerid}})
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Email
+              </th>
+              <td class="col-sm-6">{{userData.email}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Twitch.tv
+              </th>
+              <td class="col-sm-6">{{userData.twitch}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Biography
+              </th>
+              <td class="col-sm-6"><div style="word-break: break-all">{{userData.summonerdescription}}</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Champions and Roles -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span class="panel-title">Champions/Roles</span>
+          <div class="pull-right" style="margin-top:-4px">
+            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal2" ng-disabled="edited">Edit</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tr>
+              <th class="col-sm-6">Champion 1
+              </th>
+              <td class="col-sm-6">{{userData.champion1}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Champion 2
+              </th>
+              <td class="col-sm-6">{{userData.champion2}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Champion 3
+              </th>
+              <td class="col-sm-6">{{userData.champion3}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Role 1
+              </th>
+              <td class="col-sm-6">{{userData.role1}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Role 2
+              </th>
+              <td class="col-sm-6">{{userData.role2}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- Elos -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <span class="panel-title">Elo</span>
+          <div class="pull-right" style="margin-top:-4px">
+            <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal3" ng-disabled="edited">Edit</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tr>
+              <th class="col-sm-6">Current Elo
+              </th>
+              <td class="col-sm-6">{{userData.elo}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Season 1
+              </th>
+              <td class="col-sm-6">{{userData.s1}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Season 2
+              </th>
+              <td class="col-sm-6">{{userData.s2}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Season 3
+              </th>
+              <td class="col-sm-6">{{userData.s3}}
+              </td>
+            </tr>
+            <tr>
+              <th class="col-sm-6">Season 4
+              </th>
+              <td class="col-sm-6">{{userData.s4}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form name="myForm1">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Personal Info</h4>
+              </div>
+              <div class="modal-body">
+                <table class="table" style="font-size:20px">
+                  <tr>
+                    <th style="border:none">Name
+                      <br />
+                      <input class="formAdd" type="text" ng-model="userData.name" style="width:100%" required />
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Summoner
+                      <br />
+                      <input class="formAdd" type="text" ng-model="userData.summoner" style="width:100%" required />
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Email
+                      <br />
+                      <input class="formAdd" type="text" ng-model="userData.email" style="width:100%" required />
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Twitch
+                      <br />
+                      <input class="formAdd" type="text" ng-model="userData.twitch" style="width:100%"></input>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Biography
+                      <br />
+                      <textarea class="formAdd" type="text" ng-model="userData.summonerdescription" style="width:100%;" ng-maxlength="1000" ng-trim="false"></textarea>
+                      <br />
+                      <span>{{1000 - userData.summonerdescription.length}} left</span>
+                    </th>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <input class="btn btn-success" type="submit" value="Submit" ng-click="editInfo();disableEdits()" ng-disabled="myForm1.$invalid" style="width:100px">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="width:100px">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form name="myForm2">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Champions/Roles</h4>
+              </div>
+              <div class="modal-body">
+                <table class="table" style="font-size:20px">
+                  <tr>
+                    <th style="border:none">Champion 1
+                      <br />
+                      <select ng-model="userData.champion1" ng-options="currOption.name as currOption.name for currOption in championData" style="width:100%"></select>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Champion 2
+                      <br />
+                      <select ng-model="userData.champion2" ng-options="currOption.name as currOption.name for currOption in championData" style="width:100%"></select>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Champion 3
+                      <br />
+                      <select ng-model="userData.champion3" ng-options="currOption.name as currOption.name for currOption in championData" style="width:100%"></select>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Role 1
+                      <br />
+                      <select ng-model="userData.role1" ng-options="currOption.name as currOption.name for currOption in roleData" style="width:100%"></select>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Role 2
+                      <br />
+                      <select ng-model="userData.role2" ng-options="currOption.name as currOption.name for currOption in roleData" style="width:100%"></select>
+                    </th>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <input class="btn btn-success" type="submit" value="Submit" ng-click="editChampRole();disableEdits()" ng-disabled="myForm2.$invalid" style="width:100px">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="width:100px">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form name="myForm3">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Elos</h4>
+              </div>
+              <div class="modal-body">
+                <table class="table" style="font-size:20px">
+                  <tr>
+                    <th style="border:none">Current Elo
+                      <br />
+                      <select ng-model="userData.elo" ng-options="currOption.name as currOption.name for currOption in eloData" style="width:100%"></select>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Season 1 Elo
+                      <br />
+                      <select ng-model="userData.s1" ng-options="currOption.name as currOption.name for currOption in badgeData" style="width:100%"></select>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Season 2 Elo
+                      <br />
+                      <select ng-model="userData.s2" ng-options="currOption.name as currOption.name for currOption in badgeData" style="width:100%"></select>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Season 3 Elo
+                      <br />
+                      <select ng-model="userData.s3" ng-options="currOption.name as currOption.name for currOption in badgeData" style="width:100%"></select>
+                  </tr>
+                  <tr>
+                    <th style="border:none">Season 4 Elo
+                      <br />
+                      <select ng-model="userData.s4" ng-options="currOption.name as currOption.name for currOption in badgeData" style="width:100%"></select>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <input class="btn btn-success" type="submit" value="Submit" ng-click="editElo();disableEdits()" ng-disabled="myForm3.$invalid" style="width:100px">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="width:100px">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

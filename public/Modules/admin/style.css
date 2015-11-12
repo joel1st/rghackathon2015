@@ -1,0 +1,54 @@
+button.btn.btn-primary.menuBtn,button.btn.btn-info.menuBtn {
+  max-width:150px;
+}
+input {
+  width:100%;
+}
+#editList
+{
+ height: 600px;
+ overflow: auto;
+}
+img.ng-scope {
+  width: 50px;
+  height:50px;
+}
+td.col-sm-3.ng-binding,td.col-sm-2.ng-binding,td.col-sm-1.ng-binding {
+  vertical-align:middle;
+}
+.officerClass {
+  background-color:rgba(255, 0, 0, .25);
+}
+.col-sm-1 > button {
+  max-width:35px;
+  font-size:20px;
+}
+tbody > tr:hover {
+  border:3px solid deepskyblue;
+  font-weight:bold;
+}
+table.editTable > tbody > tr:hover {
+  border:none;
+}
+tbody > tr.officer:hover {
+  border:3px solid #FF0033;
+  font-weight:bold;
+}
+td.ng-binding.notOfficerInfo {
+  background-color:deepskyblue;
+  font-weight:bold;
+  font-style:italic;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-bottom:20px;
+  padding-top:15px;
+}
+td.ng-binding.officerInfo {
+  background-color:#FF0033;
+  font-weight:bold;
+  font-style:italic;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-bottom:20px;
+  padding-top:15px;
+}
