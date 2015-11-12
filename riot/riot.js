@@ -192,11 +192,10 @@ module.exports = {
         });
 	},
 
-	getMatchIds: function(region, tournamentCode, callback){
-		var url = protocal + region + matchUrl + region + matchEndpoint + 
+	getMatchIdsByTournament: function(region, tournamentCode, callback){
+		var url = protocol + region + matchUrl + region + matchEndpoint + 
 				matchByTournamentEndpoint + tournamentCode + '/ids?api_key=' + config.apiKey;
 		GET({
-			region: region,
 			url: url,
 			callback: callback
 		});
