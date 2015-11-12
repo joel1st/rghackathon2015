@@ -58,7 +58,7 @@ passport.deserializeUser(Account.deserializeUser());
 
 // API to communicate with frontend
 app.use('/api', api);
-
-app.listen(process.env.PORT || 1337, function() {
-	console.log('Server running at http://127.0.0.1:1337/');
+var port = process.env.PORT || 1337;
+app.listen(port, function() {
+	console.log('Server running at http://127.0.0.1:' + port);
 });
