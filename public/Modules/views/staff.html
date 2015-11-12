@@ -1,0 +1,28 @@
+
+<link rel="stylesheet" href="./modules/staff/style.css" />
+<br />
+<h1>Officers and Important People</h1>
+<!-- <div id="teamGraph">
+<canvas id="line" class="chart chart-line" data="data"
+  labels="labels" colours="colors" legend="true" series="series"
+  click="onClick">
+</canvas>
+</div> -->
+<div>
+	<div ng-repeat="officer in officers">
+		<h3>{{officer.fullName}}</h3>
+		<br />
+		<p>{{officer.summoner}}</p>
+		<p>{{officer.position}}</p>
+		<br />
+		<br />
+	</div>
+	<div ng-repeat="person in honorable">
+		<h3>{{person.fullName}}</h3>
+		<br />
+		<p>{{person.summoner}}</p>
+		<p>{{person.contribution}}</p>
+		<br />
+		<br />
+	</div>
+</div>
