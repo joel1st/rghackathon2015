@@ -8,8 +8,8 @@ var gamesSchema = new mongoose.Schema({
     blueTeam: Number,
     redTeam: Number,
     result: {
-	type: String,
-	enum: config.resultTypes
+	   type: String,
+	   enum: config.resultTypes
     },
     match: {}
 });
