@@ -1,5 +1,5 @@
 var http = require('http');
-
+var db = require('./db.js');
 var express = require('express');
 var app = express();
 var morgan = require('morgan');
