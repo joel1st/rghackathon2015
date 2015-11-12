@@ -8,6 +8,10 @@ var riot = require('./riot/riot.js');
 var config = require('./config.js');
 var q = require('q');
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '2kb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '2kb', extended: true}));
+
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 

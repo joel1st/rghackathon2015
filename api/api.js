@@ -12,7 +12,14 @@ for signup to front end
 (split into multiple endpoints if needed.)
 */
 router.route('/create_tournament')
-	.get(function(req, res) {
+	.post(function(req, res) {
+		var data = {};
+		if(req.body.owner != '') {
+			data.success = false;
+		} else {
+			data.success = true;
+		} res.json(data);
+
 		res.send('signup');
 	});
 
