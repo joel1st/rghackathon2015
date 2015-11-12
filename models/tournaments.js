@@ -17,6 +17,10 @@ var tournamentSchema = new mongoose.Schema({
 	enum: config.pickTypes	
     	//enum?
     },
+    mapType: {
+	type:String,
+	enum: config.mapTypes
+    }
     created: Date,
     modified: Date,
     teams: [Number] // team ids

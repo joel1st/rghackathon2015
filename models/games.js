@@ -7,6 +7,10 @@ var gamesSchema = new mongoose.Schema({
     gameCode: String,
     blueTeam: Number,
     readTeam: Number,
+    result: {
+	type: String,
+	enum: config.resultTypes
+    }
     match: String // containing the file name for the data
 });
 

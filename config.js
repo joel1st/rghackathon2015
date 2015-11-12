@@ -5,5 +5,7 @@ module.exports = {
 	},
 	supportedRegions: ['NA'],
 	pickTypes: ['DRAFT_MODE', 'BLIND_PICK', 'ALL_RANDOM', 'TOURNAMENT_DRAFT'],
-	spectateTypes: ['ALL', 'NONE', 'LOBBYONLY']
+	spectateTypes: ['ALL', 'NONE', 'LOBBYONLY'],
+	mapTypes: ['SUMMONERS_RIFT', 'CRYSTAL_SCAR', 'HOWLING_ABYSS'],
+	resultTypes: ['BLUE_WIN', 'RED_WIN', 'BLUE_DISQ', 'RED_DISQ']
 };
