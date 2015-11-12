@@ -9,7 +9,7 @@ var tournamentSchema = new mongoose.Schema({
     	type: String,
     	enum: config.supportedRegions 
     },
-    spectate: {
+    spectatorType: {
 		type: String,
 		enum: config.spectateTypes	
 	},

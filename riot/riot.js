@@ -14,6 +14,12 @@ var tournamentEndpoint = baseUrl + "tournament/";
 var providerEndpoint = baseUrl + "provider/";
 var lobbyEventsEndpoint = baseUrl + "lobby/events/by-code/";
 
+var matchUrl = 'api.pvp.net/api/lol/';
+var matchEndpoint = 'v2.2/match/';
+var matchByTournamentEndpoint = "by-tournament/";
+
+
+
 var	key = config.apiKey;
 
 var	retryAfter = 0;
@@ -103,7 +109,7 @@ module.exports = {
 
 	createTournament: function(name, providerId, callback) {
 		var url = protocol + tournamentEndpoint;
-
+		console.log('test');
 		POST({
 			url: url,
 			body: {
@@ -111,6 +117,7 @@ module.exports = {
 					providerId: providerId
 			},
 			callback: function(err, response) {
+				console.log(response);
 				if(!err){
 						var tournament = new tournaments({
 							tournamentId: response
@@ -118,6 +125,8 @@ module.exports = {
 						tournament.save(function(err, saved){
 							if(!err && saved){
 								callback(null, response);
+							} else {
+								callback(err, response);
 							}
 						});
 					}
@@ -130,8 +139,8 @@ module.exports = {
 			callback({"message": "Tournament ID doesn't exist."}, null);
 			return;
 		}
-		if(count > 1000) {
-			callback({"message": "Maximum count exceeded."}, null);
+		if(count > 1000 && count < 1) {
+			callback({"message": "Incorrect count amount."}, null);
 			return;
 		}
 		var url = protocol + codeEndpoint + "?tournamentId=" + tournamentId + "&count=" + count;
@@ -145,7 +154,7 @@ module.exports = {
                     url: url,
                     body: {
                             teamSize : data.teamSize,
-                            spectatorType : data.spectate,
+                            spectatorType : data.spectatorType,
                             pickType : data.pickType,
                             mapType : data.mapType,
                             metadata : ''//{'region' : data.region, 'tournamentId' : data.tournamentId}
@@ -173,6 +182,15 @@ module.exports = {
                 });
             }
         });
+	},
+
+	getMatchIds: function(region, tournamentCode, callback){
+		
+		GET({
+			region: region,
+			url: url,
+			callback: callback
+		});
 	}
 
 };

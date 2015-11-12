@@ -22,6 +22,6 @@ module.exports = function parseResponse(err, response, body, queryOptions){
 	}
 	else {
 		console.log(response.statusCode);
-		queryOptions.callback(response.statusCode, {'status_code': response.statusCode, 'message': responses[response.statusCode].message});
+		queryOptions.callback(response.statusCode, {'status_code': response.statusCode, 'message': responses[response.statusCode] ? responses[response.statusCode].message : "Unkown Error"});
 	}
 }

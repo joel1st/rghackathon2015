@@ -13,7 +13,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '2kb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '2kb', extended: true}));
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 
 
@@ -26,7 +26,13 @@ app.use('/api', api);
 // 	console.log(arguments);	
 // });
 
+
+
 app.get('/', function(req, res) {
+	console.log('>>>', res.locals);
+	riot.createCode(1787, 2, 'NA', function(err, data){
+		console.log("TEST", err, data);
+	});
 	res.sendFile('public/index.html', {'root' : __dirname});
 });
 
