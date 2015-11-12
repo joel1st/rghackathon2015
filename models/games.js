@@ -5,9 +5,12 @@ var config = require('../config.js');
  * individual champion roles on the left hand side of the champion pages.
  */
 var gamesSchema = new mongoose.Schema({
-    tournamentId: String,
     gameId: String,
-    match: {}
+    tournamentId: Number,
+    gameCode: String,
+    blueTeam: Number,
+    readTeam: Number,
+    match: String // containing the file name for the data
 });
 
 module.exports = mongoose.model('games', gamesSchema);
