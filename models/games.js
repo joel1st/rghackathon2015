@@ -11,7 +11,8 @@ var gamesSchema = new mongoose.Schema({
 	   type: String,
 	   enum: config.resultTypes
     },
-    match: {}
+    match: {},
+    order: Number
 });
 
 module.exports = mongoose.model('games', gamesSchema);
