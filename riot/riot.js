@@ -134,6 +134,14 @@ module.exports = {
 		});
 	},
 
+	getMatch: function(matchId, region, includeTimeline, callback) {
+		var url = protocol + region.toLowerCase() + matchUrl + region.toLowerCase() + matchEndpoint + matchId + "?includeTimeline=" + includeTimeline; 	
+		GET({
+				url: url,
+				callback: callback
+		});	
+	},
+
 	createCode: function(tournamentId, count, region, callback) {
 		if(tournamentId == null) {
 			callback({"message": "Tournament ID doesn't exist."}, null);

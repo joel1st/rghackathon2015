@@ -26,8 +26,6 @@ app.use('/api', api);
 // 	console.log(arguments);	
 // });
 
-
-
 app.get('/', function(req, res) {
 	console.log('>>>', res.locals);
 	riot.createCode(1787, 2, 'NA', function(err, data){
