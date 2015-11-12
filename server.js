@@ -8,6 +8,8 @@ var riot = require('./riot/riot.js');
 var config = require('./config.js');
 var q = require('q');
 
+var tournaments = require('./models/tournaments.js');
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '2kb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '2kb', extended: true}));
@@ -16,6 +18,25 @@ app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 
 var providers = require('./models/providers.js');
+
+
+tournaments.update({'tournamentId': 1745, 'region': 'NA'}, {
+            teamSize : 1,
+            spectate : 'ALL',
+            pickType : 'BLIND_PICK',
+            mapType : 'SUMMONERS_RIFT'
+   		 }, {'upsert': true}, function(err, data){
+   		 	console.log(data);
+   		 	if(!err) {
+   		 		riot.createCode(1745, 2, 'NA', function(err, data) {
+					if(!err) {
+						console.log(data);
+					}
+				});
+   		 	}
+
+   		 });
+
 
 
 function checkForProvider(req, res, region){
@@ -42,7 +63,6 @@ function checkForProvider(req, res, region){
 
 
 app.use(function(req, res, next){
-	console.log("!!!!")
 	var supported = config.supportedRegions;
 	var arrayOfProviders = [];
 	console.log('supp', supported);

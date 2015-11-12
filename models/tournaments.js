@@ -4,6 +4,7 @@ var config = require('../config.js');
 var tournamentSchema = new mongoose.Schema({
     ownerId: Number, // reference to users
     tournamentId: Number,
+    teamSize: Number,
     region: {
     	type: String,
     	enum: config.supportedRegions 
@@ -20,7 +21,7 @@ var tournamentSchema = new mongoose.Schema({
     mapType: {
 	type:String,
 	enum: config.mapTypes
-    }
+    },
     created: Date,
     modified: Date,
     teams: [Number] // team ids

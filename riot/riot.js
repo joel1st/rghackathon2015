@@ -4,10 +4,12 @@ var responseHandler = require('./response_handler.js');
 var config = require('../config.js');
 
 var providers = require('../models/providers.js');
+var tournaments = require('../models/tournaments.js');
+var games = require('../models/games.js');
 
 var protocol = "https://";
 var	baseUrl = "global.api.pvp.net/tournament/public/v1/";
-var codeEndpoint = baseUrl + "code/";
+var codeEndpoint = baseUrl + "code";
 var tournamentEndpoint = baseUrl + "tournament/";
 var providerEndpoint = baseUrl + "provider/";
 var lobbyEventsEndpoint = baseUrl + "lobby/events/by-code/";
@@ -46,9 +48,9 @@ function POST(options) {
 		request.post({
 			headers: {'x-riot-token' : key},
 			url:     options.url,
-			body:    option.body
+			json:    options.body
 		}, function(error, response, body){
-			responseHandler(err, response, body, options);
+			responseHandler(error, response, body, options);
 			done();
 
 		});
@@ -60,9 +62,9 @@ function POST(options) {
 
 module.exports = {
 
-	// Get summoner by name
+	
 	getTournamentCode: function(tournamentCode, callback) {
-			var url = protocol + codeEndpoint + tournamentCode;
+			var url = protocol + codeEndpoint + '/' + tournamentCode;
 			GET({
 				url: url,
 				callback: callback
@@ -80,33 +82,95 @@ module.exports = {
 					url:config.callbackUrl,
 					region: region
 				},
-				callback: function(err, response){
+				callback: function(err, response) {
 					if(!err){
 						var provider = new providers({
 							region: region,
-							providerId: response.body
+							providerId: response
 						});
 						provider.save(function(err, saved){
 							if(!err && saved){
-								callback(null, response.body);
+								callback(null, response);
 							}
 						});
 					}
 					
 				}
 			});
-
-				
-			
 	},
 
-	postProvider: function(region, url) {
-		var url = protocol + providerEndpoint;
+	createTournament: function(name, providerId, callback) {
+		var url = protocol + tournamentEndpoint;
+
 		POST({
-			body: 'create a body',
 			url: url,
-			callback: callback
+			body: {
+					name: name,
+					providerId: providerId
+			},
+			callback: function(err, response) {
+				if(!err){
+						var tournament = new tournaments({
+							tournamentId: response
+						});
+						tournament.save(function(err, saved){
+							if(!err && saved){
+								callback(null, response);
+							}
+						});
+					}
+			}
 		});
+	},
+
+	createCode: function(tournamentId, count, region, callback) {
+		if(tournamentId == null) {
+			callback({"message": "Tournament ID doesn't exist."}, null);
+			return;
+		}
+		if(count > 1000) {
+			callback({"message": "Maximum count exceeded."}, null);
+			return;
+		}
+		var url = protocol + codeEndpoint + "?tournamentId=" + tournamentId + "&count=" + count;
+
+        tournaments.findOne({'tournamentId': tournamentId, 'region': region}, function(err, data) {
+            if(err) {
+                console.error('Error: ' + err);
+            } else {
+                console.log(data);
+                POST({
+                    url: url,
+                    body: {
+                            teamSize : data.teamSize,
+                            spectatorType : data.spectate,
+                            pickType : data.pickType,
+                            mapType : data.mapType,
+                            metadata : ''//{'region' : data.region, 'tournamentId' : data.tournamentId}
+                    },
+                    callback: function(err, response) {
+                        if(!err){
+                                var savedGames = [];
+                                for(var i = 0; i < response.length; i++) {
+                                    var game = new games({
+                                        gameId: response[i]
+                                    });
+                                    (function(i){
+                                        game.save(function(err, saved){
+                                            if(!err && saved){
+                                                savedGames.push(response[i]);
+                                                console.log(savedGames);
+                                            }
+                                        });
+                                        
+                                    })(i)
+                                    
+                                } callback(null, savedGames);
+                            }
+                    }
+                });
+            }
+        });
 	}
 
 };

@@ -16,9 +16,12 @@ module.exports = function parseResponse(err, response, body, queryOptions){
 		queryOptions.callback(err, {'message': err.message});
 	}
 	else if (response.statusCode === 200) {
-		queryOptions.callback(null, JSON.parse(body));
+		var responseData = (typeof body === 'string') ? responseData = JSON.parse(body) : body;
+		
+		queryOptions.callback(null, responseData);
 	}
 	else {
+		console.log(response.statusCode);
 		queryOptions.callback(response.statusCode, {'status_code': response.statusCode, 'message': responses[response.statusCode].message});
 	}
 }
