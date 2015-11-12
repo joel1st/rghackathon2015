@@ -1,4 +1,7 @@
 var request = require('request');
+var queue = require('queue');
+var responseHandler = require('./response_handler.js');
+var config = require('../config.js');
 
 var protocol = "https://";
 var	baseUrl = "global.api.pvp.net/tournament/public/v1/";
@@ -7,55 +10,68 @@ var tournamentEndpoint = baseUrl + "tournament";
 var providerEndpoint = baseUrl + "provider";
 var lobbyEventsEndpoint = baseUrl + "lobby/events/by-code"
 
-var	key = "08da07b1-45b3-4b33-bc52-12a68e2af68e";
+var	key = config.apiKey;
 
 var	retryAfter = 0;
 var	summonerRetryAfter = 0;
 
+var queue = queue();
+queue.concurrency = 10;
+
+
+// Ask Rito for data
+function GET(options) {
+	queue.push(function(done){
+
+		request.get({
+			headers: {'x-riot-token' : key},
+			url: options.url,
+		}, function(err, response, body) {
+			responseHandler(err, response, body, options);
+			done();
+		});
+
+	});
+
+	// This will start the queue if it isn't already started.
+	queue.start();
+}
+
+
+function POST(options) {
+	queue.push(function(done){
+		request.post({
+			headers: {'x-riot-token' : key},
+			url:     url,
+			body:    body
+		}, function(error, response, body){
+			responseHandler(err, response, body, options);
+			done();
+
+		});
+	});
+
+	// This will start the queue if it isn't already started.
+	queue.start();
+}
+
 module.exports = {
 
 	// Get summoner by name
-	getTournamentCode: function(tournamentCode) {
+	getTournamentCode: function(tournamentCode, url) {
 			var url = protocol + codeEndpoint;
-			GET(url, callback);
+			GET({
+				url: url,
+				callback: callback
+			});
 	},
 
 	postProvider: function(region, url) {
 		var url = protocol + providerEndpoint;
-		POST(url, callback);
+		POST({
+			url: url,
+			callback: callback
+		});
 	}
 
 };
-
-// Ask Rito for data
-function GET(url, endpoint, callback) {
-	request.get({
-		headers: {'x-riot-token' : key},
-		url: url,
-	}, function(err, response, body) {
-		if(err) {
-			console.log("Error: " + err);
-			callback(123, {'status_code': 123, 'message': 'Request Error'});
-		}
-		else if(response.statusCode === 200) {
-			callback(response.statusCode, JSON.parse(body));
-		}
-		else if(response.statusCode === 429) {
-			callback(response.statusCode, {'status_code': response.statusCode, 'message': 'Rate Limit Exceeded'});
-		}
-		else {
-			callback(response.statusCode, {'status_code': response.statusCode, 'message': 'Something went wrong.'});
-		}
-	});
-
-
-	function POST(url, body)	{
-		request.post({
-  			headers: {'x-riot-token' : key},
-  			url:     url,
-  			body:    body
-	}, function(error, response, body){
-  		console.log(body);
-	});
-	};
-}
