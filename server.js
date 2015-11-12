@@ -5,8 +5,7 @@ var app = express();
 var morgan = require('morgan');
 var api = require('./api/api.js');
 var riot = require('./riot/riot.js');
-var config = require('./config.js');
-var q = require('q');
+var getProviders = require('./middleware/get_providers.js');
 
 var tournaments = require('./models/tournaments.js');
 
@@ -17,67 +16,8 @@ app.use(bodyParser.urlencoded({limit: '2kb', extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 
-var providers = require('./models/providers.js');
 
-
-tournaments.update({'tournamentId': 1745, 'region': 'NA'}, {
-            teamSize : 1,
-            spectate : 'ALL',
-            pickType : 'BLIND_PICK',
-            mapType : 'SUMMONERS_RIFT'
-   		 }, {'upsert': true}, function(err, data){
-   		 	console.log(data);
-   		 	if(!err) {
-   		 		riot.createCode(1745, 2, 'NA', function(err, data) {
-					if(!err) {
-						console.log(data);
-					}
-				});
-   		 	}
-
-   		 });
-
-
-
-function checkForProvider(req, res, region){
-	var deferred = q.defer();
-	providers.findOne({'region': supported[i]}, function(err, data){
-		if(!req.providers){
-			req.providers = {};
-		}
-
-		if(err || !data){
-			riot.postProviderIds(supported[i], function(err, providerId){
-				req.providers[supported[i]] = providerId;
-			});
-
-		} else {
-			req.providers[supported[i]] = data.providerId;
-
-		}
-		deferred.resolve();
-	});
-
-	return deferred.promise;
-}
-
-
-app.use(function(req, res, next){
-	var supported = config.supportedRegions;
-	var arrayOfProviders = [];
-	console.log('supp', supported);
-	for(var i = 0; i < supported.length; i++){	
-		console.log('inside the array');
-		arrayOfProviders.push(checkForProvider(req, res, supported[i]));
-
-	}
-
-	q.all(arrayOfProviders).then(function(){
-		next();
-	})
-	.done();
-
-});
+app.use(getProviders);
 
 // API to communicate with frontend
 app.use('/api', api);

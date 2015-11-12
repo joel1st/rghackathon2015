@@ -49,8 +49,8 @@ function POST(options) {
 			headers: {'x-riot-token' : key},
 			url:     options.url,
 			json:    options.body
-		}, function(error, response, body){
-			responseHandler(error, response, body, options);
+		}, function(err, response, body){
+			responseHandler(err, response, body, options);
 			done();
 
 		});
@@ -91,6 +91,8 @@ module.exports = {
 						provider.save(function(err, saved){
 							if(!err && saved){
 								callback(null, response);
+							} else {
+								callback(err, saved);
 							}
 						});
 					}
