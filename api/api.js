@@ -12,6 +12,10 @@ var providers = require('../models/providers.js');
 var tournaments = require('../models/tournaments.js');
 // api -------------------------
 
+router.post('/riot_notification', function(req, res, next) {
+	console.log(res.body);
+});
+
 router.post('/login', passport.authenticate('local'), function(req, res, next) {
     req.session.save(function (err) {
         if (err) {
