@@ -52,13 +52,16 @@ router.route('/create_tournament')
 						if (!err) {
 							// update the correct item
 							tournaments.update({"tournamentId": response}, {"spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name}, function (err, numAffected) {});
+							data.success = true;
+						} else {
+							data.success = false;
 						}
+					res.json(data);
 					});
-					data.success = true;
 				} else {
 					data.success = false;
+					res.json(data);
 				}
-				res.json(data);
 			});
 			return;
 		}
