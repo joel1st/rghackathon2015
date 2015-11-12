@@ -11,7 +11,7 @@ Send whatever data is needed
 for signup to front end 
 (split into multiple endpoints if needed.)
 */
-router.route('/sign_up')
+router.route('/create_tournament')
 	.get(function(req, res) {
 		res.send('signup');
 	});
