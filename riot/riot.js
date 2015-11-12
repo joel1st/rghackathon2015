@@ -46,7 +46,7 @@ function POST(options) {
 		request.post({
 			headers: {'x-riot-token' : key},
 			url:     options.url,
-			form:    options.body
+			json:    options.body
 		}, function(err, response, body){
 			responseHandler(err, response, body, options);
 			done();
@@ -84,11 +84,13 @@ module.exports = {
 					if(!err){
 						var provider = new providers({
 							region: region,
-							providerId: response.body
+							providerId: response
 						});
 						provider.save(function(err, saved){
 							if(!err && saved){
-								callback(null, response.body);
+								callback(null, response);
+							} else {
+								callback(err, saved);
 							}
 						});
 					}

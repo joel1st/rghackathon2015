@@ -12,11 +12,12 @@ function checkForProvider(req, res, region){
 
 		if(err || !data){
 			riot.postProviderIds(region, function(err, providerId){
-				res.locals.providers[region] = providerId;
+				cachedProviders = res.locals.providers[region] = providerId;
 			});
 
 		} else {
-			res.locals.providers[region] = data.providerId;
+
+			cachedProviders = res.locals.providers[region] = data.providerId;
 
 		}
 		deferred.resolve();
@@ -25,9 +26,11 @@ function checkForProvider(req, res, region){
 	return deferred.promise;
 }
 
+var cachedProviders;
 
 module.exports = function(req, res, next){
-	if(res.locals.providers){
+	if(cachedProviders){
+		console.log('cache is hit');
 		next();
 	} else {
 		var supported = config.supportedRegions;

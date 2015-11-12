@@ -5,9 +5,15 @@ var config = require('../config.js');
  * individual champion roles on the left hand side of the champion pages.
  */
 var providerSchema = new mongoose.Schema({
-    providerId: Number,
+    providerId: {
+    	type: Number,
+    	required: true,
+    	unique: true
+    },
     region: {
     	type: String,
+    	required: true,
+    	unique: true,
     	enum: config.supportedRegions 
     } 
 });
