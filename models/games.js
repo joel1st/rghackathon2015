@@ -6,12 +6,12 @@ var gamesSchema = new mongoose.Schema({
     tournamentId: Number,
     gameCode: String,
     blueTeam: Number,
-    readTeam: Number,
+    redTeam: Number,
     result: {
 	type: String,
 	enum: config.resultTypes
-    }
-    match: String // containing the file name for the data
+    },
+    match: {}
 });
 
 module.exports = mongoose.model('games', gamesSchema);
