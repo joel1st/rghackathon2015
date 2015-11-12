@@ -109,7 +109,7 @@ router.post('/create_tournament', passport.authenticate('local'), function(req, 
 		res.json(data);
 	});
 
-router.post('/createTeamsAndMatches', passport.authenticate('local'), function(req,  res)) {
+router.post('/createTeamsAndMatches', passport.authenticate('local'), function(req,  res) {
 	var data = {};
 	// make sure tournament exists
 	var participants = req.body.participants.split(", ");
