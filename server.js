@@ -30,7 +30,7 @@ app.use('/api', api);
 
 app.get('/', function(req, res) {
 	console.log('>>>', res.locals);
-	riot.createCode(1787, 2, 'NA', function(err, data){
+	riot.getMatchIdsByTournament('NA', 'NA0416f-45486ada-ed63-4e28-80b0-69d01f7c8652', function(err, data){
 		console.log("TEST", err, data);
 	});
 	res.sendFile('public/index.html', {'root' : __dirname});
