@@ -5,55 +5,14 @@ var app = express();
 var morgan = require('morgan');
 var api = require('./api/api.js');
 var riot = require('./riot/riot.js');
-var config = require('./config.js');
-var q = require('q');
+var getProviders = require('./middleware/get_providers.js');
 
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 
-var providers = require('./models/providers.js');
 
+app.use(getProviders);
 
-function checkForProvider(req, res, region){
-	var deferred = q.defer();
-	providers.findOne({'region': supported[i]}, function(err, data){
-		if(!req.providers){
-			req.providers = {};
-		}
-
-		if(err || !data){
-			riot.postProviderIds(supported[i], function(err, providerId){
-				req.providers[supported[i]] = providerId;
-			});
-
-		} else {
-			req.providers[supported[i]] = data.providerId;
-
-		}
-		deferred.resolve();
-	});
-
-	return deferred.promise;
-}
-
-
-app.use(function(req, res, next){
-	console.log("!!!!")
-	var supported = config.supportedRegions;
-	var arrayOfProviders = [];
-	console.log('supp', supported);
-	for(var i = 0; i < supported.length; i++){	
-		console.log('inside the array');
-		arrayOfProviders.push(checkForProvider(req, res, supported[i]));
-
-	}
-
-	q.all(arrayOfProviders).then(function(){
-		next();
-	})
-	.done();
-
-});
 
 // API to communicate with frontend
 app.use('/api', api);

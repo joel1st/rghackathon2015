@@ -46,8 +46,8 @@ function POST(options) {
 		request.post({
 			headers: {'x-riot-token' : key},
 			url:     options.url,
-			body:    option.body
-		}, function(error, response, body){
+			form:    options.body
+		}, function(err, response, body){
 			responseHandler(err, response, body, options);
 			done();
 
