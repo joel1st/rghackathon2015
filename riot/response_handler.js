@@ -1,6 +1,12 @@
 var responses = {
 	"429": {
 		message: "Rate Limit Exceeded"
+	},
+	"404": {
+		message: "Not found"
+	},
+	"500": {
+		message: "Error with Riot's Server"
 	}
 };
 

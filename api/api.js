@@ -21,6 +21,8 @@ router.route('/filters')
 		res.send('filters');
 	});
 
+
+
 router.route('/generate')
 	.get(function(req, res) {
 		res.send('generate');
