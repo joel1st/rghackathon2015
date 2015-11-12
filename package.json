@@ -1,0 +1,25 @@
+{
+  "name": "rghackathon2015",
+  "version": "1.0.0",
+  "description": "Riot Games 2015",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joel1st/rghackathon2015.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joel1st/rghackathon2015/issues"
+  },
+  "homepage": "https://github.com/joel1st/rghackathon2015#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "morgan": "^1.6.1",
+    "node-uuid": "^1.4.3"
+  }
+}
