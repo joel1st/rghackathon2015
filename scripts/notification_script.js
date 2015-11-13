@@ -18,8 +18,10 @@ riot.createTournament("Test notifications", providerId, function(err, data) {
         upsert: true
     }, function(err, data) {
         riot.createCode(tournamentId, 1, 'NA', function(err, data) {
-            if (!err) {
-                console.log('Codes:' + data);
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+            	console.log("Data: " + data);
             }
         });
     });

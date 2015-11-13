@@ -182,7 +182,6 @@ module.exports = {
                 if (err) {
                     console.error('Error: ' + err);
                 } else {
-                    console.log(data);
                     POST({
                         url: url,
                         body: {
@@ -194,7 +193,7 @@ module.exports = {
                         },
                         callback: function(err, response) {
                             if (!err) {
-                                var savedGames = ["k"];
+                                var savedGames = [];
                                 var promiseArr = [];
 
                                 var saveGames = function(i) {
@@ -206,7 +205,6 @@ module.exports = {
                                     game.save(function(err, saved) {
 
                                         if (!err && saved) {
-                                            console.log("D;" + response[i]);
                                             deferred.resolve();
                                             savedGames.push(response[i]);
                                         }
