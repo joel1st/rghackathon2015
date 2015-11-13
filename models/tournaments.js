@@ -16,7 +16,6 @@ var tournamentSchema = new mongoose.Schema({
     pickType: {
     	type: String,
 	enum: config.pickTypes	
-    	//enum?
     },
     mapType: {
 	type:String,
@@ -24,7 +23,10 @@ var tournamentSchema = new mongoose.Schema({
     },
     name: String,
     created: Date,
-    modified: Date
+    modified: Date,
+    visibility: Boolean,
+    filter: String,
+    match: {}
 });
 
 module.exports = mongoose.model('tournaments', tournamentSchema);
