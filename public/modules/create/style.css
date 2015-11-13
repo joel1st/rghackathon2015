@@ -56,7 +56,7 @@ body {
 }
 
 .owner-input:not(.default-size) {
-  border-radius: 15px;
+  
   font-size: 38px;
   height: 55px;
   width: 450px;
@@ -246,7 +246,6 @@ body {
 .item-input {
 	width: 100%;
   margin-top: 5px;
-  border-radius: 5px;
   font-size: 25px;
   height: 40px;
   padding: 5px;
@@ -328,7 +327,7 @@ td input[type=checkbox]:checked + label:before { color: limegreen; display:none;
 }
 .onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    border: 2px solid #999999;
 }
 .onoffswitch-inner {
     display: block; width: 200%; margin-left: -100%;
@@ -355,7 +354,7 @@ td input[type=checkbox]:checked + label:before { color: limegreen; display:none;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
     right: 56px;
-    border: 2px solid #999999; border-radius: 20px;
+    border: 2px solid #999999;
     transition: all 0.3s ease-in 0s; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
@@ -471,5 +470,5 @@ background-size: contain;
 a:visited{color:#888}
 a{color:#444;text-decoration:none;}
 p{margin-bottom:.3em;}
-* { font-family:monospace; }
+
 span.cc{ color:#6d84b4 }
