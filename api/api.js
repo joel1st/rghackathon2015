@@ -73,7 +73,7 @@ Send whatever data is needed
 for signup to front end 
 (split into multiple endpoints if needed.)
 */
-router.post('/create_tournament', passport.authenticate('local'), function(req, res) {
+router.post('/create_tournament', function(req, res) {
 		var data = {};
 		// check data
 		if (config.spectateTypes.indexOf(req.body.spectatorType) <= -1) {
@@ -125,7 +125,7 @@ router.post('/create_tournament', passport.authenticate('local'), function(req, 
 		res.json(data);
 	});
 
-router.post('/createTeamsAndMatches',passport.authenticate('local'),  function(req,  res) {
+router.post('/createTeamsAndMatches',  function(req,  res) {
 	var data = {};
 	// make sure tournament exists
 	var participants = req.body.participants.split(", ");
@@ -200,11 +200,12 @@ router.post('/createTeamsAndMatches',passport.authenticate('local'),  function(r
 	});
 });
 
-router.post('/currentTournamentState',passport.authenticate('local'),  function(req,  res) {
+var currentTournamentState = function(req,  res) {
 	/**
 	 * 1. Generate the bracket out of the wins -> bases
 	 * 2. add the results!
 	 */
+	console.log("Tournament Id", req.body.tournamentId);
 	console.log("fuuu");
 	teamsModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) { 
 		var numberOfTeams = resp.length;
@@ -225,7 +226,8 @@ router.post('/currentTournamentState',passport.authenticate('local'),  function(
 			games = [];
 			results = [[]];
 			var gameCounter = 0;
-			for (var i = 0; i < numberOfTeams; i += 1) {
+			console.log("Number Of Teams", numberOfTeams);
+			for (var i = 0; i < gameCounter; i += 1) {
 				if (i < preGames) {
 					console.log("Adding by game");
 					games.push([-1, i]);
@@ -235,6 +237,7 @@ router.post('/currentTournamentState',passport.authenticate('local'),  function(
 					console.log(i);
 					console.log("Adding game normal");
 					games.push([i, i+1]);
+					console.log("GameCounter", gameCounter);
 					if (response[gameCounter].result != "TBD") {
 						if (response[gameCounter].result == "RED_WIN" || response[gameCounter].result == "BLUE_DISQ") {
 							results[0].push([0,1]);
@@ -292,9 +295,22 @@ router.post('/currentTournamentState',passport.authenticate('local'),  function(
 			});
 		});
 	});
+}
+router.post('/currentTournamentState',  currentTournamentState);
+
+router.post('/findTournament',  function(req,  res) {
+	// find tournaments
+	tournaments.findOne({"name": req.body.name, "region": req.body.region}, function (err, response) {
+		req.body.tournamentId = response.tournamentId;
+		console.log("Tournament Id", response.tournamentId);
+		if (!err) {
+			currentTournamentState(req, res);
+		} else {
+			res.json({"success": false, "message": "error"});
+		}
+		
+	});
 });
-
-
 router.route('/filters')
 	.get(function(req, res) {
 		res.send('filters');
