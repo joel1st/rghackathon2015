@@ -248,13 +248,16 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
 					var amount = $("#amount").val();
 					if (!isNaN(amount) && amount != 0 && amount != "") {
 						console.log(isNaN(amount));
-						$("#conditions").append("<li  id=\"cond" + conditionCount + "\"style=\"margin: 0 0 3px 0;\" class=\"list-group-item\">" + conjunction +" | " + amount + " " + selectedOperation + removeConditionButton.replace("$id$",conditionCount) + "</li>");
+						console.log($("#conditions").length);
+						$("#conditions").append("<li  id=\"cond" + conditionCount + "\"style=\"margin: 0 0 3px 0;\" class=\"list-group-item\">" + ($("#conditions").children().length > 0 ?conjunction + " | " : "") + amount + " " + selectedOperation + removeConditionButton.replace("$id$",conditionCount) + "</li>");
 					conditionCount++;
 					}
 				}
 
 				function removeCondition(i) {
 					$("#cond" + i).remove();
+					var elem = $("#conditions").children().first();
+					elem.html(elem.html().replace("OR | ", "").replace("AND | ", ""));	
 				}
 			</script>
 			<div class="tab-pane top-padding " id="filterconditions">
@@ -263,7 +266,7 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
 					<select class="btn btn-warning dropdown-toggle" id="operation">
 						<option>Minions</option>
 						<option>Kills</option>
-						<option>Destroyed Turrets</option>
+						<option>Turrets destroyed</option>
 						<option>
 					</select>
 					<input type="text" class="form-control" style="color:#2C3E50; display:inline;width:auto" name="Amount" id="amount" placeholder="Amount">
