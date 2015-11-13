@@ -238,6 +238,49 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
 			  <span class="info-text">No warding allowed with this filter.</span>
 			</div>
 
+			<script>
+				removeConditionButton = "<button type=\"button\" class=\"btn btn-danger pull-right\" style=\"margin-top: -11px; margin-right:-17px\" onClick=\"removeCondition($id$)\">Unban</button>";
+
+				var conditionCount = 0;
+				function addCondition() {
+					var selectedOperation = $("#operation").val();
+					var conjunction = $("#conjunction").val();
+					var amount = $("#amount").val();
+					if (!isNaN(amount) && amount != 0 && amount != "") {
+						console.log(isNaN(amount));
+						$("#conditions").append("<li  id=\"cond" + conditionCount + "\"style=\"margin: 0 0 3px 0;\" class=\"list-group-item\">" + conjunction +" | " + amount + " " + selectedOperation + removeConditionButton.replace("$id$",conditionCount) + "</li>");
+					conditionCount++;
+					}
+				}
+
+				function removeCondition(i) {
+					$("#cond" + i).remove();
+				}
+			</script>
+			<div class="tab-pane top-padding " id="filterconditions">
+				This filter determines the winner of a match depending on the conditions given below. First team to fullfil all required conditions wins.<br>
+				<div class="form-group">
+					<select class="btn btn-warning dropdown-toggle" id="operation">
+						<option>Minions</option>
+						<option>Kills</option>
+						<option>Destroyed Turrets</option>
+						<option>
+					</select>
+					<input type="text" class="form-control" style="color:#2C3E50; display:inline;width:auto" name="Amount" id="amount" placeholder="Amount">
+				</div>
+				<div class="form-group">
+ 						<select class="btn btn-warning dropdown-toggle" id="conjunction" style="font-size:24px">
+						<option>AND</option>
+						<option>OR</option>
+					</select>
+					<button type="button" class="btn btn-success" style="float:right" onClick="addCondition()">Add</button><br>
+				</div>
+			  <span class="info-text">Conditions</span>
+				<ul class="list-group" id="conditions">
+				</ul>
+			</div>
+
+
 			<!-- Role limitation -->
 			<div class="tab-pane top-padding " id="filterrole">
 			  <div>
