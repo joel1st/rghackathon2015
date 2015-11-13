@@ -4,27 +4,19 @@
 angular.module('Admin',[]);
 angular.module('Authentication', []);
 angular.module('Account', []);
+angular.module('Create', []);
+angular.module('Find', []);
 angular.module('Home', []);
 angular.module('Register', []);
-angular.module('Compress', []).filter('compress', function() {
-  return function(text) {
-    return String(text).replace(/ /g,'');
-  };
-});
-angular.module('CompressUnderline', []).filter('compressU', function() {
-  return function(text) {
-    return String(text).replace(/ /g, '_');
-  };
-});
 
-angular.module('GVLegendsApp', [
+angular.module('RGHackathonApp2015', [
   'Admin',
   'Authentication',
   'Account',
+  'Create',
+  'Find',
   'Home',
   'Register',
-  'Compress',
-  'CompressUnderline',
   'ngRoute',
   'ngCookies'
 ])
@@ -39,46 +31,22 @@ angular.module('GVLegendsApp', [
 
   .when('/admin', {
     templateUrl: 'Modules/admin/views/admin.html',
-    controller: 'AdminController',
-    resolve: {
-      roster: function(AdminService) {
-        return AdminService.GetRoster();
-      },
-      champion: function(AdminService) {
-        return AdminService.GetChampions();
-      },
-      role: function(AdminService) {
-        return AdminService.GetRoles();
-      },
-      elo: function(AdminService) {
-        return AdminService.GetElos();
-      },
-      badge: function(AdminService) {
-        return AdminService.GetBadges();
-      }
-    }
+    controller: 'AdminController'
   })
 
   .when('/account', {
-    templateUrl: 'Modules/account/views/account.html',
-    controller: 'AccountController',
-    resolve: {
-      user: function(AdminService) {
-        return AdminService.GetUser();
-      },
-      champion: function(AdminService) {
-        return AdminService.GetChampions();
-      },
-      role: function(AdminService) {
-        return AdminService.GetRoles();
-      },
-      elo: function(AdminService) {
-        return AdminService.GetElos();
-      },
-      badge: function(AdminService) {
-        return AdminService.GetBadges();
-      }
-    }
+      templateUrl: 'Modules/account/views/account.html',
+      controller: 'AccountController'
+  })
+
+  .when('/create', {
+      templateUrl: 'Modules/create/views/create.html',
+      controller: 'CreateController'
+  })
+
+  .when('/find', {
+      templateUrl: 'Modules/find/views/find.html',
+      controller: 'FindController'
   })
 
   .when('/home', {
@@ -110,9 +78,9 @@ function($rootScope, $location, $cookieStore, $http) {
     $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
   }
 
+/*  
   $rootScope.$on('$locationChangeStart', function(event, next, current) {
-    // redirect to login page if not logged in
-    if ($location.path() == '/home' || $location.path() == '/' || next == 'https://gvlegends.com/gvlegends/' || next == 'http://gvlegends.com/gvlegends/' || next == 'https://gvlegends.com/gvlegends' || next == 'http://gvlegends.com/gvlegends') {
+    if ($location.path() == '/home' || $location.path() == '/') {
       $location.path('/home');
     } else if ($location.path() == '/register') {
       if ($rootScope.globals.currentUser) {
@@ -130,5 +98,6 @@ function($rootScope, $location, $cookieStore, $http) {
       $location.path('/login');
     }
   });
+*/
 }
 ]);

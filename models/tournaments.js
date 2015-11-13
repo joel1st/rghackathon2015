@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var config = require('../config.js');
 
 var tournamentSchema = new mongoose.Schema({
-    ownerId: Number, // reference to users
+    ownerId: String, // reference to users
     tournamentId: Number,
     teamSize: Number,
     region: {
