@@ -26,42 +26,42 @@ angular.module('RGHackathonApp2015', [
   $routeProvider
   .when('/', {
     controller: 'HomeController',
-    templateUrl: 'Modules/home/views/home.html'
+    templateUrl: 'modules/home/views/home.html'
   })
 
   .when('/admin', {
-    templateUrl: 'Modules/admin/views/admin.html',
+    templateUrl: 'modules/admin/views/admin.html',
     controller: 'AdminController'
   })
 
   .when('/account', {
-      templateUrl: 'Modules/account/views/account.html',
+      templateUrl: 'modules/account/views/account.html',
       controller: 'AccountController'
   })
 
   .when('/create', {
-      templateUrl: 'Modules/create/views/create.html',
+      templateUrl: 'modules/create/views/create.html',
       controller: 'CreateController'
   })
 
   .when('/find', {
-      templateUrl: 'Modules/find/views/find.html',
+      templateUrl: 'modules/find/views/find.html',
       controller: 'FindController'
   })
 
   .when('/home', {
-    templateUrl: 'Modules/home/views/home.html',
+    templateUrl: 'modules/home/views/home.html',
     controller: 'HomeController'
   })
 
   .when('/register', {
-    templateUrl: 'Modules/register/views/register.html',
+    templateUrl: 'modules/register/views/register.html',
     controller: 'RegisterController'
   })
 
   .when('/login', {
     controller: 'LoginController',
-    templateUrl: 'Modules/authentication/views/login.html',
+    templateUrl: 'modules/authentication/views/login.html',
     hideMenus: true
   })
 

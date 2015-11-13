@@ -18,6 +18,10 @@ router.post('/riot_notification', function(req, res, next) {
 	console.log(res.body);
 });
 
+router.get('/isLoggedIn', passport.authenticate('local'), function(req, res, next) {
+    res.send(200, 'Logged In');
+});
+
 router.post('/login', passport.authenticate('local'), function(req, res, next) {
     req.session.save(function (err) {
         if (err) {
