@@ -114,6 +114,16 @@ angular.module('Create')
   	id: 'nowards',
     name: 'No Warding',
     status: false,
+  }, 
+  role: {
+	id:'role',
+	name:'Role Only',
+	status:false,
+  }, 
+  summonerSpell: {
+	id:'summonerspell',
+	name:'Summoner Spells',
+	status: false,
   }
 	}];
 
@@ -136,7 +146,7 @@ angular.module('Create')
   	filters: $scope.filters
   };
 
-  $scope.step3 = true;
+  $scope.step1 = true;
 
   $scope.newUser = function() {
   	var anyEmpty = false;
