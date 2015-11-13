@@ -108,14 +108,20 @@ router.post('/create_tournament', function(req, res) {
 							// update the correct item
 							tournaments.update({"tournamentId": response}, {"visibility": Boolean(req.body.visibility), "filter": req.body.filter, "tournamentId": response, "spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name ,"region": req.body.region, "teamSize": req.body.teamSize, "ownerId": req.session.username}, function (err, numAffected) {});
 							data.success = true;
+							data.tournamentId = response;
+							data.region = req.body.region;
 						} else {
 							console.log(err);
 							data.success = false;
+							data.tournamentId = null;
+							data.region = null;
 						}
 					res.json(data);
 					});
 				} else {
 					data.success = false;
+					data.tournamentId = null;
+					data.region = null;
 					res.json(data);
 				}
 			});
@@ -194,6 +200,22 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 				game.save(function(err, resp) { if (err) {res.json({"success": false, "message": "Failed to add games"});}});
 			}
 			res.json({"success": true, "teams": teams, "results": results, "games": games});
+		} else {
+			res.json({"success": false, "message": "Tournament not found"});
+		}		
+	});
+});
+
+router.post('/generate_code', function(req,res) {
+	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, data) {
+		if (!err && data != null) {
+			riot.createCode(data.tournamentId, data.teamSize, data.region, function(err, response) {
+		        if (err) {
+		            es.json({"success": false, "message": err});
+		        } else {
+		        	res.json({"success": true, "code": response});
+		        }
+		    });
 		} else {
 			res.json({"success": false, "message": "Tournament not found"});
 		}		
