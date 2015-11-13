@@ -73,7 +73,7 @@ Send whatever data is needed
 for signup to front end 
 (split into multiple endpoints if needed.)
 */
-router.post('/create_tournament', passport.authenticate('local'), function(req, res) {
+router.post('/create_tournament',passport.authenticate('local'), function(req, res) {
 		var data = {};
 		// check data
 		if (config.spectateTypes.indexOf(req.body.spectatorType) <= -1) {
@@ -102,7 +102,7 @@ router.post('/create_tournament', passport.authenticate('local'), function(req, 
 					riot.createTournament(req.body.name, response.providerId, function(err, response) {
 						if (!err) {
 							// update the correct item
-							tournaments.update({"tournamentId": response}, {"spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name ,"region": req.body.region, "teamSize": req.body.teamSize, "ownerId": req.session.username}, function (err, numAffected) {});
+							tournaments.update({"tournamentId": response}, {"tournamentId": response, "spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name ,"region": req.body.region, "teamSize": req.body.teamSize, "ownerId": req.session.username}, function (err, numAffected) {});
 							data.success = true;
 						} else {
 							data.success = false;
@@ -120,11 +120,11 @@ router.post('/create_tournament', passport.authenticate('local'), function(req, 
 		res.json(data);
 	});
 
-router.post('/createTeamsAndMatches', passport.authenticate('local'), function(req,  res) {
+router.post('/createTeamsAndMatches',passport.authenticate('local'),  function(req,  res) {
 	var data = {};
 	// make sure tournament exists
 	var participants = req.body.participants.split(", ");
-	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region, "ownerId": req.session.username}, function(err, response) {
+	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, response) {
 		if (!err) {
 			// now do the algorithm stuff
 			var numberOfParticipants = participants.length;
@@ -164,11 +164,12 @@ router.post('/createTeamsAndMatches', passport.authenticate('local'), function(r
 			// add the teams
 			var teamToObject = [];
 			for (var i = 0; i < teams.length; i++) {
-				var members = [];
-				for (var j = 0; j < teams[i].lenght; j++) {
+			var members = [];
+				for (var j = 0; j < teams[i].length; j++) {
 					members.push({"summonerId": teams[i][j], "name": teams[i][j]});
 				}
-				var team = new teamsModel({"members": members, "name": i, "region": req.body.region});
+				console.log("Members", members);
+				var team = new teamsModel({"members": members, "name": i, "region": req.body.region, "tournamentId": req.body.tournamentId});
 				team.save(function(err, response) { 
 					if (!err) {
 						var map = {}; 
@@ -176,14 +177,15 @@ router.post('/createTeamsAndMatches', passport.authenticate('local'), function(r
 						map.id = response.id; 
 						teamToObject.push(map);
 					} else {
-						res.send({"success": false, "message": "Couldn't insert teams"});
+						console.log(err);
 					}
 				});
 			}
 			// create the games. skip number of pregames
-			for (var i = preGames; i < games.length;i++) {
+			for (var i = 0; i < games.length;i++) {
 				// insert into game
-				var game = new gamesModel({"blueTeam": games[i][0], "redTeam": games[i][1], "tournamentId": req.body.tournamentId, "result": "TBD", "order": i});
+				var won = games[i][0] == -1 ? "RED_WIN" : "TBD";
+				var game = new gamesModel({"blueTeam": games[i][0], "redTeam": games[i][1], "tournamentId": req.body.tournamentId, "result": won, "order": i});
 				game.save(function(err, resp) { if (err) {res.json({"success": false, "message": "Failed to add games"});}});
 			}
 			res.json({"success": true, "teams": teams, "results": results, "games": games});
@@ -192,6 +194,101 @@ router.post('/createTeamsAndMatches', passport.authenticate('local'), function(r
 		}		
 	});
 });
+
+router.post('/currentTournamentState',passport.authenticate('local'),  function(req,  res) {
+	/**
+	 * 1. Generate the bracket out of the wins -> bases
+	 * 2. add the results!
+	 */
+	console.log("fuuu");
+	teamsModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) { 
+		var numberOfTeams = resp.length;
+	gamesModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) {}).sort({"order":1}).exec(function(err, response) { 
+			// check games on lowest level by getting the number of teams
+			var numberOfGames = response.length;
+			console.log("Number Of Games", numberOfGames);
+			console.log("Response", response);
+			var nextSmaller2 = 1;
+			while (nextSmaller2 < numberOfTeams) {
+				nextSmaller2 *=2;
+			}
+			nextSmaller2 /= nextSmaller2 == numberOfTeams ? 1 : 2; // we're one too high if it ended
+			preGames = numberOfTeams - nextSmaller2;
+			
+			teams = [];
+			// do the stuff -> preGames
+			games = [];
+			results = [[]];
+			var gameCounter = 0;
+			for (var i = 0; i < numberOfTeams; i += 1) {
+				if (i < preGames) {
+					console.log("Adding by game");
+					games.push([-1, i]);
+					results[0].push([0,1]);
+					gameCounter++;
+				} else {
+					console.log(i);
+					console.log("Adding game normal");
+					games.push([i, i+1]);
+					if (response[gameCounter].result != "TBD") {
+						if (response[gameCounter].result == "RED_WIN" || response[gameCounter].result == "BLUE_DISQ") {
+							results[0].push([0,1]);
+						} else {
+							results[0].push([1,0]);
+						}
+					} else {
+						results[0].push([]);
+					}
+					gameCounter++;
+					i++;// increase by two (with the for above!!!)
+				}
+			}
+			// TODO add other game results
+			// we've nextSmaller2*2 games
+			var gamesStage = nextSmaller2;
+			var gamesInCurrentStage = 0;
+			results.push([]);
+			var stageCounter = 1;
+			for (var i = gameCounter; i < numberOfGames; i++) {
+				if (gamesInCurrentStage <= gamesStage) {
+					if (response[i].result != "TBD") {
+						if (response[i].result == "RED_WIN" || response[i].result == "BLUE_DISQ") {
+							results[stageCounter].push([0,1]);
+						} else {
+							results[stageCounter].push([1,0]);
+						}
+					} else {
+						results[stageCounter].push([]);
+					}
+					gamesInCurrentStage++;
+				}
+				if (gamesInCurrentStage == gamesStage) {
+					gamesInCurrentStage = 0;
+					gamesStage /= 2;
+					stageCounter++;
+				}
+			}
+			console.log("doing the teams");
+			// fetch teams
+			teamsModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) {
+				console.log("TEAMS", resp);
+				var teams = [];
+				for (var i = 0; i < resp.length; i++) {
+					var curTeam = [];
+					for (var j = 0; j < resp[i].members.length; j++) {
+						console.log("getting name", resp[i].members[j].name);
+						curTeam.push(resp[i].members[j].name);
+					}
+					console.log(curTeam);
+					teams.push(curTeam);
+				}
+
+				res.json({"success": true, "teams": teams, "games": games, "results": results});
+			});
+		});
+	});
+});
+
 
 router.route('/filters')
 	.get(function(req, res) {
