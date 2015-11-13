@@ -8,6 +8,7 @@ angular.module('Create', []);
 angular.module('Find', []);
 angular.module('Home', []);
 angular.module('Register', []);
+angular.module('Tournament', []);
 
 angular.module('RGHackathonApp2015', [
   'Admin',
@@ -17,6 +18,7 @@ angular.module('RGHackathonApp2015', [
   'Find',
   'Home',
   'Register',
+  'Tournament',
   'ngRoute',
   'ngCookies'
 ])
@@ -58,6 +60,12 @@ angular.module('RGHackathonApp2015', [
     templateUrl: 'modules/register/views/register.html',
     controller: 'RegisterController'
   })
+
+  .when('/tournament', {
+    templateUrl: 'modules/tournament/views/tournament.html',
+    templateUrl: 'modules/tournament/views/tournament.html',
+    controller: 'TournamentController'
+  })  
 
   .when('/login', {
     controller: 'LoginController',

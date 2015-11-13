@@ -8,6 +8,7 @@ var api = require('./api/api.js');
 var riot = require('./riot/riot.js');
 var path = require('path');
 var getProviders = require('./middleware/get_providers.js');
+var filters = require('./filters/filters.js');
 
 var tournaments = require('./models/tournaments.js');
 
@@ -21,8 +22,6 @@ var passport = require('passport');
 
 app.use(bodyParser.json({limit: '2kb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '2kb', extended: true}));
-
-var filters = require('./filters/filters.js');
 
 //app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
@@ -52,6 +51,11 @@ passport.deserializeUser(Account.deserializeUser());
 // API to communicate with frontend
 app.post('/', function(req, res, next) {
 	console.log(req.body);
+	riot.getMatch(req.body.gameId, 'NA', true, function(err, data) {
+		if(!err) {
+			filters.checkForWards(data);
+		}
+ 	});
 	res.send(200, 'thanks for that sweet sweet data riot');
 });
 
