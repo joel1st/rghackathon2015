@@ -249,7 +249,7 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
 					if (!isNaN(amount) && amount != 0 && amount != "") {
 						console.log(isNaN(amount));
 						console.log($("#conditions").length);
-						$("#conditions").append("<li  id=\"cond" + conditionCount + "\"style=\"margin: 0 0 3px 0;\" class=\"list-group-item\">" + ($("#conditions").children().length > 0 ?conjunction + " | " : "") + amount + " " + selectedOperation + removeConditionButton.replace("$id$",conditionCount) + "</li>");
+						$("#conditions").append("<li  id=\"cond" + conditionCount + "\"style=\"margin: 0 0px 3px 0;\" class=\"list-group-item\">" + ($("#conditions").children().length > 0 ?conjunction + " | " : "") + amount + " " + selectedOperation + removeConditionButton.replace("$id$",conditionCount) + "</li>");
 					conditionCount++;
 					}
 				}
@@ -260,7 +260,10 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
 					elem.html(elem.html().replace("OR | ", "").replace("AND | ", ""));	
 				}
 			</script>
-			<div class="tab-pane top-padding " id="filterconditions">
+			<div class="tab-pane top-padding" id="filterconditions" style="height: 350px;padding-right:17px;
+margin-right:-17px;
+overflow-y: auto;
+overflow-x: hidden;">
 				This filter determines the winner of a match depending on the conditions given below. First team to fullfil all required conditions wins.<br>
 				<div class="form-group">
 					<select class="btn btn-warning dropdown-toggle" id="operation">
@@ -269,17 +272,17 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
 						<option>Turrets destroyed</option>
 						<option>
 					</select>
-					<input type="text" class="form-control" style="color:#2C3E50; display:inline;width:auto" name="Amount" id="amount" placeholder="Amount">
+					<input type="text" class="form-control" style="color:#2C3E50; display:inline;width:auto;float:right" name="Amount" id="amount" placeholder="Amount">
 				</div>
 				<div class="form-group">
  						<select class="btn btn-warning dropdown-toggle" id="conjunction" style="font-size:24px">
 						<option>AND</option>
 						<option>OR</option>
 					</select>
-					<button type="button" class="btn btn-success" style="float:right" onClick="addCondition()">Add</button><br>
+					<button type="button" class="btn btn-success" onClick="addCondition()" style="float:right">Add</button><br>
 				</div>
 			  <span class="info-text">Conditions</span>
-				<ul class="list-group" id="conditions">
+				<ul class="list-group" style="padding-right:17px" id="conditions">
 				</ul>
 			</div>
 
