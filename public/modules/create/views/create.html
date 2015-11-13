@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="./modules/create/style.css" />
-
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
@@ -178,14 +177,126 @@
 
 
           	<!-- Item Restrictions -->
-            <div class="tab-pane" id="filteritemrestrictions">
+            <div class="tab-pane top-padding " id="filteritemrestrictions">
             		<input class="owner-input default-size item-input" placeholder="Enter restricted item" />
             </div>
 
           	<!-- No Wording -->
-            <div class="tab-pane" id="filternowards">
+            <div class="tab-pane top-padding " id="filternowards">
             		<span class="info-text">No warding allowed with this filter.</span>
             </div>
+		<!-- Role limitation -->
+	    <div class="tab-pane top-padding " id="filterrole">
+		<span>
+			<input class="ng-valid ng-dirty" id="marksman" type="checkbox">
+			<label for="marksman">Marksman</label>
+		</span><br>
+		<span>
+			<input class="ng-valid ng-dirty" id="assassin" type="checkbox">
+			<label for="assassin">Assassin</label>
+		</span><br>
+		<span>
+			<input class="ng-valid ng-dirty" id="mage"  type="checkbox">
+			<label for="mage">Mage</label>
+		</span><br>
+		<span>
+			<input class="ng-valid ng-dirty" id="tank"  type="checkbox">
+			<label for="tank">Tank</label>
+		</span><br>
+		<span>
+			<input class="ng-valid ng-dirty" id="support"  type="checkbox">
+			<label for="support">Support</label>
+		</span><br>
+		<span>
+			<input class="ng-valid ng-dirty" id="fighter" type="checkbox">
+			<label for="fighter">Fighter</label>
+		</span>
+
+<!---				<input type="checkbox">Marksman</input>
+				<input type="checkbox">Assassin</input>
+				<input type="checkbox">Mage</input>
+				<input type="checkbox">Tank</input>
+				<input type="checkbox">Support</input>
+				<input type="checkbox">Fighter</input>-->
+	    </div>
+
+	    <script>
+		disallowButton = "<button type=\"button\" class=\"btn btn-danger pull-right\" style=\"margin-top: -11px; margin-right:-17px\" onClick=\"removeElement($id$)\">Disallow</button>";
+		id = 0;
+		function addElement() {
+			if ($("#spells").val() != null) {
+				$("#allowedspells").append("<li style=\"margin: 0 0 3px 0;\" id=\"disallow" + id +"\" class=\"list-group-item\"><span id=\"val" + id + "\">"+  $("#spells").val() + "</span>" + disallowButton.replace("$id$",id) + "</li>");
+				$("#spells").find('option:selected').remove();
+				id++;
+			}
+		}
+		function removeElement(i) {
+			console.log($("#val" + i));
+			$("#spells").append("<option>" + $("#val" + i).text() + "</option>");
+			$("#disallow" + i).remove();
+		}	
+	   </script>
+	    <div class="tab-pane top-padding " id="filtersummonerspell">
+<!--			<b>Allowed Summoner Spells</b><br>
+			<select class="btn btn-warning dropdown-toggle" id="spells">
+				<option>Ignite</option>
+				<option>Barrier</option>
+				<option>Cleanse</option>
+				<option>Exhaust</option>
+				<option>Flash</option>
+				<option>Teleport</option>
+				<option>Ghost</option>
+				<option>Heal</option>
+				<option>Smite</option>
+			</select>
+			<button type="button" class="btn btn-success" onClick="addElement()">Allow</button>
+			<ul class="list-group" id="allowedspells" style="margin-top:5px">
+			</ul>-->
+			<div class="map-type cc-selector">
+				<table style="width:100%">
+				<tr>
+  				<td style="width:33%;padding:5px 5px 5px 5px;"><input checked="checked" id="FLASH" type="checkbox" name="map-type-radio" value="FLASH" />
+  				<label class="drinkcard-cc map-image FLASH" for="FLASH"></label>
+				</td>
+
+  				<td style="width:33%;padding:5px 5px 5px 5px;"><input checked="checked" id="CLEANSE" type="checkbox" name="map-type-radio" value="CLEANSE" />
+  				<label class="drinkcard-cc map-image CLEANSE" for="CLEANSE"></label>
+				</td>
+
+  				<td style="width:33%;padding:5px 5px 5px 5px;"><input checked="checked" id="EXHAUST" type="checkbox" name="map-type-radio" value="EXHAUST" />
+  				<label class="drinkcard-cc map-image EXHAUST" for="EXHAUST"></label>
+				</td>
+				</tr>
+				<tr>
+  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="HEAL" type="checkbox" name="map-type-radio" value="HEAL" />
+  				<label class="drinkcard-cc map-image HEAL" for="HEAL"></label>
+				</td>
+
+  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="IGNITE" type="checkbox" name="map-type-radio" value="IGNITE" />
+  				<label class="drinkcard-cc map-image IGNITE" for="IGNITE"></label>
+				</td>
+  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="BARRIER" type="checkbox" name="map-type-radio" value="BARRIER" />
+  				<label class="drinkcard-cc map-image BARRIER" for="BARRIER"></label>
+				</td>
+				</tr>
+
+
+				<tr>
+  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="SMITE" type="checkbox" name="map-type-radio" value="SMITE" />
+  				<label class="drinkcard-cc map-image SMITE" for="SMITE"></label>
+				</td>
+
+  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="TELEPORT" type="checkbox" name="map-type-radio" value="TELEPORT" />
+  				<label class="drinkcard-cc map-image TELEPORT" for="TELEPORT"></label>
+				</td>
+  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="GHOST" type="checkbox" name="map-type-radio" value="GHOST" />
+  				<label class="drinkcard-cc map-image GHOST" for="GHOST"></label>
+				</td>
+				</tr>
+
+				</table>
+  			</div>
+	    </div>
           </div>
         </div>
       </div>
