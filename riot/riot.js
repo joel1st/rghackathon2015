@@ -162,7 +162,7 @@ module.exports = {
     },
 
     createCode: function(tournamentId, count, region, callback) {
-        if (tournamentId == null) {
+        if (tournamentId === null) {
             callback({
                 "message": "Tournament ID doesn't exist."
             }, null);
@@ -212,22 +212,23 @@ module.exports = {
                                         }
                                     });
                                     return deferred.promise;
+                                };
 
-                                    for (var i = 0; i < response.length; i++) {
+                                for (var i = 0; i < response.length; i++) {
 
-                                        promiseArr.push(saveGames(i));
+                                    promiseArr.push(saveGames(i));
 
-                                    }
-
-                                    q.all(promiseArr).then(function() {
-                                        callback(null, savedGames);
-                                    })
                                 }
-                               
+
+                                q.all(promiseArr).then(function() {
+                                    callback(null, savedGames);
+                                });
                             }
-                        });
-                    }
-                });
+                               
+                        }
+                    });
+                }
+            });
         },
 
         getMatchIdsByTournament: function(region, tournamentCode, callback) {
