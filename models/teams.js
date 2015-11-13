@@ -3,10 +3,11 @@ var config = require('../config.js');
 
 var teamSchema = new mongoose.Schema({
     members: [{
-        summonerId: Number,
+        summonerId: String,
         name: String
     }],
     name: String,
+    tournamentId: Number,
     region: {
     	type: String,
     	enum: config.supportedRegions 

@@ -24,8 +24,7 @@ var tournamentSchema = new mongoose.Schema({
     },
     name: String,
     created: Date,
-    modified: Date,
-    teams: [Number] // team ids
+    modified: Date
 });
 
 module.exports = mongoose.model('tournaments', tournamentSchema);
