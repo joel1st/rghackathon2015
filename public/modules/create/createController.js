@@ -129,6 +129,11 @@ angular.module('Create')
       id: 'summonerspell',
       name: 'Summoner Spells',
       status: false,
+    }, 
+    conditions: {
+	id:'conditions',
+	name: 'Winconditions',
+	status: false,
     }
   }];
 

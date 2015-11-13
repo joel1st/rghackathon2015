@@ -202,8 +202,16 @@ body {
   font-size: 24px;
 }
 
+#filteritemrestrictions, #filterchamprestrictions {
+	height: 350px;
+  margin-right: -17px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 #step3 .list-group-item {
 	color: black;
+	width: 522px;
 }
 
 

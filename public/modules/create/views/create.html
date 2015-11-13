@@ -238,31 +238,77 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
 			  <span class="info-text">No warding allowed with this filter.</span>
 			</div>
 
+			<script>
+				removeConditionButton = "<button type=\"button\" class=\"btn btn-danger pull-right\" style=\"margin-top: -11px; margin-right:-17px\" onClick=\"removeCondition($id$)\">Unban</button>";
+
+				var conditionCount = 0;
+				function addCondition() {
+					var selectedOperation = $("#operation").val();
+					var conjunction = $("#conjunction").val();
+					var amount = $("#amount").val();
+					if (!isNaN(amount) && amount != 0 && amount != "") {
+						console.log(isNaN(amount));
+						console.log($("#conditions").length);
+						$("#conditions").append("<li  id=\"cond" + conditionCount + "\"style=\"margin: 0 0 3px 0;\" class=\"list-group-item\">" + ($("#conditions").children().length > 0 ?conjunction + " | " : "") + amount + " " + selectedOperation + removeConditionButton.replace("$id$",conditionCount) + "</li>");
+					conditionCount++;
+					}
+				}
+
+				function removeCondition(i) {
+					$("#cond" + i).remove();
+					var elem = $("#conditions").children().first();
+					elem.html(elem.html().replace("OR | ", "").replace("AND | ", ""));	
+				}
+			</script>
+			<div class="tab-pane top-padding " id="filterconditions">
+				This filter determines the winner of a match depending on the conditions given below. First team to fullfil all required conditions wins.<br>
+				<div class="form-group">
+					<select class="btn btn-warning dropdown-toggle" id="operation">
+						<option>Minions</option>
+						<option>Kills</option>
+						<option>Turrets destroyed</option>
+						<option>
+					</select>
+					<input type="text" class="form-control" style="color:#2C3E50; display:inline;width:auto" name="Amount" id="amount" placeholder="Amount">
+				</div>
+				<div class="form-group">
+ 						<select class="btn btn-warning dropdown-toggle" id="conjunction" style="font-size:24px">
+						<option>AND</option>
+						<option>OR</option>
+					</select>
+					<button type="button" class="btn btn-success" style="float:right" onClick="addCondition()">Add</button><br>
+				</div>
+			  <span class="info-text">Conditions</span>
+				<ul class="list-group" id="conditions">
+				</ul>
+			</div>
+
+
 			<!-- Role limitation -->
 			<div class="tab-pane top-padding " id="filterrole">
 			  <div>
 			    <input class="filterroleradio" id="marksman" type="checkbox">
-			    <label for="marksman">Marksman</label>
+			    <label class="noselect" for="marksman">Marksman</label>
 			  </div>
 			  <div>
 			    <input class="filterroleradio" id="assassin" type="checkbox">
-			    <label for="assassin">Assassin</label>
+			    <label class="noselect" for="assassin">Assassin</label>
 			  </div>
 			  <div>
 			    <input class="filterroleradio" id="mage" type="checkbox">
-			    <label for="mage">Mage</label>
+			    <label class="noselect" for="mage">Mage</label>
 			  </div>
 			  <div>
 			    <input class="filterroleradio" id="tank" type="checkbox">
-			    <label for="tank">Tank</label>
+			    <label class="noselect" for="tank">Tank</label>
 			  </div>
 			  <div>
 			    <input class="filterroleradio" id="support" type="checkbox">
-			    <label for="support">Support</label>
+			    <label class="noselect" for="support">Support</label>
 			  </div>
 			  <div>
 			    <input class="filterroleradio" id="fighter" type="checkbox">
-			    <label for="fighter">Fighter</label>
+			    <label class="noselect" for="fighter">Fighter</label>
 			  </div>
 			</div>
 
@@ -332,43 +378,43 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
   <div class="row">
     <div class="col-xs-4">
       <input checked="checked" id="FLASH" type="checkbox" name="map-type-radio" value="FLASH" />
-      <label class="drinkcard-cc map-image FLASH" for="FLASH"></label>
+      <label class="drinkcard-cc map-image noselect FLASH" for="FLASH"></label>
     </div>
     <div class="col-xs-4">
       <input checked="checked" id="CLEANSE" type="checkbox" name="map-type-radio" value="CLEANSE" />
-      <label class="drinkcard-cc map-image CLEANSE" for="CLEANSE"></label>
+      <label class="drinkcard-cc map-image noselect CLEANSE" for="CLEANSE"></label>
     </div>
     <div class="col-xs-4">
       <input checked="checked" id="EXHAUST" type="checkbox" name="map-type-radio" value="EXHAUST" />
-      <label class="drinkcard-cc map-image EXHAUST" for="EXHAUST"></label>
+      <label class="drinkcard-cc map-image noselect EXHAUST" for="EXHAUST"></label>
     </div>
     </div>
     <div class="row">
     <div class="col-xs-4">
       <input checked="checked" id="HEAL" type="checkbox" name="map-type-radio" value="HEAL" />
-      <label class="drinkcard-cc map-image HEAL" for="HEAL"></label>
+      <label class="drinkcard-cc map-image noselect HEAL" for="HEAL"></label>
     </div>
     <div class="col-xs-4">
       <input checked="checked" id="IGNITE" type="checkbox" name="map-type-radio" value="IGNITE" />
-      <label class="drinkcard-cc map-image IGNITE" for="IGNITE"></label>
+      <label class="drinkcard-cc map-image noselect IGNITE" for="IGNITE"></label>
     </div>
     <div class="col-xs-4">
       <input checked="checked" id="BARRIER" type="checkbox" name="map-type-radio" value="BARRIER" />
-      <label class="drinkcard-cc map-image BARRIER" for="BARRIER"></label>
+      <label class="drinkcard-cc map-image noselect BARRIER" for="BARRIER"></label>
     </div>
     </div>
     <div class="row">
     <div class="col-xs-4">
       <input checked="checked" id="SMITE" type="checkbox" name="map-type-radio" value="SMITE" />
-      <label class="drinkcard-cc map-image SMITE" for="SMITE"></label>
+      <label class="drinkcard-cc map-image noselect SMITE" for="SMITE"></label>
     </div>
     <div class="col-xs-4">
       <input checked="checked" id="TELEPORT" type="checkbox" name="map-type-radio" value="TELEPORT" />
-      <label class="drinkcard-cc map-image TELEPORT" for="TELEPORT"></label>
+      <label class="drinkcard-cc map-image noselect TELEPORT" for="TELEPORT"></label>
     </div>
     <div class="col-xs-4">
       <input checked="checked" id="GHOST" type="checkbox" name="map-type-radio" value="GHOST" />
-      <label class="drinkcard-cc map-image GHOST" for="GHOST"></label>
+      <label class="drinkcard-cc map-image noselect GHOST" for="GHOST"></label>
     </div>
   </div>
 </div>
