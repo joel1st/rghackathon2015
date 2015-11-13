@@ -110,6 +110,11 @@ angular.module('Create')
       items: ''
     }
   },
+  champrestrictions: {
+	id: 'champrestrictions',
+	name: 'Champ Restrictions',
+	status: false,
+  },
   nowards: {
   	id: 'nowards',
     name: 'No Warding',
