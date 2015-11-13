@@ -50,6 +50,11 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // API to communicate with frontend
+app.post('/', function(req, res, next) {
+	console.log(req.body);
+	res.send(200, 'thanks for that sweet sweet data riot');
+});
+
 app.use('/api', api);
 var port = process.env.PORT || 1337;
 

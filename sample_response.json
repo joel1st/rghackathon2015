@@ -1,0 +1,11 @@
+{ startTime: 1447385417664,
+  winningTeam: [ { summonerName: 'Rithms', summonerId: 35364656 } ],
+  losingTeam: [],
+  shortCode: 'NA04170-41d96ed6-bd1a-4b02-b53c-06aeba4382aa',
+  metaData: '',
+  gameId: 2007791708,
+  gameName: '3ce3344b-84eb-4c77-a13f-2799077a9edb',
+  gameType: 'Practice',
+  gameMap: 11,
+  gameMode: 'CLASSIC',
+  region: 'NA1' }
