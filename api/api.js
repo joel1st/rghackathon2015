@@ -23,27 +23,34 @@ router.post('/login', passport.authenticate('local'), function(req, res, next) {
         if (err) {
             return next(err);
         }
-        res.redirect('/');
+        res.send(200, 'Successfully Logged In');
     });
 });
 
 router.post('/register',  function(req, res, next) {
-	console.log(req, res);
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-    	console.log(req.body, err, account);
-        if (err) {
-          return res.send({info: "Sorry. That username already exists. Try again."});
-        }
 
-        passport.authenticate('local')(req, res, function () {
-            req.session.save(function (err) {
-                if (err) {
-                    return next(err);
-                }
-                res.redirect('/');
-            });
-        });
-    });
+	if(!req.body.username.length && !req.body.password.length){
+		res.send(403, {error: "Username or Password not Provided."});
+	} else {
+		Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+			console.log(req.body, err, account);
+		    if (err) {
+		      return res.send(403, {error: "Sorry. That username already exists. Try again."});
+		    }
+
+		    passport.authenticate('local')(req, res, function () {
+		        req.session.save(function (err) {
+		            if (err) {
+		                return next(err);
+		            }
+		            res.send(200, {data: "Successfully Created Account."});
+
+		        });
+		    });
+		});
+
+	}
+    
 });
 
 
