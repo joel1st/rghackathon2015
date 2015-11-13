@@ -1,0 +1,46 @@
+body {
+  background-color: #18bc9c;
+  min-width: 500px;
+  width: auto !important;
+  width:500px;
+}
+
+#tournamentPage > div {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#tournamentPage label {
+	display: block;
+	font-size: 35px;
+}
+
+#tournamentPage input {
+	border-radius: 15px;
+  font-size: 38px;
+  height: 55px;
+  width: 450px;
+  padding: 5px;
+}
+
+#tournamentPage input:focus {
+	outline: none;
+}
+
+.g_gracket { width: 9999px; background-color: #18bc9c; padding: 55px 15px 5px; line-height: 100%; position: relative; overflow: hidden;}
+.g_round { float: left; margin-right: 70px; }
+.g_game { position: relative; margin-bottom: 15px; }
+.g_gracket h3 { margin: 0; padding: 10px 8px 8px; font-size: 18px; font-weight: normal; color: #fff}
+.g_team { background: #3597AE; }
+.g_team:last-child {  background: #FCB821; }
+.g_round:last-child { margin-right: 20px; }
+.g_winner { background: #444; }
+.g_winner .g_team { background: none; }
+.g_current { cursor: pointer; background: #000!important; }
+.g_round_label { top: -5px; font-weight: normal; color: #CCC; text-align: center; font-size: 18px; }
