@@ -1,4 +1,4 @@
-body {
+		body {
   background-color: #18bc9c;
   min-width: 500px;
   width: auto !important;
@@ -36,6 +36,15 @@ body {
 /* STEP 1 */
 #step1 {
 	width: 538px !important;
+}
+
+#step2 .col-xs-12 {
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+#step2 .col-xs-12 input {
+	width: 300px;
 }
 
 .owner-label {
