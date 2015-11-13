@@ -119,7 +119,17 @@ angular.module('Create')
   	id: 'nowards',
     name: 'No Warding',
     status: false,
-  }
+  },  role: {
+       id:'role',
+       name:'Role Only',
+       status:false,
+  }, 
+  summonerSpell: {
+       id:'summonerspell',
+       name:'Summoner Spells',
+       status: false,
+   }
+
 	}];
 
 	if (!$scope.users.length) {
