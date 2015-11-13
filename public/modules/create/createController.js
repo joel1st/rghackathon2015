@@ -152,7 +152,7 @@ angular.module('Create')
   	filters: $scope.filters
   };
 
-  $scope.step3 = true;
+  $scope.step1 = true;
 
   $scope.newUser = function() {
   	var anyEmpty = false;
