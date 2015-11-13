@@ -6,7 +6,7 @@ angular.module('Create')
 
 	$scope.messages = {};
 	$scope.users = new Array(12);
-  $scope.regions = ['NA','EU','RU','LAN','OCE'];		
+  $scope.regions = ['NA', 'BR', 'EUNE', 'EUW', 'KR', 'RU','LAN','OCE', 'TR'];		
   $scope.comparators = ['>', '=', '<'];
   $scope.message = {
   	step1: 'Please sign up so we can keep track of your tournament',
@@ -136,7 +136,6 @@ angular.module('Create')
 	status: false,
     }
   }];
-
 
 	if (!$scope.users.length) {
 			$scope.users.push('');
