@@ -1,8 +1,34 @@
-#teamGraph {
-
+body {
+  background-color: #18bc9c;
+  min-width: 500px;
+  width: auto !important;
+  width:500px;
 }
 
-#line {
-	width:100px;
-	height:100px;
+#findPage > div {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#findPage label {
+	display: block;
+	font-size: 35px;
+}
+
+#findPage input {
+	border-radius: 15px;
+  font-size: 38px;
+  height: 55px;
+  width: 450px;
+  padding: 5px;
+}
+
+#findPage input:focus {
+	outline: none;
 }

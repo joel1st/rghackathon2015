@@ -136,7 +136,7 @@ angular.module('Create')
   	filters: $scope.filters
   };
 
-  $scope.step1 = true;
+  $scope.step3 = true;
 
   $scope.newUser = function() {
   	var anyEmpty = false;
