@@ -226,7 +226,7 @@ body {
 .filter-content {
 	background-color: #2c3e50;
 	min-height: 350px;
-	color: white;
+	color: black;
 	border-radius: 5px;
 }
 
@@ -281,12 +281,12 @@ input[type=checkbox] + label:before {
 
 input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
 input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
-input[type=checkbox] + label:before { color: #2c3e50; } /* space between checkbox and label */
+input[type=checkbox] + label:before { color: #2c3e50; display:none; } /* space between checkbox and label */
 .filter-list.active input[type=checkbox] + label:before { color: white; } /* space between checkbox and label */
 
 input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
 input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
-input[type=checkbox]:checked + label:before { color: limegreen; } /* allow space for check mark */
+input[type=checkbox]:checked + label:before { color: limegreen; display:none;} /* allow space for check mark */
 .filter-list.active input[type=checkbox]:checked + label:before { color: limegreen; } /* allow space for check mark */
 
 
@@ -373,9 +373,9 @@ input[type=checkbox]:checked + label:before { color: limegreen; } /* allow space
 .map-image {
 	position: relative;
 	vertical-align: middle;
-  width: 150px;
+  width: 75px;
   border-radius: 100px;
-  height: 150px;
+  height: 75px;
 }
 
 .map-title {
@@ -430,10 +430,24 @@ input[type=checkbox]:checked + label:before { color: limegreen; } /* allow space
 .FOUR{background-image:url(http://icons.iconarchive.com/icons/mattahan/umicons/128/Number-4-icon.png);}
 .FIVE{background-image:url(http://icons.iconarchive.com/icons/mattahan/umicons/128/Number-5-icon.png);}
 
+.BARRIER{background-image:url(http://vignette2.wikia.nocookie.net/leagueoflegends/images/c/cc/Barrier.png/revision/latest?cb=20140115125640);}
+.CLEANSE{background-image:url(http://vignette2.wikia.nocookie.net/leagueoflegends/images/9/95/Cleanse.png/revision/latest?cb=20140115125907);}
+.EXHAUST{background-image:url(http://vignette2.wikia.nocookie.net/leagueoflegends/images/4/4a/Exhaust.png/revision/latest?cb=20111115121116);}
+.FLASH{background-image:url(http://vignette1.wikia.nocookie.net/leagueoflegends/images/7/74/Flash.png/revision/latest?cb=20140115125446);}
+.GHOST{background-image:url(http://vignette2.wikia.nocookie.net/leagueoflegends/images/a/ab/Ghost.png/revision/latest?cb=20140115125935);}
+.HEAL{background-image:url(http://vignette2.wikia.nocookie.net/leagueoflegends/images/6/6e/Heal.png/revision/latest?cb=20111115121115);}
+.IGNITE{background-image:url(http://vignette3.wikia.nocookie.net/leagueoflegends/images/f/f4/Ignite.png/revision/latest?cb=20131212215221);}
+.SMITE{background-image:url(http://vignette3.wikia.nocookie.net/leagueoflegends/images/0/05/Smite.png/revision/latest?cb=20140115125806);}
+.TELEPORT{background-image:url(http://vignette3.wikia.nocookie.net/leagueoflegends/images/e/e8/Teleport.png/revision/latest?cb=20140115125728);}
+
+
+
+
 .drinkcard-cc{
+
     cursor:pointer;
 /*    background-size:contain;*/
-background-size: cover;
+background-size: contain;
     background-repeat:no-repeat;
     display:inline-block;
 /*    //width:100px;height:70px;*/
