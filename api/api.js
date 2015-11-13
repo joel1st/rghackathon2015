@@ -209,7 +209,7 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 router.post('/generate_code', function(req,res) {
 	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, data) {
 		if (!err && data != null) {
-			riot.createCode(data.tournamentId, data.teamSize, data.region, function(err, response) {
+			riot.createCode(data.tournamentId, data.teamSize * 2, data.region, function(err, response) {
 		        if (err) {
 		            es.json({"success": false, "message": err});
 		        } else {
