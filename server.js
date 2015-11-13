@@ -24,18 +24,16 @@ app.use(bodyParser.urlencoded({limit: '2kb', extended: true}));
 var filters = require('./filters/filters.js');
 
 //Test match data
-riot.getMatch(2003103131, 'NA', true, function(err, data) {
+/*riot.getMatch(2003103131, 'NA', true, function(err, data) {
 	console.log(filters.checkForWards(data));
-});
+});*/
 
 //app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 
 app.use(getProviders);
 
-
-
- // persistent login sessions
+// persistent login sessions
 //app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -53,7 +51,6 @@ var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
-
 
 // API to communicate with frontend
 app.use('/api', api);

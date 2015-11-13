@@ -10,8 +10,10 @@ var config = require('../config.js');
 var riot = require('../riot/riot.js');
 var providers = require('../models/providers.js');
 var tournaments = require('../models/tournaments.js');
+
 // api -------------------------
 
+// Get notification from Riot when game ends
 router.post('/riot_notification', function(req, res, next) {
 	console.log(res.body);
 });
@@ -43,7 +45,6 @@ router.post('/register',  function(req, res, next) {
         });
     });
 });
-
 
 router.get('/logout', function(req, res, next) {
     req.logout();
