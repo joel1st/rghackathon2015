@@ -282,6 +282,7 @@ input[type=checkbox] + label:before {
 input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
 input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
 input[type=checkbox] + label:before { color: #2c3e50; } /* space between checkbox and label */
+span input[type=checkbox] + label:before { color: white; } /* space between checkbox and label */
 td input[type=checkbox] + label:before { color: #2c3e50; display:none; } /* space between checkbox and label */
 .filter-list.active input[type=checkbox] + label:before { color: white; } /* space between checkbox and label */
 
