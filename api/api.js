@@ -73,7 +73,7 @@ Send whatever data is needed
 for signup to front end 
 (split into multiple endpoints if needed.)
 */
-router.post('/create_tournament',passport.authenticate('local'), function(req, res) {
+router.post('/create_tournament', function(req, res) {
 		var data = {};
 		// check data
 		if (config.spectateTypes.indexOf(req.body.spectatorType) <= -1) {
@@ -101,10 +101,15 @@ router.post('/create_tournament',passport.authenticate('local'), function(req, r
 				if (!err) {
 					riot.createTournament(req.body.name, response.providerId, function(err, response) {
 						if (!err) {
+							console.log(typeof req.body.visibility);
+							console.log(req.body.visibility);
+							console.log(typeof Boolean(req.body.visibility));
+							console.log(req.body.filter);
 							// update the correct item
-							tournaments.update({"tournamentId": response}, {"tournamentId": response, "spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name ,"region": req.body.region, "teamSize": req.body.teamSize, "ownerId": req.session.username}, function (err, numAffected) {});
+							tournaments.update({"tournamentId": response}, {"visibility": Boolean(req.body.visibility), "filter": req.body.filter, "tournamentId": response, "spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name ,"region": req.body.region, "teamSize": req.body.teamSize, "ownerId": req.session.username}, function (err, numAffected) {});
 							data.success = true;
 						} else {
+							console.log(err);
 							data.success = false;
 						}
 					res.json(data);
