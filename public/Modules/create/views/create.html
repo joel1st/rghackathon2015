@@ -11,7 +11,17 @@
   </div>
 </div>
 
+
 <div id="createTournament">
+<div class="alert-container">
+	<div ng-show="messages.error" class="alert alert-danger" role="alert">
+			<strong>Error!</strong> {{messages.error}}
+	</div>
+	<div ng-show="messages.success" class="alert alert-success" role="alert">
+	  {{messages.success}}
+	</div>
+</div>
+
 
   <div id="step1" ng-show="step1">
 
@@ -24,9 +34,20 @@
       </div>
       <br />
       	<input type="password" class="form-control owner-input owner-password" placeholder="Password" ng-model="newTournament.password" required />
-      	<button type="submit" class="btn btn-outline step1submit top-margin" ng-disabled="step1form.$invalid || step1form.$pristine">Next</button>
+      	<button type="submit" 
+      					class="btn btn-outline step1submit top-margin step1-button" 
+      					ng-disabled="step1form.$invalid || step1form.$pristine">
+      		<i ng-show="step1LoginSpinner" class="fa fa-circle-o-notch fa-spin"></i>
+      		Next
+      	</button>
+      	<button type="button" 
+      					class="btn btn-outline step1submit top-margin register-button step1-button" 
+      					ng-disabled="step1form.$invalid || step1form.$pristine"
+      					ng-click="step1Register()">
+      		<i ng-show="step1RegisterSpinner" class="fa fa-circle-o-notch fa-spin"></i>
+      		Register
+      	</button>
     </form>
-    <a href="#/register" class="account-link">Already have an account?</a>
   </div>
 
 <div id="step2" ng-show="step2">

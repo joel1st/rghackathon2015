@@ -16,6 +16,11 @@ body {
   margin: auto;
 }
 
+.alert-container {
+	top: -145px !important;
+	width: 540px !important;
+}
+
 /*Header Text*/
 .header-text {
     margin: 0 auto !important;
@@ -50,6 +55,19 @@ body {
 
 .owner-password {
 	width: 538px !important;
+}
+
+.step1-button {
+	width: 150px;
+}
+
+#step1 .fa-circle-o-notch {
+	float: left;
+	margin-top: 4px;
+}
+
+.register-button {
+	margin-right: 10px;
 }
 
 .region-selector:not(.default-size) {

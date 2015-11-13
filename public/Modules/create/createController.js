@@ -2,8 +2,9 @@
 
 angular.module('Create')
 
-.controller('CreateController', ['$scope', function ($scope) {
+.controller('CreateController', ['$scope', '$http', function ($scope, $http) {
 
+	$scope.messages = {};
 	$scope.users = [];
   $scope.regions = ['na','eu','ru','lan','oce'];		
   $scope.comparators = ['>', '=', '<'];
@@ -151,8 +152,51 @@ angular.module('Create')
   }
 
   $scope.submitStep1 = function() {
-  	$scope.step1 = false;
-  	$scope.step2 = true;
+  	$scope.step1LoginSpinner = true;
+  	$scope.messages = {};
+    $http({
+    	url:"/api/login", 
+    	method: 'POST',
+    	data: {
+        'username': $scope.newTournament.owner,
+        'password': $scope.newTournament.password
+    	}
+    	})
+    .success(function(result) {
+      $scope.step1 = false;
+  		$scope.step2 = true;
+    })
+    .error(function(result) {
+    	$scope.messages.error = "Invalid credentials";
+        console.log(result);
+    })
+    .finally(function(result) {
+        $scope.step1LoginSpinner = false;
+    })
+  }
+
+  $scope.step1Register = function() {
+  	$scope.step1RegisterSpinner = true;
+  	$scope.messages = {};
+    $http({
+    	url:"/api/register", 
+    	method: 'POST',
+    	data: {
+        'username': $scope.newTournament.owner,
+        'password': $scope.newTournament.password
+    	}
+    	})
+    .success(function(result) {
+      $scope.step1 = false;
+  		$scope.step2 = true;
+    })
+    .error(function(result) {
+    	$scope.messages.error = "Problem registering account";
+        console.log(result);
+    })
+    .finally(function(result) {
+        $scope.step1RegisterSpinner = false;
+    })
   }
 
   $scope.submitStep2 = function() {
