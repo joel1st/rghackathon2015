@@ -6,7 +6,7 @@ angular.module('Create')
 
 	$scope.messages = {};
 	$scope.users = [];
-  $scope.regions = ['na','eu','ru','lan','oce'];		
+  $scope.regions = ['NA','eu','ru','lan','oce'];		
   $scope.comparators = ['>', '=', '<'];
   $scope.message = {
   	step1: 'Please sign up so we can keep track of your tournament',
@@ -123,12 +123,13 @@ angular.module('Create')
 
   $scope.newTournament = {
   	owner: '',
-  	region: $scope.regions[0],
   	settings: {
-  		playercount: $scope.players[0].value,
-  		picktype: $scope.picks[0].value,
-  		maptype: $scope.maps[0].value,
-  		spectatortype: $scope.spectators[0].value,
+  		name: '',
+  		region: $scope.regions[0],
+  		teamSize: $scope.players[0].value,
+  		pickType: $scope.picks[0].value,
+  		mapType: $scope.maps[0].value,
+  		spectatorType: $scope.spectators[0].value,
   		visibility: $scope.visibilities[0].value
   	},
   	users: $scope.users,
@@ -167,7 +168,7 @@ angular.module('Create')
   		$scope.step2 = true;
     })
     .error(function(result) {
-    	$scope.messages.error = "Invalid credentials";
+    	$scope.messages.error = result;
         console.log(result);
     })
     .finally(function(result) {
@@ -191,7 +192,7 @@ angular.module('Create')
   		$scope.step2 = true;
     })
     .error(function(result) {
-    	$scope.messages.error = "Problem registering account";
+    	$scope.messages.error = result.error;
         console.log(result);
     })
     .finally(function(result) {
@@ -205,9 +206,26 @@ angular.module('Create')
   }
 
   $scope.submitStep3 = function() {
-  	$scope.step3 = false;
-  	$scope.step4 = true;
   	console.log($scope.newTournament);
+
+  	$scope.step1RegisterSpinner = true;
+  	$scope.messages = {};
+    $http({
+    	url:"/api/create_tournament", 
+    	method: 'POST',
+    	data: $scope.newTournament.settings
+    	})
+    .success(function(result) {
+      $scope.step3 = false;
+  		$scope.step4 = true;
+    })
+    .error(function(result) {
+    	$scope.messages.error = result.error;
+        console.log(result);
+    })
+    .finally(function(result) {
+        $scope.step1RegisterSpinner = false;
+    })
   }
 
 }]);
