@@ -73,7 +73,7 @@ Send whatever data is needed
 for signup to front end 
 (split into multiple endpoints if needed.)
 */
-router.post('/create_tournament', function(req, res) {
+router.post('/create_tournament', passport.authenticate('local'), function(req, res) {
 		var data = {};
 		// check data
 		if (config.spectateTypes.indexOf(req.body.spectatorType) <= -1) {
