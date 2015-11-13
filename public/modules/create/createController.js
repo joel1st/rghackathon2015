@@ -2,10 +2,10 @@
 
 angular.module('Create')
 
-.controller('CreateController', ['$scope', '$http', function ($scope, $http) {
+.controller('CreateController', ['$scope', '$http', '$timeout', '$location', function ($scope, $http, $timeout, $location) {
 
 	$scope.messages = {};
-	$scope.users = [];
+	$scope.users = new Array(12);
   $scope.regions = ['NA','EU','RU','LAN','OCE'];		
   $scope.comparators = ['>', '=', '<'];
   $scope.message = {
@@ -119,16 +119,6 @@ angular.module('Create')
   	id: 'nowards',
     name: 'No Warding',
     status: false,
-  }, 
-  role: {
-	id:'role',
-	name:'Role Only',
-	status:false,
-  }, 
-  summonerSpell: {
-	id:'summonerspell',
-	name:'Summoner Spells',
-	status: false,
   }
 	}];
 
@@ -151,7 +141,7 @@ angular.module('Create')
   	filters: $scope.filters
   };
 
-  $scope.step1 = true;
+  $scope.step2 = true;
 
   $scope.newUser = function() {
   	var anyEmpty = false;
@@ -163,7 +153,7 @@ angular.module('Create')
   	});
 
   	if (!anyEmpty) {
-  			$scope.users.push('');
+  		$scope.users.push('');
   	}
   }
 
@@ -222,8 +212,8 @@ angular.module('Create')
 
   $scope.submitStep3 = function() {
   	console.log($scope.newTournament);
+  	$scope.step3RedirectSpinner = true;
 
-  	$scope.step1RegisterSpinner = true;
   	$scope.messages = {};
     $http({
     	url:"/api/create_tournament", 
@@ -233,13 +223,16 @@ angular.module('Create')
     .success(function(result) {
       $scope.step3 = false;
   		$scope.step4 = true;
+  		$timeout(function() { 
+  			$location.path('/tournament');
+  			$scope.step3RedirectSpinner = false;
+  		}, 2000);
     })
     .error(function(result) {
     	$scope.messages.error = result.error;
         console.log(result);
     })
     .finally(function(result) {
-        $scope.step1RegisterSpinner = false;
     })
   }
 

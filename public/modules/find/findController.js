@@ -2,7 +2,11 @@
 
 angular.module('Find')
 
-.controller('FindController', ['$scope', function ($scope) {
+.controller('FindController', ['$scope', '$location', function ($scope, $location) {
+
+	$scope.goTournament = function() {
+		$location.path('/tournament');
+	}
 
 	$scope.tournaments = [];
 	if (_.isEmpty($scope.tournaments)) {
@@ -32,91 +36,5 @@ angular.module('Find')
 			})
 		}
 	}
-
-/*  $scope.tournaments = [
-  {
-  	name: 'Tournament',
-  	teamCount: '12',
-  	owner: 'ProBronzeLord',
-  	progress: 15
-  },
-  {
-  	name: '123Tournament',
-  	teamCount: '15',
-  	owner: 'ProBronzeLord',
-  	progress: 8
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '12',
-  	owner: 'ProBronzeLord',
-  	progress: 50
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '4',
-  	owner: 'ProBronzeLord',
-  	progress: 12
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '4',
-  	owner: 'ProBronzeLord',
-  	progress: 100
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '18',
-  	owner: 'ProBronzeLord',
-  	progress: 23
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '13',
-  	owner: 'ProBronzeLord',
-  	progress: 66
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '11',
-  	owner: 'ProBronzeLord',
-  	progress: 80
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '5',
-  	owner: 'ProBronzeLord',
-  	progress: 60
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '27',
-  	owner: 'ProBronzeLord',
-  	progress: 45
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '8',
-  	owner: 'ProBronzeLord',
-  	progress: 35
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '16',
-  	owner: 'ProBronzeLord',
-  	progress: 25
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '32',
-  	owner: 'ProBronzeLord',
-  	progress: 70
-  },
-  {
-  	name: 'Tournament',
-  	teamCount: '16',
-  	owner: 'ProBronzeLord',
-  	progress: 90
-  }];*/
 
 }]);
