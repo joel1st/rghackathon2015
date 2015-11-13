@@ -93,44 +93,45 @@ angular.module('Create')
   ];
 
   $scope.filters = [{
-  championmastery: {
-  	id: 'championmastery',
-  	name: 'Champion Mastery',
-  	status: true,
-  	settings: {
-  	  championlevel: 5,
-  	  comparator: $scope.comparators[0]
-  	}
-  },
-  itemrestrictions: {
-  	id: 'itemrestrictions',
-    name: 'Item Restrictions',
-    status: false,
-    settings: {
-      items: ''
+    championmastery: {
+      id: 'championmastery',
+      name: 'Champion Mastery',
+      status: true,
+      settings: {
+        championlevel: 5,
+        comparator: $scope.comparators[0]
+      }
+    },
+    itemrestrictions: {
+      id: 'itemrestrictions',
+      name: 'Item Restrictions',
+      status: false,
+      settings: {
+        items: ''
+      }
+    },
+    champrestrictions: {
+      id: 'champrestrictions',
+      name: 'Champ Restrictions',
+      status: false,
+    },
+    nowards: {
+      id: 'nowards',
+      name: 'No Warding',
+      status: false,
+    },
+    role: {
+      id: 'role',
+      name: 'Role Only',
+      status: false,
+    },
+    summonerSpell: {
+      id: 'summonerspell',
+      name: 'Summoner Spells',
+      status: false,
     }
-  },
-  champrestrictions: {
-	id: 'champrestrictions',
-	name: 'Champ Restrictions',
-	status: false,
-  },
-  nowards: {
-  	id: 'nowards',
-    name: 'No Warding',
-    status: false,
-  },  role: {
-       id:'role',
-       name:'Role Only',
-       status:false,
-  }, 
-  summonerSpell: {
-       id:'summonerspell',
-       name:'Summoner Spells',
-       status: false,
-   }
+  }];
 
-	}];
 
 	if (!$scope.users.length) {
 			$scope.users.push('');
@@ -151,7 +152,7 @@ angular.module('Create')
   	filters: $scope.filters
   };
 
-  $scope.step2 = true;
+  $scope.step3 = true;
 
   $scope.newUser = function() {
   	var anyEmpty = false;

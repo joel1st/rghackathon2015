@@ -21,6 +21,22 @@ body {
 	width: 540px !important;
 }
 
+#step3 .summoner-spells label:before {
+	display:none;
+}
+
+#step3 .summoner-spells .row {
+	padding-bottom: 30px;
+}
+
+#step3 .filterrole {
+	color: white;
+}
+
+#step3 .filterrole input[type=checkbox] + label:before {
+	color: white;
+}
+
 /*Header Text*/
 .header-text {
     margin: 0 auto !important;
@@ -173,6 +189,24 @@ body {
 	font-size: 20px;
 }
 
+#step3 #filteritemrestrictions .btn-danger,
+#step3 #filterchamprestrictions .btn-danger {
+  font-size: 15px;
+  width: 75px;
+}
+
+#step3 #filteritemrestrictions .btn-warning,
+#step3 #filterchamprestrictions .btn-warning {
+  width: 445px;
+  height: 42px;
+  font-size: 24px;
+}
+
+#step3 .list-group-item {
+	color: black;
+}
+
+
 .step3submit {
 	float: right;
   margin-right: -15px;
@@ -226,7 +260,7 @@ body {
 .filter-content {
 	background-color: #2c3e50;
 	min-height: 350px;
-	color: black;
+	color: white;
 	border-radius: 5px;
 }
 
@@ -280,7 +314,10 @@ input[type=checkbox] + label:before {
 
 input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
 input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
-input[type=checkbox] + label:before { color: #2c3e50; } /* space between checkbox and label */
+input[type=checkbox]:not(.filterroleradio) + label:before { color: #2c3e50; } /* space between checkbox and label */
+input[type=checkbox].filterroleradio + label:before, input[type=checkbox].filterroleradio + label { font-size:32px; }
+input[type=checkbox] + label:hover { cursor: pointer; }
+
 span input[type=checkbox] + label:before { color: white; } /* space between checkbox and label */
 td input[type=checkbox] + label:before { color: #2c3e50; display:none; } /* space between checkbox and label */
 .filter-list.active input[type=checkbox] + label:before { color: white; } /* space between checkbox and label */
