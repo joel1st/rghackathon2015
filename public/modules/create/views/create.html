@@ -121,7 +121,7 @@
       <label class="noselect">Participating Summoners</label>
       <div class="user-list-container">
       <div ng-repeat="user in users track by $index">
-        <input ng-model="users[$index]" ng-change="newUser()" class="user-list" />
+        <input ng-model="users[$index]" ng-change="newUser()" class="user-list" placeholder="Summoner {{$index+1}}" />
       </div>
       </div>
     </div>
@@ -343,15 +343,11 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
       <button type="button" class="btn btn-outline top-margin" ng-click="step3 = false; step2 = true">Back</button>
       <button type="submit" class="btn btn-outline step3submit top-margin" ng-disabled="step3form.$invalid">Next</button>
 
-
-
-
-
       	</form>
   </div>
 
   <div id="step4" ng-show="step4">
-  <span class="noselect">Setting up your tournament...</span>
+  <span class="noselect"><i ng-show="step3RedirectSpinner" class="fa fa-circle-o-notch fa-spin"></i> Setting up your tournament...</span>
 
   </div>
 </div>

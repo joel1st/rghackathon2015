@@ -70,7 +70,7 @@
       Progress
     </th>
   </tr>
-  <tr ng-repeat="t in tournaments | filter:searchText">
+  <tr ng-repeat="t in tournaments | filter:searchText" ng-click="goTournament()">
     <td colspan="2">
       {{t.name}}
     </td>
