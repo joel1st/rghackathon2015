@@ -1,0 +1,1227 @@
+@font-face {
+    font-family: "AlternateGothicW02-No2D";
+    src: url('../fonts/alternate-gothic-2d.eot');                   /* IE9 Compatibility Modes */
+    src: url('../fonts/alternate-gothic-2d.eot?') format('eot'),     /* IE6-IE8 */
+        url('../fonts/alternate-gothic-2d.woff') format('woff'),    /* Modern Browsers */
+        url('../fonts/alternate-gothic-2d.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('../fonts/alternate-gothic-2d.svg') format('svg');      /* Legacy iOS */
+}
+
+html,
+body {
+    /* SOLID COLOR */
+    /*background-color:#2c3e50;
+    height: 100%;*/
+
+    /* LEAGUE OF LEGENDS BG */
+    /*position: absolute;
+    width: 100%;
+    min-width: 1000px;
+    height: 1080px;
+    z-index: -10;
+    background-color: black;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url("http://cdn.leagueoflegends.com/lolkit/1.0.27/resources/images/bg-default.jpg");
+    top: 0;*/
+
+    /* RIOT GAMES BG */
+    background-color: #2c3e50;
+    background: #000 url('../img/background.jpg') no-repeat center top;
+    color: #000000;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 5px 0;
+    font-family: 'AlternateGothicW02-No2D', Arial, sans-serif;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+h1 {
+    font-size: 70px;
+    line-height: 60px;
+}
+h2 {
+    font-size: 60px;
+    line-height: 50px;
+}
+h3 {
+    font-size: 50px;
+    line-height: 40px;
+}
+h4 {
+    font-size: 40px;
+    line-height: 30px;
+}
+h5 {
+    font-size: 30px;
+    line-height: 20px;
+}
+h6 {
+    font-size: 25px;
+    line-height: 15px;
+}
+pre {
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre;
+}
+a {
+    color: #ED3029;
+}
+a:hover {
+    color: #c0392b;
+}
+
+.api-update-post a {
+    color: #000000;
+}
+.api-update-post a:hover {
+    color: #000000;
+}
+
+#inputs-link {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+#inputs-link a {
+    color: #0f6ab4;
+    text-decoration: none;
+}
+
+#inputs-link a:hover {
+    color: #0f6ab4;
+    text-decoration: none;
+}
+
+#inputs-link a:visited {
+    color: #0f6ab4;
+    text-decoration: none;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -40px;
+}
+.main.container {
+    background-color: #FAFAFA;
+    /*padding: 60px 20px;*/
+    padding: 25px 30px;
+    border-radius: 6px;
+    box-shadow: 0px 16px 20px 6px #000000;
+    -moz-box-shadow: 0px 16px 20px 6px #000000;
+    -webkit-box-shadow: 0px 16px 20px 6px #000000;
+    filter: progid:DXImageTransform.Microsoft.Shadow(strength= 16,direction = 180,color = '#000000');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength = 16,Direction = 180,Color = '#000000')";
+}
+
+.large-textarea {
+    width: 500px;
+}
+
+#discussions .masthead .content-border-content .header h2 {
+    font-family: 'AlternateGothicW02-No2D', Arial, sans-serif;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+.header.container {
+    width: 1000px;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: 0px 16px 20px 6px #000000;
+    -moz-box-shadow: 0px 16px 20px 6px #000000;
+    -webkit-box-shadow: 0px 16px 20px 6px #000000;
+    filter: progid:DXImageTransform.Microsoft.Shadow(strength= 16,direction = 180,color = '#000000');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength = 16,Direction = 180,Color = '#000000')";
+}
+.header.container > div {
+    position: relative;
+    top: 60px;
+    left: 50px;
+}
+/* Header images are roughly 16x5 aspect ratio. */
+.header.container.khazix {
+    height: 331px;
+    background: url(../img/champs/banners/khazix-base-banner.jpg) no-repeat;
+}
+.header.container.fiora {
+    height: 336px;
+    background: url(../img/champs/banners/fiora-hm-banner.jpg) no-repeat;
+}
+.header.container.galio {
+    height: 347px;
+    background: url(../img/champs/banners/galio-gk-banner.jpg) no-repeat;
+}
+.header.container.miss-fortune {
+    height: 310px;
+    background: url(../img/champs/banners/mf-base-banner.jpg) no-repeat;
+}
+.header.container.chogath {
+    height: 345px;
+    background: url(../img/champs/banners/chogath-bc-banner.jpg) no-repeat;
+}
+.header.container.ezreal {
+    height: 312px;
+    background: url(../img/champs/banners/ezreal-pf-banner.jpg) no-repeat;
+}
+.header.container.katarina {
+    height: 313px;
+    background: url(../img/champs/banners/katarina-base-banner.jpg) no-repeat;
+}
+.header.container.riven {
+    height: 312px;
+    background: url(../img/champs/banners/riven-champion-banner.jpg) no-repeat;
+}
+.header.container.blitzcrank {
+    height: 312px;
+    background: url(../img/champs/banners/blitzcrank-iblitz-banner.jpg) no-repeat;
+}
+.header.container.lux {
+    height: 313px;
+    background: url(../img/champs/banners/lux-base-banner.jpg) no-repeat;
+}
+.header.container.soraka {
+    height: 312px;
+    background: url(../img/champs/banners/soraka-dryad-banner.jpg) no-repeat;
+}
+.header.container.ashe {
+    height: 313px;
+    background: url(../img/champs/banners/ashe-freljord-banner.jpg) no-repeat;
+}
+.header.container.cassiopeia {
+    height: 313px;
+    background: url(../img/champs/banners/cassiopeia-mythic-banner.jpg) no-repeat;
+}
+.header.container.sona {
+    height: 313px;
+    background: url(../img/champs/banners/sona-arcade-banner.jpg) no-repeat;
+}
+.header.container h1 {
+    color: #fff;
+    letter-spacing: 0em;
+    font-size: 70px;
+    line-height: 60px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+}
+.header.container h4 {
+    color: #fff;
+    letter-spacing: 0em;
+    font-size: 40px;
+    line-height: 30px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+}
+.header.container .quote-block {
+    display: inline-block;
+    margin-top: 25px;
+}
+.header.container .quote-block .champ-name {
+    font-size: 30px;
+    text-align: right;
+}
+.body.container {
+    background-color: #FAFAFA;
+    padding: 25px 30px;
+    -webkit-border-bottom-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    box-shadow: 0px 16px 20px 6px #000000;
+    -moz-box-shadow: 0px 16px 20px 6px #000000;
+    -webkit-box-shadow: 0px 16px 20px 6px #000000;
+    filter: progid:DXImageTransform.Microsoft.Shadow(strength= 16,direction = 180,color = '#000000');
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength = 16,Direction = 180,Color = '#000000')";
+}
+.body.container.lulu {
+    width: 1000px;
+    height: 589px;
+    background: url(../img/champs/cutouts/lulu-dt-cutout.png) no-repeat;
+    background-color: #FAFAFA;
+    border-radius: 6px;
+    padding: 0;
+}
+.body.container.lulu > div {
+    margin: 25px 30px;
+}
+.body.container.drmundo {
+    width: 1000px;
+    min-height: 345px;
+    background: url(../img/champs/cutouts/drmundo-rb-cutout.png) no-repeat;
+    background-position: right top;
+    background-color: #FAFAFA;
+    border-radius: 6px;
+    padding: 0;
+}
+.body.container.drmundo > div {
+    margin: 25px 30px;
+}
+.body.container.full {
+    width: 1000px;
+    background-color: #FAFAFA;
+    border-radius: 6px;
+    padding: 0;
+}
+.body.container.full > div {
+    margin: 70px 30px;
+}
+.body.container.full h1 {
+    color: #fff;
+    letter-spacing: 0em;
+    font-size: 70px;
+    line-height: 60px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.6), 0 0 30px rgba(0,0,0,.075);
+}
+.body.container.full h4 {
+    color: #fff;
+    letter-spacing: 0em;
+    font-size: 40px;
+    line-height: 30px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+}
+.body.container.full .quote-block {
+    display: inline-block;
+    margin-top: 35px;
+}
+.body.container.full .quote-block .champ-name {
+    font-size: 30px;
+    text-align: right;
+}
+.body.container.full.thresh {
+    height: 590px;
+    background: url(../img/champs/full/thresh-base-full.jpg) no-repeat;
+}
+.body.container.full.irelia {
+    height: 568px;
+    background: url(../img/champs/full/irelia-frostblade-full.jpg) no-repeat;
+}
+.body.container.full.jinx {
+    height: 592px;
+    background: url(../img/champs/full/jinx-mafia-full.jpg) no-repeat;
+}
+.body.container.full.orianna {
+    height: 625px;
+    background: url(../img/champs/full/orianna-bladecraft-full.jpg) no-repeat;
+}
+.body.container.full.velkoz {
+    height: 565px;
+    background: url(../img/champs/full/velkoz-battlecast-full.jpg) no-repeat;
+}
+.push {
+    height: 60px;
+}
+.push:before, .push:after {
+    display: table;
+    content: "";
+    zoom: 1;
+}
+.push:after {
+    clear: both;
+}
+.push.xlarge {
+    height: 300px;
+}
+
+.dl-horizontal dt {
+    padding-top: 5px;
+    width: 190px;
+}
+.dl-horizontal dd {
+    padding-top: 5px;
+    margin-left: 210px;
+}
+.dl-horizontal.left dt {
+    width: 120px;
+}
+.dl-horizontal.left dd {
+    margin-left: 130px;
+}
+
+/* PAGINATION */
+.pagination a,
+.pagination span {
+    float: left;
+    padding: 4px 12px;
+    line-height: 20px;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-left-width: 0;
+}
+.pagination span {
+    background-color: #f5f5f5;
+}
+.pagination a:hover {
+    background-color: #f5f5f5;
+}
+.pagination a:first-child,
+.pagination span:first-child {
+    border-left-width: 1px;
+    -webkit-border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    border-top-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-topleft: 4px;
+}
+.pagination a:last-child,
+.pagination span:last-child {
+    -webkit-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+}
+
+/* TABLE OVERRIDE */
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+    background-color: #F5F5F5;
+}
+
+/* FOOTER */
+#footer {
+    height: 80px;
+    /*background-color: #333;*/
+    font-size: 11px;
+}
+#footer .container {
+    padding: 0 20px 15px 20px;
+}
+#footer .push-top {
+
+}
+#footer .legal {
+    display: inline-block;
+    color: #ABB0B3;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+#footer a {
+    margin-left: 10px;
+    color: #bdc3c7;
+}
+#footer a:hover {
+    color: #bdc3c7;
+}
+#footer img {
+    height: 75px;
+}
+
+/* HOVER DROPDOWNS */
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+.navbar-inverse .nav li.dropdown:hover > a.dropdown-toggle {
+    color: #fff;
+}
+.navbar-inverse .nav li.dropdown:hover > a .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+a.menu:after, .dropdown-toggle:after {
+    content: none;
+}
+.navbar .dropdown-menu {
+    margin-top: 0;
+}
+ul.nav li.dropdown:hover {
+    color: #ffffff;
+}
+.dropdown-menu {
+    background-color: #111111;
+    -webkit-border-radius: 6px;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius: 6px;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    border-radius: 6px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border: none;
+}
+.dropdown-menu:before,
+.dropdown-menu:after {
+    border: none !important;
+    content: "" !important;
+}
+.dropdown-menu  > li > a {
+    color: #999999;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+    background-color: #ED3029;
+    background-image: none;
+}
+.nav-list > .active > a,
+.nav-list > .active > a:hover,
+.nav-list > .active > a:focus {
+    background-color: #ED3029;
+    background-image: none;
+}
+.dropdown-submenu > .dropdown-menu {
+    margin-top: 6px;
+}
+.dropdown-menu .divider {
+    background-color: #454545;
+    border-bottom: none;
+}
+.dropdown-menu li.section-title {
+    font-size: 11px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #999999;
+}
+
+/* NAVBAR */
+.navbar-inverse .navbar-inner {
+    /*border-bottom: 5px solid #2980b9;*/
+    font-family: 'AlternateGothicW02-No2D', Arial, sans-serif;
+    font-weight: 100;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* NAVBAR BTN */
+.navbar-inverse .nav > li > a.btn-register {
+    padding: 3px 12px;
+    margin: 7px 15px 0 0;
+    color: #ffffff;
+    background-color: #ED3029;
+}
+.navbar-inverse .nav > li > a.btn-register:hover,
+.navbar-inverse .nav > li > a.btn-register:active {
+    color: #ffffff;
+    background-color: #ED3029;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+/* NAVBAR BRAND */
+.navbar .brand {
+    margin: 5px 70px 5px 0;
+    padding: 0;
+}
+.navbar .brand .developers {
+    display: inline;
+    position: relative;
+    top: 3px;
+    left: 2px;
+    font-size: 25px;
+}
+.navbar .brand img {
+    height: 30px;
+}
+
+/* SIDEBAR WELL */
+.well {
+    padding: 10px 0;
+}
+
+/* LANDING HEADER */
+h1.landing.header {
+    font-size: 82px;
+    line-height: 60px;
+    margin: 10px 0 25px 0;
+}
+p.landing.description {
+    font-size: 22px;
+    line-height: 26px;
+    margin-bottom: 40px;
+}
+
+/* BLOG LIST */
+.blog-list {
+    list-style: none;
+    margin: 10px 0;
+}
+.blog-list li {
+    margin: 0;
+}
+.blog-list li p {
+    font-size: 11px;
+    line-height: 13px;
+    margin: 0 0 5px 0;
+}
+
+/* CREATE LIST */
+.create-list {
+    list-style: none;
+    margin: 10px 0;
+}
+.create-list li a {
+    font-size: 20px;
+    margin: 0 0 5px 0;
+}
+.create-list li p {
+    font-size: 12px;
+    margin: 0 0 12px 0;
+}
+
+/* THE DOCS */
+.docs h3,
+.docs h4 {
+    margin: 10px 0 5px 0;
+}
+
+/* REGISTRATION FORM */
+.registration-form {
+    padding-left: 300px;
+}
+.registration-form h3 {
+    font-size: 30px;
+    margin: 0 0 8px 0;
+}
+.registration-form label {
+    font-weight: bold;
+    cursor: auto;
+}
+.registration-form .btn {
+    margin-top: 20px;
+    padding: 14px 34px;
+}
+.registration-form p {
+    font-size: 75%;
+    margin-top: 10px;
+}
+.registration-form li {
+    list-style: none;
+}
+
+/* SIGN IN FORM */
+.sign-in-form {
+    padding-left: 300px;
+}
+.sign-in-form label {
+    font-weight: bold;
+    cursor: auto;
+}
+.sign-in-form .btn {
+    margin-top: 10px;
+}
+.sign-in-form p {
+    font-size: 75%;
+    margin-top: 10px;
+}
+
+/* GUIDELINES HEADER */
+.guidelines.header {
+    margin-top: 50px;
+}
+.guidelines.description {
+    font-size: 18px;
+    margin-top: 10px;
+}
+.guidelines h4 {
+    border-top: 3px solid #1C1E20;
+    border-bottom: 3px solid #1C1E20;
+    text-align: center;
+    padding: 5px 0;
+}
+.guidelines div.content {
+    color: #ffffff;
+    background-color: #1C1E20;
+    padding: 0 10px 10px 10px;
+    margin-top: 15px;
+}
+.guidelines .arrow {
+    width: 0;
+    height: 0;
+    margin-bottom: 10px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #ED3029;
+    position: relative;
+    left: 125px;
+}
+
+/* FAQ */
+.faq h4 {
+    margin: 30px 0 10px 0;
+    font-size: 22px;
+}
+.faq .well {
+    padding: 15px;
+}
+.faq .well p:first-child {
+    font-size: 17px;
+    font-weight: 100;
+}
+.faq .well p:last-child {
+    margin: 0;
+}
+
+/* VERIFIED/WELCOME */
+.welcome h4 {
+    margin-top: 25px;
+}
+.welcome p {
+    font-size: 18px;
+    line-height: 24px;
+    margin: 20px 0 0 0;
+}
+.welcome ul {
+    list-style: none;
+}
+.welcome .choices {
+    margin-top: 40px;
+}
+.welcome .choices a {
+    font-size: 22px;
+}
+.welcome .choices p {
+    font-size: 13px;
+    margin: 5px 0 0 0;
+}
+.welcome .choices .center-button {
+    text-align: center;
+}
+.welcome p.description {
+    margin-top: 15px;
+    font-size: 16px;
+}
+.welcome p.choice-description {
+    font-size: 12px;
+}
+
+/* USER */
+.user form {
+    margin: 20px 0;
+}
+
+/* TERMS OF USE */
+.terms {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 0px;
+}
+.terms .detail {
+    margin-bottom: 30px;
+}
+.terms h4 {
+    margin-bottom: 10px;
+}
+
+.terms-label {
+    vertical-align: middle;
+}
+
+.terms-agree {
+    margin-right: 5px !important;
+    vertical-align: middle;
+    margin-bottom: 5px !important;
+}
+
+#DropDown-champion, #DropDown-summoner, #DropDown-item {
+    width: 405px;
+}
+
+#DropDown-champion-query, #DropDown-summoner-query, #DropDown-item-query {
+    width: 365px;
+}
+
+/* RIOT-ESQUE BUTTONS */
+.btn {
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    font-family: 'AlternateGothicW02-No2D', Arial, sans-serif;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 20px;
+    padding: 8px 16px;
+}
+.btn:hover, .btn:focus {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+.btn-large {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    font-size: 30px;
+    padding: 14px 20px;
+}
+.btn-small {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    font-size: 20px;
+    padding: 5px 14px;
+}
+.btn-primary {
+    text-shadow: none;
+    background-color: #ED3029;
+    background-image: none;
+    background-repeat: no-repeat;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #ED3029;
+}
+.btn-inverse {
+    text-shadow: none;
+    background-color: #363636;
+    background-image: none;
+    background-repeat: no-repeat;
+}
+.btn-inverse:hover,
+.btn-inverse:focus,
+.btn-inverse:active {
+    background-color: #363636;
+}
+.btn-secondary {
+    text-shadow: none;
+    background-color: #075d94;
+    background-image: none;
+    background-repeat: no-repeat;
+    color: #ffffff;
+}
+.btn-secondary:hover {
+    color: #ffffff;
+    background-color: #075d94;
+}
+
+/* RIOT-ESQUE ALERTS */
+/*.alert-warning {
+    color: ;
+    background-color: ;
+    border-color: ;
+} */
+
+/* BOX FOR USE ON IMAGES */
+.box {
+    background-color: #000000;
+    background: rgba(0, 0, 0, .5);
+    padding: 20px 30px 10px 10px;
+    color: #ffffff;
+}
+
+/* ARROW */
+
+ul.red-arrow {
+    padding: 0;
+    margin: 0 0 10px 15px;
+    list-style:none;
+}
+
+ul.red-arrow>li {
+    padding-left: 15px;
+}
+
+ul.red-arrow>li:before {
+    content: "";
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid #ED3029;
+    display: inline-block;
+    margin-right: 2px;
+    vertical-align: middle;
+    margin-left: -15px; /*same as padding-left set on li*/
+    width: 8px; /*same as padding-left set on li*/
+}
+
+/* STATUS ICONS USING JUST CSS */
+.status-icon {
+    display: inline;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    margin: 0 20px 0.25em 0;
+}
+.status-icon:before,
+.status-icon:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+}
+.status-icon.help {
+    color:#2385BA;
+}
+
+.status-icon.help:before {
+    content:"?";
+    left:3px;
+    width:16px;
+    height:16px;
+    margin-top:-8px;
+    font-size:14px;
+    font-weight:bold;
+    line-height:15px;
+    text-align:center;
+    color:#fff;
+    background:#2385BA;
+    /* css3 */
+    -webkit-border-radius:16px;
+    -moz-border-radius:16px;
+    border-radius:16px;
+}
+.status-icon.ok:before {
+    left: 6px;
+    width: 5px;
+    height: 12px;
+    border-width: 0 5px 5px 0;
+    border-style: solid;
+    border-color: #468847;
+    margin-top: -11px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.status-icon.warn:before,
+.status-icon.warn:after {
+    left: 6px;
+    width: 5px;
+    height: 15px;
+    margin-top: -7px;
+    background: #ffcc51;
+    /* css3 */
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.status-icon.warn:after {
+    left: 1px;
+    width: 15px;
+    height: 5px;
+    margin-top: -2px;
+}
+.status-icon.error:before,
+.status-icon.error:after {
+    left: 6px;
+    width: 5px;
+    height: 15px;
+    margin-top: -7px;
+    background: #8A0808;
+    /* css3 */
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.status-icon.error:after {
+    left: 1px;
+    width: 15px;
+    height: 5px;
+    margin-top: -2px;
+}
+.status-icon.degraded:before {
+    content: "!";
+    z-index: 2;
+    left: 9px;
+    top: 7px;
+    margin-top: -8px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+}
+.status-icon.degraded:after {
+    z-index: 1;
+    border-width: 0 11px 18px;
+    border-style: solid;
+    border-color: #3D4145 transparent;
+    margin-top: -10px;
+    background: transparent;
+}
+.status-icon.info:before {
+    content: "i";
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: italic;
+    line-height: 16px;
+    text-align: center;
+    color: #ffffff;
+    background: #00aeef;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+}
+
+/* ICON FIXES */
+.icon-plus {
+    margin-top: 3px;
+}
+
+/* TABLE WITH LINK ROWS */
+.table-links tbody tr:hover {
+    cursor: pointer;
+}
+.table-links tbody > tr:nth-child(odd):hover > td,
+.table-links tbody > tr:nth-child(odd):hover > th {
+    background-color: #F2F2F2;
+}
+.table-links tbody > tr:hover > td,
+.table-links tbody > tr:hover > th {
+    background-color: #F7F7F7;
+}
+
+/* FILTER BAR */
+.filter-bar {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #1C1E20;
+    color: #FAFAFA;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.filter-bar .filter-label {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.filter-bar select {
+    margin: 0 20px 0 0;
+}
+/* FILTER REGION TOGGLES */
+.noSelect { /* prevents labels from being highlighted */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.filter-region-td {
+    background-color: #ffffff;
+    width: 45px;
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+    color:#000000;
+    margin-right:3px;
+}
+.filter-region .reg_check {
+    display:none;
+}
+input[type=checkbox]:checked ~ .filter-region-td {
+    background-color: lightgrey;
+}
+/* END FILTER REGION */
+.api-update-post {
+    margin-bottom: 40px;
+}
+
+.api-update-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+/* graph total count in filter bar text */
+.count-label {
+    min-width:22%; margin-left:25px;font-size: 1.2em;
+}
+
+/* D3 GRAPH */
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.x.axis path {
+    display: none;
+}
+.line {
+    fill: none;
+    stroke: #3d4145;
+    stroke-width: 1.5px;
+}
+
+#shortName, #results-per-page {
+    color: black;
+    background-color: white;
+}
+
+.tooltip {
+    pointer-events: none; color:#111; padding:3px;
+    border:1px solid #DCA; background:#fffAF0;
+    font-size: 1.1em;
+}
+
+.dot:hover {
+    fill: #ed3029;
+}
+
+.bar {
+    fill: #3d4145;
+}
+
+.bar:hover {
+    fill: #ed3029;
+    stroke-width: 2px;
+}
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+
+/* Moderator show app page */
+.app-graph-container {
+    margin-top: 0;
+    width: 100%;
+    float:left;
+}
+
+.app-graph {
+    height:500px; width:900px; padding:10px; margin:auto
+}
+.stats-topApps-container {
+    width:320px; height:620px; float:right; overflow:auto
+}
+
+.show-info-container {
+    width:600px;
+    margin-bottom: 0;
+    float: left;
+}
+
+.show-region-container {
+    float:right;
+}
+
+.show-buttons-container {
+    display: inline-table;
+    float: none;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
+.show-notes-container {
+    display: inline-table;
+    margin-left:0;
+}
+
+.show-notes-container .table {
+    margin-bottom: 10px;
+}
+
+/* tooltip for stats list app table */
+#topApps_col {
+    max-width:110px; overflow:hidden;
+}
+a.appTable span {
+    display:none; padding:14px 20px;
+    margin-top:-15px;margin-left: 25px;
+    width:200px; line-height:20px;
+}
+a.appTable:hover span{
+    display:inline; position:absolute; color:#111;
+    border:1px solid #DCA; background:#fffAF0;
+}
+/* show_app notes */
+.user-notes-container {
+    background-color: #eeeeee; padding-top: 10px; padding-bottom: 10px; margin-bottom: 10px;
+}
+.appNotes-display-scroll {
+   width:950px;
+}
+
+/* input text field size larger then bootstrap*/
+.input-xxxlarge-restricted {
+    width:600px; max-width:600px
+}
+
+/* export button add-on */
+.export {
+    float:right; margin-top: 20px;
+}
+
+/* highlights the usage graphs on the main page */
+.flash {
+    border-color: #FFFFA7; border-style: solid; border-width: 10px; padding:4px; border-radius: 6px;
+}
+
+/* featured apps stuff*/
+
+.featured-element {
+    overflow:hidden;
+    width: 170px; height:115px;
+    background-color: white;
+    text-align: center;
+    border-style: solid; border-color: #1C1E20;
+    border-radius: 5px;
+}
+
+.featured-label {
+    background-color: #1C1E20;
+    color:white;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#pagination-top {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+#pagination-bottom {
+    margin-top: -5px;
+    margin-bottom: 0;
+    display: inline-block;
+}
+
+/* reCaptcha stuff */
+.reCaptcha-pop-up {
+    position:fixed;
+    top:35%;
+    left:42%;
+    z-index: 1;
+    border-radius: 10px;
+    width:320px; border-style: solid; border-width: 2px;
+    padding:10px;
+    background-color:#f5f5f5;
+    text-align: center;
+}
