@@ -6,7 +6,7 @@ Registers a given user if he was not present before.
 | Parameter  | Type  | Values/Desc  | 
 |---|---|---|
 | email | email | |
-| password | str | restrictios for strenght |
+| password | str | restrictions for strength |
 
 |Return | Type | Values/Desc |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ Registers a given user if he was not present before.
 ## Create Tournament
 Creates a tournament if
 
-	* user is logged in
+* user is logged in
 
 | Parameter  | Type  | Values/Desc  | 
 |---|---|---|
@@ -52,12 +52,12 @@ Creates a tournament if
 ## Add Team
 Adds a team to a given tournament if
 
-	* owner of the tournament is adding a team
-	* team captain is adding the team and the tournament is public & signups are available
-	* additionaly adds the team as owned by the team captain/owner if nonexistant
-	* (maybe) restriction if the tournament has already progressed/started
-	* tournament is not full
-	* is not after signup deadline
+* owner of the tournament is adding a team
+* team captain is adding the team and the tournament is public & signups are available
+* additionaly adds the team as owned by the team captain/owner if nonexistant
+* (maybe) restriction if the tournament has already progressed/started
+* tournament is not full
+* is not after signup deadline
 
 | Parameter | Type | Values/Desc
 | --- | --- | --- |
@@ -106,6 +106,7 @@ Returns a Tournament DTO
 
 
 **Tournament** or 
+
 | Parameter | Type | Value/Desc |
 | --- | --- | --- |
 | errorMsg  | string | |
