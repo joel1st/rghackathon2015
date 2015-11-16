@@ -2,6 +2,7 @@
 
 ## Register
 Registers a given user if he was not present before.
+
 | Parameter  | Type  | Values/Desc  | 
 |---|---|---|
 | email | email | |
@@ -25,6 +26,7 @@ Registers a given user if he was not present before.
 
 ## Create Tournament
 Creates a tournament if
+
 	* user is logged in
 
 | Parameter  | Type  | Values/Desc  | 
@@ -49,6 +51,7 @@ Creates a tournament if
 
 ## Add Team
 Adds a team to a given tournament if
+
 	* owner of the tournament is adding a team
 	* team captain is adding the team and the tournament is public & signups are available
 	* additionaly adds the team as owned by the team captain/owner if nonexistant
@@ -91,6 +94,7 @@ Returns the game code for a given game id if the current user is either a partic
 ## getTournament
 Returns a Tournament DTO
 **Conditions**
+
 * current user is owner
 * tournament is public
 * current user is captain of a participating team
@@ -140,6 +144,7 @@ Returns a Tournament DTO
 | parameters | Filter-Parameter | filter parameter object depending on the filter type |
 
 Examples for parameters:
+
 *  List<Champion> for banned champions filter.
 
 ## Champion
