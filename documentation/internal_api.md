@@ -40,7 +40,7 @@ Creates a tournament if
 | signups | boolean | true if teams can register for the tournament |
 | endOfSignUp | int | signup deadline |  
 | region | enum | one of the valid regions |
-| filters | List<Filter> | |
+| filters | List\<Filter\> | |
 | maxTeams | int | maximum number of teams | 
 
 | Return value | Type | Values/Desc |
@@ -65,7 +65,7 @@ Adds a team to a given tournament if
 | tag | strign | tag with lenght between \[1-5\] (must be unique for a tournament) |
 | tournamentId | integer | |
 | region | enum | one of the valid regions |
-| members | List<String> | list of valid summoner names |
+| members | List\<String\> | list of valid summoner names |
 
 | Return value | Type | Value/Desc |
 | --- | --- | --- |
@@ -80,7 +80,7 @@ No parameters expected.
 
 | Return value | Type | Value/Desc |
 | --- | ---| ---|
-| teams | List<Team> | only the teams associated with the user|
+| teams | List\<Team\> | only the teams associated with the user|
 
 ## Generate Game Code
 Returns the game code for a given game id if the current user is either a participating team member OR the owner of the tournament
@@ -120,7 +120,7 @@ Returns a Tournament DTO
 | id | integer | |
 | name | string | teamname |
 | tag | string | |
-| members | List<Summoner> | |
+| members | List\<Summoner\> | |
 
 ## Summoner
 | Key | Type | Desc |
@@ -146,14 +146,14 @@ Returns a Tournament DTO
 
 Examples for parameters:
 
-*  List<Champion> for banned champions filter.
+*  List\<Champion\> for banned champions filter.
 
 ## Champion
 | Key | Type | Desc |
 | --- | --- | --- |
 | id | int | champion id from riot api |
 | name | string | |
-| champPic | tuple<Integer> | tuple containing x and y coordinates (one picture with all champs like google does for their icons) |
+| champPic | tuple\<Integer\> | tuple containing x and y coordinates (one picture with all champs like google does for their icons) |
 
 ## Tournament
 | Key | Type | Desc |
@@ -166,6 +166,6 @@ Examples for parameters:
 | public | boolean | |
 | teamSize | int | \[1-5\] |
 | public | boolean | if the tournament is public |
-| teams | List<Team> | participating teams |
-| games | List<Game> | ordered list with bye games |
-| filters | List<Filter> | list of filters of different types|
+| teams | List\<Team\> | participating teams |
+| games | List\<Game\> | ordered list with bye games |
+| filters | List\<Filter\> | list of filters of different types|
