@@ -1,7 +1,7 @@
 # Internal API Endpoints
 
 ## Register
-Registers a given user if he was not present before.
+Registers a given user if his email is unique.
 
 | Parameter  | Type  | Values/Desc  | 
 |---|---|---|
@@ -17,7 +17,7 @@ Registers a given user if he was not present before.
 | Parameter  | Type  | Values/Desc  | 
 |---|---|---|
 | email | email | |
-| password | str | restrictios for strenght |
+| password | str |  restrictions for strength |
 
 |Return | Type | Values/Desc |
 | --- | --- | --- |
@@ -91,8 +91,15 @@ Returns the game code for a given game id if the current user is either a partic
 | region | int | |
 | gameId | int | |
 
+
+| Return | Type | Value/Desc |
+| --- | --- | --- |
+| success | boolean | |
+| gameCode | string | gameCode |
+
 ## getTournament
 Returns a Tournament DTO
+
 **Conditions**
 
 * current user is owner
@@ -107,7 +114,7 @@ Returns a Tournament DTO
 
 **Tournament** or 
 
-| Parameter | Type | Value/Desc |
+| Return | Type | Value/Desc |
 | --- | --- | --- |
 | errorMsg  | string | |
 
@@ -132,16 +139,20 @@ Returns a Tournament DTO
 ## Game
 | Key | Type | Desc |
 | --- | --- | --- |
+| gameId | integer | unique for every game! |
 | red_team | int | team id |
 | blue_team | int | team id |
 | finisehd | boolean | |
 | winner | enum | RED, BLUE, **only** present if finished == true |
 | disqualification | boolean | **only** present if finished == true |
+| gameCode | string | **only** if already created |
+| failedFilters | List<FailedFilter> | |
 
 ## Filter
 | Key | Type | Desc |
 | --- | --- | --- |
 | type | enum | one of the allowed filter types (e. g. no warding) |
+| name | string | filter name |
 | parameters | Filter-Parameter | filter parameter object depending on the filter type |
 
 Examples for parameters:
@@ -169,3 +180,12 @@ Examples for parameters:
 | teams | List\<Team\> | participating teams |
 | games | List\<Game\> | ordered list with bye games |
 | filters | List\<Filter\> | list of filters of different types|
+
+## Failed Filter
+| Key | Type | Desc |
+| --- | --- | --- |
+| filter | Filter | the failed filter |
+| reason | Reason | reasion depending on the filter |
+| team | enum | RED, BLUE |
+
+E. g. list of summoners who warded or Tuple<Summoner, Champion> for banned champion filter
