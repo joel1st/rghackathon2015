@@ -38,15 +38,16 @@ Creates a tournament if
 | teamSize | int | \[1-5\] |
 | public | boolean | |
 | signups | boolean | true if teams can register for the tournament |
-| endOfSignUp | int | signup deadline |  
+| endOfSignUp | int | signup deadline |
 | region | enum | one of the valid regions |
 | filters | List\<Filter\> | |
 | maxTeams | int | maximum number of teams | 
+| bracketType | enum | atm only single elimination | 
 
 | Return value | Type | Values/Desc |
 |---|---|---|
 | success | boolean | |
-| tournamentId | integer | only returned if the request was successful |
+| tournamentId | integer | only returned if the request was successful, id from our db |
 | errorMsg | string | only returned if request was unsuccessful |
 
 ## Add Team
@@ -72,6 +73,8 @@ Adds a team to a given tournament if
 | success | boolean | |
 | teamId | int | unique identifier over all regions |
 | errorMsg | string | different error msgs if user was not found / team name not unique for a tournament |
+
+* teamNr within tournament is saved internally
 
 ## Get Teams for User
 Returns the teams associated with the current user
@@ -140,8 +143,8 @@ Returns a Tournament DTO
 | Key | Type | Desc |
 | --- | --- | --- |
 | gameId | integer | unique for every game! |
-| red_team | int | team id |
-| blue_team | int | team id |
+| red_team | int | team nr |
+| blue_team | int | team nr |
 | finisehd | boolean | |
 | winner | enum | RED, BLUE, **only** present if finished == true |
 | disqualification | boolean | **only** present if finished == true |
@@ -152,7 +155,6 @@ Returns a Tournament DTO
 | Key | Type | Desc |
 | --- | --- | --- |
 | type | enum | one of the allowed filter types (e. g. no warding) |
-| name | string | filter name |
 | parameters | Filter-Parameter | filter parameter object depending on the filter type |
 
 Examples for parameters:
