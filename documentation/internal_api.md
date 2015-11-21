@@ -124,20 +124,22 @@ Returns a Tournament DTO
 
 # Object Definitions
 
+See database schema for an updated version/differences to internal must be documented here (TODO)
 ## Team
 | Key | Type | Desc |
 | --- | --- | --- |
 | id | integer | |
 | name | string | teamname |
 | tag | string | |
+| region | string | |
 | members | List\<Summoner\> | |
 
 ## Summoner
 | Key | Type | Desc |
 | --- | --- | --- |
 | name | string | summoner name |
-| region | string | valid region |
 | summonerId | int |
+| captain | boolean | if the summoner is captain of the team |
 
 ## Game
 | Key | Type | Desc |
@@ -188,6 +190,12 @@ Examples for parameters:
 | --- | --- | --- |
 | filter | Filter | the failed filter |
 | reason | Reason | reasion depending on the filter |
-| team | enum | RED, BLUE |
 
+
+## Reason
+| Key | Type | Desc |
+| --- | --- | --- |
+| team | enum | RED, BLUE |
+| summonerId | int | summoner id of offending summoner, present if it's a failure of a summoner |
+| offenseType | string | description for the offense |
 E. g. list of summoners who warded or Tuple<Summoner, Champion> for banned champion filter

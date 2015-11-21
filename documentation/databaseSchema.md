@@ -8,6 +8,7 @@ Tournament
 	mapType
 	spectatorType
 	bracketType
+	teamSize
 	public
 	signUps
 	signUpDeadline
@@ -40,6 +41,8 @@ Game
 			filterId
 			reason 
 				[
+					team
+					summonerId
 					// depending on filter
 				]
 		]
@@ -47,6 +50,7 @@ Game
 Team
 	_id
 	name
+	tag
 	captain
 	region
 	members
