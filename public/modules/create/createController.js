@@ -156,8 +156,6 @@ angular.module('Create')
   	filters: $scope.filters
   };
 
-  $scope.step1 = true;
-
   $scope.newUser = function() {
   	var anyEmpty = false;
   	_.each($scope.users, function(user) {
@@ -250,5 +248,8 @@ angular.module('Create')
     .finally(function(result) {
     })
   }
+
+
+   $scope.step2 = true;
 
 }]);

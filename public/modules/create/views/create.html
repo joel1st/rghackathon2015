@@ -32,6 +32,7 @@
   <!-- /.container-fluid -->
 </nav>
 
+<div id="createTournamentContainer">
 <div class="header-text">
   <div class="col-lg-12">
     <div class="intro-text">
@@ -67,13 +68,13 @@
       <br />
       	<input type="password" class="form-control owner-input owner-password" placeholder="Password" ng-model="newTournament.password" required />
       	<button type="submit" 
-      					class="btn btn-outline step1submit top-margin step1-button" 
+      					class="btn btn-outline step1submit top-margin step1-button col-sm-4 col-xs-12" 
       					ng-disabled="step1form.$invalid || step1form.$pristine">
       		<i ng-show="step1LoginSpinner" class="fa fa-circle-o-notch fa-spin"></i>
       		Log In
       	</button>
       	<button type="button" 
-      					class="btn btn-outline step1submit top-margin register-button step1-button" 
+      					class="btn btn-outline step1submit top-margin register-button step1-button col-sm-4 col-xs-12" 
       					ng-disabled="step1form.$invalid || step1form.$pristine"
       					ng-click="step1Register()">
       		<i ng-show="step1RegisterSpinner" class="fa fa-circle-o-notch fa-spin"></i>
@@ -90,7 +91,8 @@
   	<input ng-model="newTournament.settings.name" required />
   </div>
     <!-- Start Sidebar -->
-    <div class="col-xs-6">
+    <div class="row">
+    <div class="col-sm-6">
         <div>
           <label class="noselect">Tournament Visibility</label>
           <select class="btn btn-info dropdown-toggle" ng-model="newTournament.settings.visibility" ng-options="visibility.value as visibility.name for visibility in visibilities">
@@ -117,13 +119,14 @@
           </select>
         </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-sm-6">
       <label class="noselect">Participating Summoners</label>
       <div class="user-list-container">
       <div ng-repeat="user in users track by $index">
         <input ng-model="users[$index]" ng-change="newUser()" class="user-list" placeholder="Summoner {{$index+1}}" />
       </div>
       </div>
+    </div>
     </div>
   </div>
   <button type="button" class="btn btn-outline top-margin" ng-click="step2 = false; step1 = true">Back</button>
@@ -450,3 +453,5 @@ overflow-x: hidden;">
   				<label class="drinkcard-cc map-image CRYSTAL_SCAR" for="CRYSTAL_SCAR"></label>
   				<span class="map-title">Crystal Scar</span>
   		</div>
+      -->
+</div>

@@ -1,0 +1,13 @@
+body {
+	min-width: 510px;
+}
+
+.alert {
+	font-size: 20px;
+}
+
+.alert-danger {
+	color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
