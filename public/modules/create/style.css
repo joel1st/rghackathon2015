@@ -109,17 +109,9 @@ body {
 	width: 538px !important;
 }
 
-.step1-button.col-sm-6 {
-  /*max-width: 150px;*/
-}
-
 #step1 .fa-circle-o-notch {
 	float: left;
 	margin-top: 4px;
-}
-
-.register-button {
-/*margin-right: 10px;*/
 }
 
 .region-selector:not(.default-size) {
@@ -179,6 +171,14 @@ body {
 #step2 {
 	max-width: 700px !important;
   min-width: 450px;
+}
+
+.step2back, .step3back {
+  margin-left: 15px;
+}
+
+.step2submit, .step3submit {
+  margin-right: 15px;
 }
 
 #step2 label {
