@@ -24,7 +24,7 @@
     "easy-autocomplete": "^1.1.6",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
-    "mongoose": "^4.2.5",
+    "mongoose": "^4.2.7",
     "morgan": "^1.6.1",
     "node-uuid": "^1.4.3",
     "passport": "^0.3.2",
