@@ -3,7 +3,7 @@ module.exports = {
 	db: {
 		name: process.env.DB_NAME || 'rghackathon2015'
 	},
-	callbackUrl: "https://tournamentgg.herokuapp.com",
+	callbackUrl: "http://tournamentgg.herokuapp.com",
 	supportedRegions: ['NA'],
 	pickTypes: ['DRAFT_MODE', 'BLIND_PICK', 'ALL_RANDOM', 'TOURNAMENT_DRAFT'],
 	spectateTypes: ['ALL', 'NONE', 'LOBBYONLY'],
