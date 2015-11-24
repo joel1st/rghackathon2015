@@ -250,6 +250,6 @@ angular.module('Create')
   }
 
 
-   $scope.step2 = true;
+   $scope.step1 = true;
 
 }]);
