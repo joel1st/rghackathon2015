@@ -378,14 +378,17 @@ overflow-x: hidden;">
         </div>
       </div>
 
-      <button type="button" class="btn btn-outline top-margin step4back col-xs-5 col-sm-3" ng-click="step4 = false; step3 = true">Back</button>
-      <button type="submit" class="btn btn-outline top-margin step4submit col-xs-5 col-sm-3" ng-disabled="step4form.$invalid">Next</button>
+      <button type="button" class="btn btn-outline top-margin step4back col-xs-5 col-sm-3" ng-click="step4 = false; step3 = true" ng-disabled="step4Spinner">Back</button>
+      <button type="submit" class="btn btn-outline top-margin step4submit col-xs-5 col-sm-3" ng-disabled="step4form.$invalid || step4Spinner">
+      <i ng-show="step4Spinner" class="fa fa-circle-o-notch fa-spin"></i>
+      Next
+      </button>
 
       	</form>
   </div>
 
   <div id="step5" ng-show="step5">
-  <span class="noselect"><i ng-show="step5RedirectSpinner" class="fa fa-circle-o-notch fa-spin"></i> Setting up your tournament...</span>
+  <span class="noselect"><i class="fa fa-circle-o-notch fa-spin"></i> Setting up your tournament...</span>
 
   </div>
 </div>

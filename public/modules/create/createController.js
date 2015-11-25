@@ -231,7 +231,7 @@ angular.module('Create')
 
   $scope.submitStep4 = function() {
   	console.log($scope.newTournament);
-  	$scope.step5RedirectSpinner = true;
+  	$scope.step4Spinner = true;
 
   	$scope.messages = {};
     $http({
@@ -244,12 +244,12 @@ angular.module('Create')
   		$scope.step5 = true;
   		$timeout(function() { 
   			$location.path('/tournament');
-  			$scope.step5RedirectSpinner = false;
   		}, 2000);
     })
     .error(function(result) {
     	$scope.messages.error = result.error;
         console.log(result);
+        $scope.step4Spinner = false;
     })
     .finally(function(result) {
     })
