@@ -49,6 +49,18 @@ iframe html {
   background-color: #18bc9c;
 }
 
+.specialbox {
+  position: absolute;
+  font-size: 20px;
+  top: 0;
+  background: rgba(0,0,0,0.85);
+  color: white;
+  left: 0;
+  width: 230px;
+  height: 40px;
+  padding: 5px;
+}
+
 .g_gracket { width: 9999px; background-color: #18bc9c; padding: 55px 15px 5px; line-height: 100%; position: relative; overflow: hidden;}
 .g_round { float: left; margin-right: 70px; }
 .g_game { position: relative; margin-bottom: 15px; }

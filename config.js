@@ -1,5 +1,5 @@
 module.exports = {
-	apiKey: process.env.API_KEY || '8c40e17c-483a-4554-bdb2-60244bc49931',
+	apiKey: process.env.API_KEY || 'API-KEY-HERE',
 	db: {
 		name: process.env.DB_NAME || 'rghackathon2015'
 	},

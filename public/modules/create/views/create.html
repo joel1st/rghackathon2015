@@ -39,6 +39,7 @@
     	<span class="skills" ng-show="step1">{{message.step1}}</span>
     	<span class="skills" ng-show="step2">{{message.step2}}</span>
     	<span class="skills" ng-show="step3">{{message.step3}}</span>
+      <span class="skills" ng-show="step4">{{message.step4}}</span>
       <hr class="star-light">
     </div>
   </div>
@@ -46,7 +47,7 @@
 
 
 <div id="createTournament">
-<div class="alert-container">
+<div class="alert-container" ng-show="step1">
 	<div ng-show="messages.error" class="alert alert-danger" role="alert">
 			<strong>Error!</strong> {{messages.error}}
 	</div>
@@ -90,10 +91,9 @@
   	<label>Tournament Name</label>
   	<input ng-model="newTournament.settings.name" required />
   </div>
+  <div class="col-xs-12">
     <!-- Start Sidebar -->
-    <div class="row">
-    <div class="col-sm-6">
-        <div>
+        <div class="top-padding">
           <label class="noselect">Tournament Visibility</label>
           <select class="btn btn-info dropdown-toggle" ng-model="newTournament.settings.visibility" ng-options="visibility.value as visibility.name for visibility in visibilities">
           </select>
@@ -118,8 +118,17 @@
           <select class="btn btn-info dropdown-toggle" ng-model="newTournament.settings.spectatorType" ng-options="spectator.value as spectator.name for spectator in spectators">
           </select>
         </div>
-    </div>
-    <div class="col-sm-6">
+      </div>
+  </div>
+  <button type="button" class="btn btn-outline top-margin step2back col-xs-5 col-sm-3" ng-click="step2 = false; step1 = true">Back</button>
+  <button type="submit" class="btn btn-outline top-margin step2submit col-xs-5 col-sm-3" ng-disabled="step2form.$invalid">Next</button>
+  </form>
+</div>
+
+  <div id="step3" ng-show="step3">
+   <form name="step3form" ng-submit="submitStep3()" novalidate>
+
+    <div class="row">
       <label class="noselect">Participating Summoners</label>
       <div class="user-list-container">
       <div ng-repeat="user in users track by $index">
@@ -127,18 +136,16 @@
       </div>
       </div>
     </div>
-    </div>
-  </div>
-  <button type="button" class="btn btn-outline top-margin step2back col-xs-5 col-sm-3" ng-click="step2 = false; step1 = true">Back</button>
-  <button type="submit" class="btn btn-outline top-margin step2submit col-xs-5 col-sm-3" ng-disabled="step2form.$invalid">Next</button>
-  </form>
-</div>
+      <div class="row">
+      <button type="button" class="btn btn-outline top-margin step3back col-xs-5 col-sm-3" ng-click="step3 = false; step2 = true">Back</button>
+      <button type="submit" class="btn btn-outline top-margin step3submit col-xs-5 col-sm-3" ng-disabled="step3form.$invalid">Next</button>
+      </div>
+   </form>
+   </div>
 
 
-
-
-  <div id="step3" ng-show="step3">
-   <form name="step3form" ng-submit="submitStep3()" novalidate>
+  <div id="step4" ng-show="step4">
+   <form name="step4form" ng-submit="submitStep4()" novalidate>
 
 
 
@@ -321,65 +328,6 @@ overflow-x: hidden;">
 
 
 	    <div class="tab-pane top-padding " id="filtersummonerspell">
-<!--			<b>Allowed Summoner Spells</b>
-			<select class="btn btn-warning dropdown-toggle" id="spells">
-				<option>Ignite</option>
-				<option>Barrier</option>
-				<option>Cleanse</option>
-				<option>Exhaust</option>
-				<option>Flash</option>
-				<option>Teleport</option>
-				<option>Ghost</option>
-				<option>Heal</option>
-				<option>Smite</option>
-			</select>
-			<button type="button" class="btn btn-success" onClick="addElement()">Allow</button>
-			<ul class="list-group" id="allowedspells" style="margin-top:5px">
-			</ul>-->
-<!-- 			<div class="map-type cc-selector">
-				<table style="width:100%">
-				<tr>
-  				<td style="width:33%;padding:5px 5px 5px 5px;"><input checked="checked" id="FLASH" type="checkbox" name="map-type-radio" value="FLASH" />
-  				<label class="drinkcard-cc map-image FLASH" for="FLASH"></label>
-				</td>
-
-  				<td style="width:33%;padding:5px 5px 5px 5px;"><input checked="checked" id="CLEANSE" type="checkbox" name="map-type-radio" value="CLEANSE" />
-  				<label class="drinkcard-cc map-image CLEANSE" for="CLEANSE"></label>
-				</td>
-
-  				<td style="width:33%;padding:5px 5px 5px 5px;"><input checked="checked" id="EXHAUST" type="checkbox" name="map-type-radio" value="EXHAUST" />
-  				<label class="drinkcard-cc map-image EXHAUST" for="EXHAUST"></label>
-				</td>
-				</tr>
-				<tr>
-  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="HEAL" type="checkbox" name="map-type-radio" value="HEAL" />
-  				<label class="drinkcard-cc map-image HEAL" for="HEAL"></label>
-				</td>
-
-  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="IGNITE" type="checkbox" name="map-type-radio" value="IGNITE" />
-  				<label class="drinkcard-cc map-image IGNITE" for="IGNITE"></label>
-				</td>
-  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="BARRIER" type="checkbox" name="map-type-radio" value="BARRIER" />
-  				<label class="drinkcard-cc map-image BARRIER" for="BARRIER"></label>
-				</td>
-				</tr>
-
-
-				<tr>
-  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="SMITE" type="checkbox" name="map-type-radio" value="SMITE" />
-  				<label class="drinkcard-cc map-image SMITE" for="SMITE"></label>
-				</td>
-
-  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="TELEPORT" type="checkbox" name="map-type-radio" value="TELEPORT" />
-  				<label class="drinkcard-cc map-image TELEPORT" for="TELEPORT"></label>
-				</td>
-  				<td style="padding:5px 5px 5px 5px;"><input checked="checked" id="GHOST" type="checkbox" name="map-type-radio" value="GHOST" />
-  				<label class="drinkcard-cc map-image GHOST" for="GHOST"></label>
-				</td>
-				</tr>
-
-				</table>
-  			</div> -->
 <div class="summoner-spells cc-selector">
   <div class="row">
     <div class="col-xs-4">
@@ -430,14 +378,17 @@ overflow-x: hidden;">
         </div>
       </div>
 
-      <button type="button" class="btn btn-outline top-margin step3back col-xs-5 col-sm-3" ng-click="step3 = false; step2 = true">Back</button>
-      <button type="submit" class="btn btn-outline top-margin step3submit col-xs-5 col-sm-3" ng-disabled="step3form.$invalid">Next</button>
+      <button type="button" class="btn btn-outline top-margin step4back col-xs-5 col-sm-3" ng-click="step4 = false; step3 = true" ng-disabled="step4Spinner">Back</button>
+      <button type="submit" class="btn btn-outline top-margin step4submit col-xs-5 col-sm-3" ng-disabled="step4form.$invalid || step4Spinner">
+      <i ng-show="step4Spinner" class="fa fa-circle-o-notch fa-spin"></i>
+      Next
+      </button>
 
       	</form>
   </div>
 
-  <div id="step4" ng-show="step4">
-  <span class="noselect"><i ng-show="step3RedirectSpinner" class="fa fa-circle-o-notch fa-spin"></i> Setting up your tournament...</span>
+  <div id="step5" ng-show="step5">
+  <span class="noselect"><i class="fa fa-circle-o-notch fa-spin"></i> Setting up your tournament...</span>
 
   </div>
 </div>

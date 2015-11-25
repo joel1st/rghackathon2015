@@ -28,19 +28,19 @@ body {
 	width: 540px !important;
 }
 
-#step3 .summoner-spells label:before {
+#step4 .summoner-spells label:before {
 	display:none;
 }
 
-#step3 .summoner-spells .row {
+#step4 .summoner-spells .row {
 	padding-bottom: 30px;
 }
 
-#step3 .filterrole {
+#step4 .filterrole {
 	color: white;
 }
 
-#step3 .filterrole input[type=checkbox] + label:before {
+#step4 .filterrole input[type=checkbox] + label:before {
 	color: white;
 }
 
@@ -78,16 +78,9 @@ body {
 }
 
 #step2 .col-xs-12 {
-	text-align: center;
 	padding-bottom: 15px;
 	padding-top: 15px;
 	font-size: 18px;
-}
-
-#step2 .col-xs-12 input {
-	width: 300px;
-	height: 40px;
-  font-size: 25px;
 }
 
 .owner-label {
@@ -169,15 +162,16 @@ body {
 }
 
 #step2 {
-	max-width: 700px !important;
-  min-width: 450px;
+  top: 120px !important;
+	max-width: 500px !important;
+  min-width: 250px;
 }
 
-.step2back, .step3back {
+.step2back, .step4back {
   margin-left: 15px;
 }
 
-.step2submit, .step3submit {
+.step2submit, .step4submit {
   margin-right: 15px;
 }
 
@@ -190,44 +184,82 @@ body {
   overflow: auto;
 }
 
-#step2 .col-sm-6 select {
+#step2 label {
+  text-align: left;
+}
+
+#step2 select, #step2 input {
   min-width: 250px;
+  max-width: 500px;
   width: 100%;
+  font-size: 25px;
+}
+
+#step2 input {
+  font-size: 25px;
 }
 
 .step2submit {
 	float: right;
 }
 
-#step2 .user-list {
-	width: 100%;
-  margin-top: 5px;
-}
-
 /* STEP 3 */
 #step3 {
-	min-width: 500px;
+  top: 120px !important;
+  max-width: 500px !important;
+  min-width: 250px;
+}
+
+#step3 label {
+  font-size: 25px;
+}
+
+#step3 .user-list-container {
+  max-height: 600px;
+  overflow: auto;
+}
+
+#step3 .row {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+#step3 input {
+  min-width: 250px;
+  max-width: 500px;
+  width: 100%;
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+.step3submit {
+  float: right;
+}
+
+
+/* STEP 4 */
+#step4 {
 	width: 800px !important;
 }
 
-#step3 .btn-warning {
+#step4 .btn-warning {
 	font-size: 30px;
   padding: 1px;
   padding-left: 10px;
 }
 
-#step3 .info-text {
+#step4 .info-text {
 	font-size: 20px;
 }
 
-#step3 #filteritemrestrictions .btn-danger,
-#step3 #filterchamprestrictions .btn-danger {
+#step4 #filteritemrestrictions .btn-danger,
+#step4 #filterchamprestrictions .btn-danger {
   font-size: 15px;
   width: 75px;
 }
 
-#step3 #filteritemrestrictions .btn-warning,
-#step3 #filterchamprestrictions .btn-warning {
+#step4 #filteritemrestrictions .btn-warning,
+#step4 #filterchamprestrictions .btn-warning {
   width: 445px;
   height: 42px;
   font-size: 24px;
@@ -240,13 +272,17 @@ body {
   overflow-x: hidden;
 }
 
-#step3 .list-group-item {
+#step4 .list-group-item {
 	color: black;
 	width: 522px;
 }
 
+#step4 .step4back {
+  margin-left: 0;
+}
 
-.step3submit {
+
+.step4submit {
 	float: right;
   margin-right: -15px;
 }
@@ -325,12 +361,12 @@ body {
   margin-top: 10px;
 }
 
-#step4 {
+#step5 {
 	width: 350px !important;
 	text-align: center;
 }
 
-#step4 span {
+#step5 span {
 	font-size: 20px;
 	color: white;
 }
