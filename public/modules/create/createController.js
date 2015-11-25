@@ -5,13 +5,14 @@ angular.module('Create')
 .controller('CreateController', ['$scope', '$http', '$timeout', '$location', function ($scope, $http, $timeout, $location) {
 
 	$scope.messages = {};
-	$scope.users = new Array(12);
+	$scope.users = new Array(1);
   $scope.regions = ['NA', 'BR', 'EUNE', 'EUW', 'KR', 'RU','LAN','OCE', 'TR'];		
   $scope.comparators = ['>', '=', '<'];
   $scope.message = {
   	step1: 'Please sign up so we can keep track of your tournament',
   	step2: 'Select your tournament preferences',
-  	step3: 'Specify additional rules and filters for your tournament'
+    step3: 'Enter the particpating Summoners',
+  	step4: 'Specify additional rules and filters for your tournament'
   };
 
   $scope.maps = [{
@@ -224,8 +225,13 @@ angular.module('Create')
   }
 
   $scope.submitStep3 = function() {
+    $scope.step3 = false;
+    $scope.step4 = true;
+  }
+
+  $scope.submitStep4 = function() {
   	console.log($scope.newTournament);
-  	$scope.step3RedirectSpinner = true;
+  	$scope.step5RedirectSpinner = true;
 
   	$scope.messages = {};
     $http({
@@ -234,11 +240,11 @@ angular.module('Create')
     	data: $scope.newTournament.settings
     	})
     .success(function(result) {
-      $scope.step3 = false;
-  		$scope.step4 = true;
+      $scope.step4 = false;
+  		$scope.step5 = true;
   		$timeout(function() { 
   			$location.path('/tournament');
-  			$scope.step3RedirectSpinner = false;
+  			$scope.step5RedirectSpinner = false;
   		}, 2000);
     })
     .error(function(result) {
@@ -250,6 +256,6 @@ angular.module('Create')
   }
 
 
-   $scope.step2 = true;
+   $scope.step1 = true;
 
 }]);
