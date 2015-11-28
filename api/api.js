@@ -14,7 +14,7 @@ var gamesModel = require('../models/games.js');
 // api -------------------------
 
 // Get notification from Riot when game ends
-router.post('/riot_notification', function(req, res, next) {
+router.post('/riotNotification', function(req, res, next) {
 	console.log(res.body);
 });
 
@@ -72,7 +72,7 @@ Send whatever data is needed
 for signup to front end 
 (split into multiple endpoints if needed.)
 */
-router.post('/create_tournament', function(req, res) {
+router.post('/createTournament', function(req, res) {
 		var data = {};
 		// check data
 		if (config.spectateTypes.indexOf(req.body.spectatorType) <= -1) {
@@ -205,7 +205,7 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 	});
 });
 
-router.post('/generate_code', function(req,res) {
+router.post('/generateTournamentCode', function(req,res) {
 	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, data) {
 		if (!err && data != null) {
 			riot.createCode(data.tournamentId, data.teamSize * 2, data.region, function(err, response) {

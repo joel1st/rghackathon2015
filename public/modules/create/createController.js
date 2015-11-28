@@ -235,7 +235,7 @@ angular.module('Create')
 
   	$scope.messages = {};
     $http({
-    	url:"/api/create_tournament", 
+    	url:"/api/createTournament", 
     	method: 'POST',
     	data: $scope.newTournament.settings
     	})
