@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 
 var router = express.Router();
-var uuid = require('node-uuid');
 var passport = require('passport');
 var Account = require('../models/account');
 var os = require('os');
@@ -333,19 +332,5 @@ router.post('/findTournament',  function(req,  res) {
 		
 	});
 });
-router.route('/filters')
-	.get(function(req, res) {
-		res.send('filters');
-	});
-
-
-router.get('/generate', function(req, res) {
-		res.send('generate');
-	});
-
-// Generate a callback
-router.get('/generate_callback', function(req, res) {
-		res.send(uuid.v1());
-	});
 
 module.exports = router;

@@ -226,16 +226,16 @@ module.exports = {
                         }
                     });
                 }
-            });
-        },
+        });
+    },
 
-        getMatchIdsByTournament: function(region, tournamentCode, callback) {
-            var url = protocol + region + matchUrl + region + matchEndpoint +
-                matchByTournamentEndpoint + tournamentCode + '/ids?api_key=' + config.apiKey;
-            GET({
-                url: url,
-                callback: callback
-            });
-        }
+    getMatchIdsByTournament: function(region, tournamentCode, callback) {
+        var url = protocol + region + matchUrl + region + matchEndpoint +
+            matchByTournamentEndpoint + tournamentCode + '/ids?api_key=' + config.apiKey;
+        GET({
+            url: url,
+            callback: callback
+        });
+    }
 
-    };
+};
