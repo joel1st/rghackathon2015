@@ -55,7 +55,7 @@ router.post('/register',  function(req, res, next) {
 		});
 
 	}
-    
+
 });
 
 router.get('/logout', function(req, res, next) {
@@ -68,9 +68,9 @@ router.get('/logout', function(req, res, next) {
     });
 });
 
-/* 
-Send whatever data is needed 
-for signup to front end 
+/*
+Send whatever data is needed
+for signup to front end
 (split into multiple endpoints if needed.)
 */
 router.post('/create_tournament', function(req, res) {
@@ -78,25 +78,25 @@ router.post('/create_tournament', function(req, res) {
 		// check data
 		if (config.spectateTypes.indexOf(req.body.spectatorType) <= -1) {
 			data.success = false;
-			data.message = "Invalid spectate type";		
+			data.message = "Invalid spectate type";
 		} else if (config.mapTypes.indexOf(req.body.mapType) <= -1) {
 			data.success = false;
-			data.message = "Invalid map type";		
+			data.message = "Invalid map type";
 		} else if (config.pickTypes.indexOf(req.body.pickType) <= -1) {
 			data.success = false;
-			data.message = "Invalid pick type";		
+			data.message = "Invalid pick type";
 		} else if (req.body.teamSize > 5 || req.body.teamSize < 1) {
 			data.success = false;
-			data.message = "Invalid team size";		
+			data.message = "Invalid team size";
 		} else if (req.body.name == "") {
 			data.success = false;
 			data.message = "Invalid Tournament name";
 		} else if (config.supportedRegions.indexOf(req.body.region) <= -1) {
 			data.success = false;
-			data.message = "Invalid Region";		
+			data.message = "Invalid Region";
 		} else { // all cool now
 			// so request it from the riot api
-			providers.findOne({'region': req.body.region}, function(err, response) {	
+			providers.findOne({'region': req.body.region}, function(err, response) {
 				var data = {};
 				if (!err) {
 					riot.createTournament(req.body.name, response.providerId, function(err, response) {
@@ -158,7 +158,7 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 			}
 			nextSmaller2 /= nextSmaller2 == teams.length ? 1 : 2; // we're one too high if it ended
 			preGames = teams.length - nextSmaller2;
-			
+
 			// do the stuff -> preGames
 			games = [];
 			results = [[]];
@@ -181,11 +181,11 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 				}
 				console.log("Members", members);
 				var team = new teamsModel({"members": members, "name": i, "region": req.body.region, "tournamentId": req.body.tournamentId});
-				team.save(function(err, response) { 
+				team.save(function(err, response) {
 					if (!err) {
-						var map = {}; 
+						var map = {};
 						map.name = i;
-						map.id = response.id; 
+						map.id = response.id;
 						teamToObject.push(map);
 					} else {
 						console.log(err);
@@ -202,7 +202,7 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 			res.json({"success": true, "teams": teams, "results": results, "games": games});
 		} else {
 			res.json({"success": false, "message": "Tournament not found"});
-		}		
+		}
 	});
 });
 
@@ -218,7 +218,7 @@ router.post('/generate_code', function(req,res) {
 		    });
 		} else {
 			res.json({"success": false, "message": "Tournament not found"});
-		}		
+		}
 	});
 });
 
@@ -229,20 +229,16 @@ var currentTournamentState = function(req,  res) {
 	 */
 	console.log("Tournament Id", req.body.tournamentId);
 	console.log("fuuu");
-	teamsModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) { 
+	teamsModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) {
 		var numberOfTeams = resp.length;
-	gamesModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) {}).sort({"order":1}).exec(function(err, response) { 
+	gamesModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) {}).sort({"order":1}).exec(function(err, response) {
 			// check games on lowest level by getting the number of teams
 			var numberOfGames = response.length;
 			console.log("Number Of Games", numberOfGames);
 			console.log("Response", response);
-			var nextSmaller2 = 1;
-			while (nextSmaller2 < numberOfTeams) {
-				nextSmaller2 *=2;
-			}
-			nextSmaller2 /= nextSmaller2 == numberOfTeams ? 1 : 2; // we're one too high if it ended
+			var nextSmaller2 = Math.floor(Math.log(numberofteams) / Math.log(2));
 			preGames = numberOfTeams - nextSmaller2;
-			
+
 			teams = [];
 			// do the stuff -> preGames
 			games = [];
@@ -330,7 +326,7 @@ router.post('/findTournament',  function(req,  res) {
 		} else {
 			res.json({"success": false, "message": "error"});
 		}
-		
+
 	});
 });
 router.route('/filters')
