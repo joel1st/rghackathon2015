@@ -10,6 +10,8 @@ var path = require('path');
 var getProviders = require('./middleware/get_providers.js');
 var filters = require('./filters/filters.js');
 
+var staticData = require('./riot/static_data.js');
+
 var tournaments = require('./models/tournaments.js');
 
 var cookieParser = require('cookie-parser');
@@ -71,3 +73,12 @@ app.use(function(err, req, res, next) {
 app.listen(port, function() {
 	console.log('Server running at http://127.0.0.1:' + port);
 });
+
+
+// Get and update static data at server start, and daily.
+staticData.updateChampionData();
+staticData.updateItemData();
+setInterval(function() {
+	staticData.updateChampionData();
+	staticData.updateItemData();
+}, 86400 * 1000);
