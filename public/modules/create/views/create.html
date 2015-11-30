@@ -194,15 +194,15 @@
 		dissallowButtonChamp = "<button type=\"button\" class=\"btn btn-success pull-right\" style=\"margin-top: -11px; margin-right:-17px\" onClick=\"removeElementChamp($id$)\">Unban</button>";
 		id = 0;
 		function addElementItems() {
-			if ($("#spells").val() != null) {
-				$("#allowedspells").append("<li style=\"margin: 0 0 3px 0;\" id=\"disallow" + id +"\" class=\"list-group-item\"><span id=\"val" + id + "\">"+  $("#spells").val() + "</span>" + dissallowButtonItem.replace("$id$",id) + "</li>");
-				$("#spells").find('option:selected').remove();
+			if ($("#items").val() != null) {
+				$("#allowedspells").append("<li style=\"margin: 0 0 3px 0;\" id=\"disallow" + id +"\" class=\"list-group-item\"><span id=\"val" + id + "\">"+  $("#items").val() + "</span>" + dissallowButtonItem.replace("$id$",id) + "</li>");
+				$("#items").find('option:selected').remove();
 				id++;
 			}
 		}
 		function removeElementItem(i) {
 			console.log($("#val" + i));
-			$("#spells").append("<option>" + $("#val" + i).text() + "</option>");
+			$("#items").append("<option>" + $("#val" + i).text() + "</option>");
 			$("#disallow" + i).remove();
 		}
 		function addElementChamps() {
@@ -216,20 +216,10 @@
 			console.log($("#val" + i));
 			$("#champs").append("<option>" + $("#val" + i).text() + "</option>");
 			$("#disallowChamp" + i).remove();
-		}	
-		$( document ).ready(function() {
-var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ashe","Azir","Blitzcrank","Brand","Braum","Caitlyn","Cassiopeia","Cho'Gath","Corki","Darius","Diana","Dr. Mundo","Draven","Elise","Evelynn","Ezreal","Fiddlesticks","Fiora","Fizz","Galio","Gangplank","Garen","Gnar","Gragas","Graves","Hecarim","Heimerdinger","Irelia","Janna","Jarvan IV","Jax","Jayce","Jinx","Kalista","Karma","Karthus","Kassadin","Katarina","Kayle","Kennen","Kha'Zix","Kog'Maw","LeBlanc","Lee Sin","Leona","Lissandra","Lucian","Lulu","Lux","Malphite","Malzahar","Maokai","Master Yi","Miss Fortune","Mordekaiser","Morgana","Nami","Nasus","Nautilus","Nidalee","Nocturne","Nunu","Olaf","Orianna","Pantheon","Poppy","Quinn","Rammus","Rek'Sai","Renekton","Rengar","Riven","Rumble","Ryze","Sejuani","Shaco","Shen","Shyvana","Singed","Sion","Sivir","Skarner","Sona","Soraka","Swain","Syndra","Talon","Taric","Teemo","Thresh","Tristana","Trundle","Tryndamere","Twisted Fate","Twitch","Udyr","Urgot","Varus","Vayne","Veigar","Vel'Koz","Vi","Viktor","Vladimir","Volibear","Warwick","Wukong","Xerath","Xin Zhao","Yasuo","Yorick","Zac","Zed","Ziggs","Zilean","Zyra"];
-			var items = ["Abyssal Scepter","Aegis of the Legion","Aether Wisp","Amplifying Tome","Ancient Coin","Archangel's Staff","Archangel's Staff (Crystal Scar)","Ardent Censer","Athene's Unholy Grail","B. F. Sword","Bami's Cinder","Banner of Command","Banshee's Veil","Berserker's Greaves","Bilgewater Cutlass","Blade of the Ruined King","Blasting Wand","Boots of Mobility","Boots of Speed","Boots of Swiftness","Brawler's Gloves","Catalyst the Protector","Caulfield's Warhammer","Chain Vest","Chalice of Harmony","Cloak of Agility","Cloth Armor","Corrupting Potion","Crystalline Bracer","Cull","Dagger","Dead Man's Plate","Death's Dance","Death's Daughter","Dervish Blade","Diet Poro-Snax","Doran's Blade","Doran's Blade (Showdown)","Doran's Ring","Doran's Ring (Showdown)","Doran's Shield","Doran's Shield (Showdown)","Elixir of Iron","Elixir of Sorcery","Elixir of Wrath","Entropy","Essence Reaver","Executioner's Calling","Explorer's Ward","Eye of the Equinox","Eye of the Oasis","Eye of the Watchers","Face of the Mountain","Faerie Charm","Farsight Alteration","Fiendish Codex","Fire at Will","Forbidden Idol","Frost Queen's Claim","Frostfang","Frozen Heart","Frozen Mallet","Giant Slayer","Giant's Belt","Glacial Shroud","Golden Transcendence","Greater Stealth Totem (Trinket)","Greater Vision Totem (Trinket)","Grez's Spectral Lantern","Guardian Angel","Guardian's Horn","Guinsoo's Rageblade","Haunting Guise","Health Potion","Hexdrinker","Hextech Gunblade","Hextech Revolver","Hextech Sweeper","Hextech Sweeper","Hunter's Machete","Hunter's Potion","Hunter's Talisman","Iceborn Gauntlet","Infinity Edge","Ionian Boots of Lucidity","Jaurim's Fist","Kindlegem","Kircheis Shard","Last Whisper","Liandry's Torment","Lich Bane","Locket of the Iron Solari","Long Sword","Lord Dominik's Regards","Lord Van Damm's Pillager","Luden's Echo","Madred's Razors","Manamune","Manamune (Crystal Scar)","Maw of Malmortius","Mejai's Soulstealer","Mercurial Scimitar","Mercury's Treads","Mikael's Crucible","Moonflair Spellblade","Morellonomicon","Mortal Reminder","Muramana","Muramana","Nashor's Tooth","Needlessly Large Rod","Negatron Cloak","Ninja Tabi","Nomad's Medallion","Null-Magic Mantle","Odyn's Veil","Ohmwrecker","Oracle Alteration","Oracle's Extract","Orb of Winter","Overlord's Bloodmail","Perfect Hex Core","Phage","Phantom Dancer","Pickaxe","Poro-Snax","Prospector's Blade","Prospector's Ring","Prototype Hex Core","Quicksilver Sash","Rabadon's Deathcap","Raise Morale","Randuin's Omen","Rapid Firecannon","Raptor Cloak","Ravenous Hydra","Recurve Bow","Refillable Potion","Rejuvenation Bead","Relic Shield","Righteous Glory","Rod of Ages","Rod of Ages (Crystal Scar)","Ruby Crystal","Ruby Sightstone","Runaan's Hurricane","Rylai's Crystal Scepter","Sanguine Blade","Sapphire Crystal","Seeker's Armguard","Seraph's Embrace","Seraph's Embrace","Serrated Dirk","Sheen","Sightstone","Skirmisher's Sabre","Sorcerer's Shoes","Soul Anchor (Trinket)","Spectre's Cowl","Spellthief's Edge","Spirit Visage","Staff of Flowing Water","Stalker's Blade","Statikk Shiv","Sterak's Gage","Stinger","Sunfire Cape","Sweeping Lens (Trinket)","Talisman of Ascension","Targon's Brace","Tear of the Goddess","Tear of the Goddess (Crystal Scar)","The Black Cleaver","The Black Spear","The Bloodthirster","The Dark Seal","The Hex Core mk-1","The Hex Core mk-2","The Lightbringer","Thornmail","Tiamat","Titanic Hydra","Total Biscuit of Rejuvenation","Total Biscuit of Rejuvenation","Tracker's Knife","Trinity Force","Vampiric Scepter","Vision Ward","Void Staff","Warden's Mail","Warding Totem (Trinket)","Warmog's Armor","Wicked Hatchet","Will of the Ancients","Wit's End","Wooglet's Witchcap","Wriggle's Lantern","Youmuu's Ghostblade","Zeal","Zeke's Harbinger","Zhonya's Hourglass","Zz'Rot Portal"];
-			for (var i = 0; i < items.length; i++) {
-				$("#spells").append("<option>" + items[i]  + "</option>");
-			}
-
-			for (var i = 0; i < champions.length; i++) {
-				$("#champs").append("<option>" + champions[i]  + "</option>");
-			}
-		});
+		}
 	   </script>	
-			<select class="btn btn-warning dropdown-toggle" id="spells">
+			<select class="btn btn-warning dropdown-toggle" id="items">
+        <option ng-repeat="item in items" value="{{item.name}}" ng-show="{{item.name.length > 0}}">{{item.name}}</option>
 			</select>
 			<button type="button" class="btn btn-danger" onClick="addElementItems()">Ban</button>
 			<ul class="list-group" id="allowedspells" style="margin-top:5px">
@@ -238,6 +228,7 @@ var champions = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Ash
 
 			<div class="tab-pane top-padding " id="filterchamprestrictions">
 			  <select class="btn btn-warning dropdown-toggle" id="champs">
+          <option ng-repeat="champion in champions" value="{{champion.name}}" ng-show="{{champion.name.length > 0}}">{{champion.name}}</option>
 			  </select>
 			  <button type="button" class="btn btn-danger" onClick="addElementChamps()">Ban</button>
 			  <ul class="list-group" id="allowedchamps" style="margin-top:5px">

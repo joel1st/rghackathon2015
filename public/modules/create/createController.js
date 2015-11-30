@@ -2,7 +2,7 @@
 
 angular.module('Create')
 
-.controller('CreateController', ['$scope', '$http', '$timeout', '$location', function ($scope, $http, $timeout, $location) {
+.controller('CreateController', ['$scope', '$http', '$timeout', '$location', 'StaticData', function ($scope, $http, $timeout, $location, StaticData) {
 
 	$scope.messages = {};
 	$scope.users = new Array(1);
@@ -14,6 +14,18 @@ angular.module('Create')
     step3: 'Enter the particpating Summoners',
   	step4: 'Specify additional rules and filters for your tournament'
   };
+
+  $scope.items = StaticData.getItems().success(function(data) {
+    for(var i = 0; i < data.length; i++) {
+      $scope.items[data[i].id] = data[i];
+    }
+  });
+
+  $scope.champions = StaticData.getChampions().success(function(data) {
+    for(var i = 0; i < data.length; i++) {
+      $scope.champions[data[i].id] = data[i];
+    }
+  });
 
   $scope.maps = [{
   	name: 'Summoners Rift',
