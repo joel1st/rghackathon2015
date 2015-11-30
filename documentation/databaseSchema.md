@@ -9,10 +9,11 @@ Tournament
 	spectatorType
 	bracketType
 	teamSize
-	public
+	visibility
 	signUps
 	signUpDeadline
 	maxTeams
+	created
 	filters
 		[
 		filterId
@@ -43,7 +44,6 @@ Game
 				[
 					team
 					summonerId
-					// depending on filter
 				]
 		]
 
@@ -62,7 +62,7 @@ Team
 		_id
 		]
 
-Users
+Account
 	_id
 	email
 	password

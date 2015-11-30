@@ -32,6 +32,8 @@
     "passport-local-mongoose": "^3.1.0",
     "q": "^1.4.1",
     "queue": "^3.1.0",
-    "request": "^2.65.0"
+    "request": "^2.65.0",
+    "typescript": "^1.6.2",
+    "typescript-require": "^0.2.9-1"
   }
 }
