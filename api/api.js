@@ -137,7 +137,7 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 	var participants = req.body.participants.split(", ");
 	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, response) {
 		if (!err) {
-			// now do the algorithm stuff
+			// Create random teams
 			var numberOfParticipants = participants.length;
 			var numberOfTeams = Math.floor(numberOfParticipants / response.teamSize);
 			var teams = [];
@@ -150,13 +150,8 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 				participants.splice(randomNumber, 1);
 			}
 
-			// teams are made
-			// make the brackets
-			var nextSmaller2 = 1;
-			while (nextSmaller2 < teams.length) {
-				nextSmaller2 *=2;
-			}
-			nextSmaller2 /= nextSmaller2 == teams.length ? 1 : 2; // we're one too high if it ended
+			// create games
+			var nextSmaller2 = Math.floor(Math.log(teams.length) / Math.log(2));
 			preGames = teams.length - nextSmaller2;
 
 			// do the stuff -> preGames
@@ -227,8 +222,6 @@ var currentTournamentState = function(req,  res) {
 	 * 1. Generate the bracket out of the wins -> bases
 	 * 2. add the results!
 	 */
-	console.log("Tournament Id", req.body.tournamentId);
-	console.log("fuuu");
 	teamsModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) {
 		var numberOfTeams = resp.length;
 	gamesModel.find({"tournamentId": req.body.tournamentId}, function(err, resp) {}).sort({"order":1}).exec(function(err, response) {
