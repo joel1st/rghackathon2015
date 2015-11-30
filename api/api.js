@@ -11,6 +11,8 @@ var providers = require('../models/providers.js');
 var tournaments = require('../models/tournaments.js');
 var teamsModel = require('../models/teams.js');
 var gamesModel = require('../models/games.js');
+var Champions = require('../models/champions.js');
+var Items = require('../models/items.js');
 // api -------------------------
 
 // Get notification from Riot when game ends
@@ -218,6 +220,26 @@ router.post('/generateTournamentCode', function(req,res) {
 		} else {
 			res.json({"success": false, "message": "Tournament not found"});
 		}		
+	});
+});
+
+// Champions Endpoint - returns stored champion data.
+router.get('/champions', function(req, res) {
+	Champions.find({}, function(err, champions) {
+		if(err) console.log(err);
+		if(champions) {
+			res.json(champions);
+		}
+	});
+});
+
+// Items Endpoint - returns stored item data.
+router.get('/items', function(req, res) {
+	Items.find({}, function(err, items) {
+		if(err) console.log(err);
+		if(items) {
+			res.json(items);
+		}
 	});
 });
 
