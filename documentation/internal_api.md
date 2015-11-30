@@ -77,6 +77,52 @@ Updates a team.
 | msg | string | error msg |
 | failingMembers | \[Number\] | pointer into members array (failed lookup), only present if relevant |
 
+### EditTeam
+
+Updates a team.
+* user needs to be logged in
+* user needs to be the owner of the team
+* members must be valid summoners in the team region
+
+| Parameter | Type | Value/Desc |
+| --- | --- | --- |
+| tag | string | |
+| name | string | |
+| members | [Member] | |
+
+| Return | Type | Values/Desc |
+| --- | --- | --- |
+| success | boolean | |
+| msg | string | error msg |
+| failingMembers | \[Number\] | pointer into members array (failed lookup), only present if relevant |
+
+### GetTeamList
+Returns a team list for the given user.
+
+* username must be a valid registered user
+
+| Parameter | Type | Value/Desc |
+| --- | --- | --- |
+| username | string | username |
+
+| Return | Type | Value/Desc |
+| --- | --- | --- |
+| success | boolean | |
+| teams | [Team] | list of teams for the specified user |
+
+### GetTeam
+
+Returns the team for the given team id.
+
+| Parameter | Type | Value/Desc |
+| --- | --- | --- |
+| teamId | integer | |
+
+| Return | Type | Value/Desc |
+| --- | --- | --- |
+| success | boolean | |
+| team | Team | |
+
 ### GetTeamList
 Returns a team list for the given user.
 
@@ -225,14 +271,15 @@ Adds the given teams to the tournament.
 * doesn't delete old games (updates schedule accordingly)
 
 Generates the games (only possible if no games have been played yet)
-| --- | --- | --- |
+
 | Parameter | Type | Desc/Value |
+| --- | --- | --- |
 | tournamentId | integer | |
 
 | Return | Type | Desc/Value |
 | --- | --- | --- |
 | success | boolean | |
-| games | [Game] | the generated games |
+| games | Tree\<Game\> | the generated games, root is the final |
 
 ### getGameCode
 Returns the game code for a given game.
@@ -309,7 +356,7 @@ No parameters expected.
 | signUp | boolean | |
 | signUpDeadline | Date | |
 | teams | List\<Team\> | participating teams |
-| games | List\<Game\> | ordered list with bye games |
+| games | Tree\<Game\> | ordered list with bye games |
 | filters | List\<Filter\> | list of filters of different types|
 
 ## Failed Filter
@@ -331,20 +378,71 @@ E. g. list of summoners who warded or Tuple<Summoner, Champion> for banned champ
 # Return Type Definitions
 
 ## Tournament
+| Key | Type | Desc |
+| --- | --- | --- |
+| owner | string | account name of the owner |
+| region | Region | |
+| teamSize | integer | [1,5] |
+| maxTeams | integer | |
+| name | string | |
+| spectatorType | SpectatorType | |
+| bracketType | BracketType | |
+| mapType | MapType | |
+| pickType | PickType | |
+| visibility | boolean | |
+| signUp | boolean | |
+| signUpDeadline | Date | |
+| filter | List<Filter> | |
+| teams | List<Team> | |
+| games | List<Game> | |
 
 ## Team
+| Key | Type | Desc |
+| --- | --- | --- |
+| manager | string | manager name |
+| name | string | |
+| tag | string | |
+| region | Region | |
+| members | List<Summoner> | |
 
 ## Summoner
+| Key | Type | Desc |
+| --- | --- | --- |
+| name | string | |
+| captain | boolean | |
 
 ## Game
+| Key | Type | Desc |
+| --- | --- | --- |
+| tournamentId | integer | tournamentId (maybe the random value discussed above) |
+| gameCode | string | game code from riot's api |
+| blueTeam | Team | |
+| redTeam | Team | |
+| winner | TeamSide | |
+| disqualification | boolean | if any of the teams got disqualified |
+| failedFilters | List<Reason> | list of dq reasons |
 
 ## Filter
-
-## FailedFilter
+| Key | Type | Desc |
+| --- | --- | --- |
+| type | FilterType | |
+| name | string | |
 
 ## Reason
+| Key | Type | Desc |
+| --- | --- | --- |
+| filter | integer |  |
+| team | TeamSide | |
+| summonerId | integer | id in the players of a game |
+| reason | Object | unspecified object (depending on filter) |
 
 # Enums
+
+## TeamSide
+| Value | Desc |
+| --- | --- |
+| RED | |
+| BLUE | |
 
 ## BracketType
 
