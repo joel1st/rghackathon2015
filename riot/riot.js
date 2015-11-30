@@ -8,11 +8,13 @@ var tournaments = require('../models/tournaments.js');
 var games = require('../models/games.js');
 
 var protocol = "https://";
-var baseUrl = "global.api.pvp.net/tournament/public/v1/";
-var codeEndpoint = baseUrl + "code";
-var tournamentEndpoint = baseUrl + "tournament/";
-var providerEndpoint = baseUrl + "provider/";
-var lobbyEventsEndpoint = baseUrl + "lobby/events/by-code/";
+var baseTournamentUrl = "global.api.pvp.net/tournament/public/v1/";
+var baseStaticDataUrl = "global.api.pvp.net/api/lol/static-data/na/v1.2/";
+
+var codeEndpoint = baseTournamentUrl + "code";
+var tournamentEndpoint = baseTournamentUrl + "tournament/";
+var providerEndpoint = baseTournamentUrl + "provider/";
+var lobbyEventsEndpoint = baseTournamentUrl + "lobby/events/by-code/";
 
 var matchUrl = '.api.pvp.net/api/lol/';
 var matchEndpoint = '/v2.2/match/';
@@ -232,6 +234,22 @@ module.exports = {
     getMatchIdsByTournament: function(region, tournamentCode, callback) {
         var url = protocol + region + matchUrl + region + matchEndpoint +
             matchByTournamentEndpoint + tournamentCode + '/ids?api_key=' + config.apiKey;
+        GET({
+            url: url,
+            callback: callback
+        });
+    },
+
+    getItemData: function(callback) {
+        var url = protocol + baseStaticDataUrl + 'item?itemListData=all&api_key=' + config.apiKey;
+        GET({
+            url: url,
+            callback: callback
+        });
+    },
+
+    getChampionData: function(callback) {
+        var url = protocol + baseStaticDataUrl + 'champion?champData=all&api_key=' + config.apiKey;
         GET({
             url: url,
             callback: callback
