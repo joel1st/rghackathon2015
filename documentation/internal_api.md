@@ -334,6 +334,16 @@ No parameters expected.
 | --- | --- | --- |
 | champions | [Champion] | array of champions |
 
+### items
+
+* no conditions
+
+No parameters expected.
+
+|Return | Type | Values/Desc |
+| --- | --- | --- |
+| items | [Item] | array of items |
+
 # Parameter Type Definitions
 
 ## Team
@@ -444,15 +454,20 @@ E. g. list of summoners who warded or Tuple<Summoner, Champion> for banned champ
 | --- | --- | --- |
 | name | string | |
 | id | integer | |
-| name | string | |
-| name | string | |
+| title | string | |
+| key | string | |
+| image | string | |
+| version | string | |
+| updated_at | Date | |
 
-  name: String,
-  id: Number,
-  title: String,
-  key: String,
-  image: String,
-  version: String,
+## Item
+| Key | Type | Desc |
+| --- | --- | --- |
+| name | string | |
+| id | integer | |
+| image | string | |
+| version | string | |
+| updated_at | Date | |
 
 ## Reason
 | Key | Type | Desc |
