@@ -323,6 +323,17 @@ No parameters expected.
 | filters | [Filter] | array of filters |
 
 
+## Static Data
+### champions
+
+* no conditions
+
+No parameters expected.
+
+|Return | Type | Values/Desc |
+| --- | --- | --- |
+| champions | [Champion] | array of champions |
+
 # Parameter Type Definitions
 
 ## Team
@@ -427,6 +438,21 @@ E. g. list of summoners who warded or Tuple<Summoner, Champion> for banned champ
 | --- | --- | --- |
 | type | FilterType | |
 | name | string | |
+
+## Champion
+| Key | Type | Desc |
+| --- | --- | --- |
+| name | string | |
+| id | integer | |
+| name | string | |
+| name | string | |
+
+  name: String,
+  id: Number,
+  title: String,
+  key: String,
+  image: String,
+  version: String,
 
 ## Reason
 | Key | Type | Desc |
