@@ -39,3 +39,6 @@ node_modules
 .project
 .settings/
 .tern-project
+
+# ts for now
+ts/
