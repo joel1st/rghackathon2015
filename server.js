@@ -74,12 +74,10 @@ function checkTeamMembers(participantList, teamMemberList) {
           break; // stop looping we found someone who matches
       }
     }
-    console.log("loop success");
     if (!found) {
       failedParticipants.push({participantId: currentParticipant.participantId, summonerId: currentParticipant.summonerId, summonerName: currentParticipant.summonerName});
     }
   }
-  console.log("returning failed participants");
   return failedParticipants;
 }
 

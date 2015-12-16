@@ -24,10 +24,8 @@ function loadGame(findCondition) {
   return new es6_promise.Promise(function(resolve, reject) {
       games.findOne(findCondition, function(err, internalGame) {
         if (!err && internalGame != null) {
-          console.log("internal game", internalGame);
           resolve(internalGame);
         } else {
-          console.log("Error", err, internalGame);
           reject("Error while loading Game: " + err);
         }
       });
