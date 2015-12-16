@@ -2,13 +2,16 @@ var riot = require('../riot/riot.js');
 
 module.exports = {
 	filters: ["No Wards Allowed"],
+	checkForWards: checkForWards,
+	filterToFunction: filterToFunction
+};
 
-/*  Check for ward placed events in data
+/*  Check for ward placed events in data. parameters is ignored.
 	and return an object with the following properties:
 		valid - false when a team is disqualified for not following the rules.
 		team - number of team participant was on.
 */
-checkForWards: function(json) {
+function checkForWards(json, parameters) {
 	var teams = getParticipantTeams(json);
 	timelineData = json.timeline.frames;
 	for(var i = 0; i < timelineData.length; i++) {
@@ -28,8 +31,10 @@ checkForWards: function(json) {
 	} return {valid: true, team: 0};
 }
 
-};
 
+// Map mapping from the filter type to the check function
+var filterToFunction = new Array();
+filterToFunction["NO_WARD"] = checkForWards;
 /* Create an object, organizing participants to their respective teams.
 	Team 1 = 100
 	Team 2 = 200

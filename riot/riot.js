@@ -17,7 +17,7 @@ var providerEndpoint = baseTournamentUrl + "provider/";
 var lobbyEventsEndpoint = baseTournamentUrl + "lobby/events/by-code/";
 
 var matchUrl = '.api.pvp.net/api/lol/';
-var matchEndpoint = '/v2.2/match/';
+var matchEndpoint = '/v2.2/match/for-tournament/';
 var summonerEndpoint = '/v1.4/summoner/by-name/';
 var matchByTournamentEndpoint = "by-tournament/";
 
@@ -140,8 +140,8 @@ module.exports = {
         });
     },
 
-    getMatch: function(matchId, region, includeTimeline, callback) {
-        var url = protocol + region.toLowerCase() + matchUrl + region.toLowerCase() + matchEndpoint + matchId + "?includeTimeline=" + includeTimeline;
+    getMatch: function(tournamentCode, matchId, region, includeTimeline, callback) {
+        var url = protocol + region.toLowerCase() + matchUrl + region.toLowerCase() + matchEndpoint + matchId + "?includeTimeline=" + includeTimeline + "&tournamentCode=" + tournamentCode;
         GET({
             url: url,
             callback: callback
@@ -224,7 +224,7 @@ module.exports = {
                                     callback(null, savedGames);
                                 });
                             }
-                               
+
                         }
                     });
                 }

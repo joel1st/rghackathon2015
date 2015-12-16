@@ -18,6 +18,7 @@ var Items = require('../models/items.js');
 // Get notification from Riot when game ends
 router.post('/riotNotification', function(req, res, next) {
 	console.log(res.body);
+	res.send(200, "All cool");
 });
 
 router.get('/isLoggedIn', passport.authenticate('local'), function(req, res, next) {
@@ -35,7 +36,7 @@ router.post('/login', passport.authenticate('local'), function(req, res, next) {
 
 router.post('/register',  function(req, res, next) {
 
-	if(!req.body.username.length && !req.body.password.length){
+	if(!req.body.username || !req.body.password || !req.body.username.length || !req.body.password.length){
 		res.send(403, {error: "Username or Password not Provided."});
 	} else {
 		Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
