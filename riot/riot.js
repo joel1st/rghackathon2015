@@ -125,16 +125,9 @@ module.exports = {
             },
             callback: function(err, response) {
                 if (!err) {
-                    var tournament = new tournaments.tournaments({
-                        tournamentId: response
-                    });
-                    tournament.save(function(err, saved) {
-                        if (!err && saved) {
-                            callback(null, response);
-                        } else {
-                            callback(err, response);
-                        }
-                    });
+                  callback(null, response);
+                } else {
+                  callback(err, null);
                 }
             }
         });
