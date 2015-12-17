@@ -8,5 +8,5 @@ module.exports = {
 	pickTypes: ['DRAFT_MODE', 'BLIND_PICK', 'ALL_RANDOM', 'TOURNAMENT_DRAFT'],
 	spectateTypes: ['ALL', 'NONE', 'LOBBYONLY'],
 	mapTypes: ['SUMMONERS_RIFT', 'CRYSTAL_SCAR', 'HOWLING_ABYSS'],
-	resultTypes: ['BLUE_WIN', 'RED_WIN', 'BLUE_DISQ', 'RED_DISQ', "TBD"]
+	resultTypes: ['BLUE_WIN', 'RED_WIN', "TBD", "BOTH_DISQ"]
 };

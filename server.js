@@ -90,6 +90,7 @@ app.post('/', function(req, res, next) {
   riot.getMatch(req.body.shortCode, req.body.gameId, req.body.region.replace(/\d/g, ""), true, function(err, riotGame) {
     if (!err) {
       var internalGameGlob, teamList = new Array();
+      var lastFailTime = -2; // -1 marks failure before game started (e. g. team members)
       // create a list of teams of participants and add summonerId and name to match.participants
       for (var i = 0; i < riotGame.participants.length; i++) {
         var currentParticipant = riotGame.participants[i];
@@ -118,6 +119,8 @@ app.post('/', function(req, res, next) {
         if (checkTeamMembers(teamList['100'], blueTeam.members).length == 0) { // check if the correct members were given
           internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 100, valid: true});
         } else {
+          internalGameGlob.result = config.ResultTypes.RED_WIN;
+          lastFailTime = -1;
           internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 100, valid: false});
         }
         return teams.loadTeam({_id: internalGameGlob.redTeam});
@@ -125,6 +128,7 @@ app.post('/', function(req, res, next) {
         if (checkTeamMembers(teamList['200'], redTeam.members).length == 0) {
           internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 200, valid: true});
         } else {
+          internalGameGlob.result = internalGameGlob.result === config.ResultTypes.RED_WIN ? "BOTH_DISQ" : "BLUE_WIN";
           internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 200, valid: false });
         }
         return tournaments.loadTournament({_id: req.body.metadata.tournamentId});
@@ -133,6 +137,9 @@ app.post('/', function(req, res, next) {
           var returnVal = filterToFunction[internalTournament.filters[i].type](riotGame, internalTournament.filters[i].parameters);
           returnVale.type = internalTournament.filters[i];
           internalGameGlob.failedReasons.push(returnVal);
+          if (!returnVal.valid && (lastFailTime > returnVal.timestamp || lastFailTime === -2)) {
+            internalGameGlob.result = returnVal.team == 100 ? "RED_WIN" : "BLUE_WIN"
+          }
         }
         internalGameGlob.checked = true;
         // and now save the game

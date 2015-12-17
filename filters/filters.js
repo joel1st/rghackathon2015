@@ -6,6 +6,8 @@ module.exports = {
 	filterToFunction: filterToFunction
 };
 
+// FILTERS NEED TO PROVIDE A TIMESTAMP AND VALID FIELD AND TEAM (element of {100, 200})
+
 /*  Check for ward placed events in data. parameters is ignored.
 	and return an object with the following properties:
 		valid - false when a team is disqualified for not following the rules.
@@ -21,14 +23,14 @@ function checkForWards(json, parameters) {
 				if(events[j].eventType === 'WARD_PLACED') {
 					var creator = events[j].creatorId;
 					if(teams['100'].indexOf(creator) > -1) {
-						return {valid: false, team: 1};
+						return {valid: false, team: 100, timestamp: events[j].timestamp};
 					} else if(teams['200'].indexOf(creator > -1)) {
-						return {valid: false, team: 2};
+						return {valid: false, team: 200, timestamp: events[j].timestamp};
 					}
 				}
 			}
 		}
-	} return {valid: true, team: 0};
+	} return {valid: true, team: 0, timestamp: 0};
 }
 
 
