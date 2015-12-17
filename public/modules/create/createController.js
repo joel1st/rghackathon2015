@@ -6,7 +6,7 @@ angular.module('Create')
 
 	$scope.messages = {};
 	$scope.users = new Array(1);
-  $scope.regions = ['NA', 'BR', 'EUNE', 'EUW', 'KR', 'RU','LAN','OCE', 'TR'];		
+  $scope.regions = ['NA', 'BR', 'EUNE', 'EUW', 'KR', 'RU','LAN','OCE', 'TR'];
   $scope.comparators = ['>', '=', '<'];
   $scope.message = {
   	step1: 'Please sign up so we can keep track of your tournament',
@@ -30,11 +30,11 @@ angular.module('Create')
   $scope.maps = [{
   	name: 'Summoners Rift',
   	value: 'SUMMONERS_RIFT'
-  }, 
+  },
   {
   	name: 'Crystal Scar',
   	value: 'CRYSTAL_SCAR'
-  }, 
+  },
   {
   	name: 'Howling Abyss',
   	value: 'HOWLING_ABYSS'
@@ -44,7 +44,7 @@ angular.module('Create')
   $scope.picks = [{
   	name: 'Blind Pick',
   	value: 'BLIND_PICK'
-  }, 
+  },
   {
   	name: 'Draft Mode',
   	value: 'DRAFT_MODE'
@@ -62,7 +62,7 @@ angular.module('Create')
   $scope.spectators = [{
   	name: 'None',
   	value: 'NONE'
-  }, 
+  },
   {
   	name: 'Lobby Only',
   	value: 'LOBBYONLY'
@@ -76,19 +76,19 @@ angular.module('Create')
   $scope.players = [{
   	name: 'One',
   	value: '1'
-  }, 
+  },
   {
   	name: 'Two',
   	value: '2'
-  }, 
+  },
   {
   	name: 'Three',
   	value: '3'
-  }, 
+  },
   {
   	name: 'Four',
   	value: '4'
-  }, 
+  },
   {
   	name: 'Five',
   	value: '5'
@@ -98,7 +98,7 @@ angular.module('Create')
   $scope.visibilities = [{
   	name: 'Public',
   	value: 'Public'
-  }, 
+  },
   {
   	name: 'Private',
   	value: 'Private'
@@ -142,7 +142,7 @@ angular.module('Create')
       id: 'summonerspell',
       name: 'Summoner Spells',
       status: false,
-    }, 
+    },
     conditions: {
 	id:'conditions',
 	name: 'Winconditions',
@@ -163,10 +163,10 @@ angular.module('Create')
   		pickType: $scope.picks[0].value,
   		mapType: $scope.maps[0].value,
   		spectatorType: $scope.spectators[0].value,
-  		visibility: $scope.visibilities[0].value
+  		visibility: $scope.visibilities[0].value,
   	},
   	users: $scope.users,
-  	filters: $scope.filters
+  	filters:$scope.filters,
   };
 
   $scope.newUser = function() {
@@ -187,7 +187,7 @@ angular.module('Create')
   	$scope.step1LoginSpinner = true;
   	$scope.messages = {};
     $http({
-    	url:"/api/login", 
+    	url:"/api/login",
     	method: 'POST',
     	data: {
         'username': $scope.newTournament.owner,
@@ -211,7 +211,7 @@ angular.module('Create')
   	$scope.step1RegisterSpinner = true;
   	$scope.messages = {};
     $http({
-    	url:"/api/register", 
+    	url:"/api/register",
     	method: 'POST',
     	data: {
         'username': $scope.newTournament.owner,
@@ -242,19 +242,19 @@ angular.module('Create')
   }
 
   $scope.submitStep4 = function() {
-  	console.log($scope.newTournament);
+  	console.log("Submitting", $scope.newTournament);
   	$scope.step4Spinner = true;
 
   	$scope.messages = {};
     $http({
-    	url:"/api/createTournament", 
+    	url:"/api/createTournament",
     	method: 'POST',
-    	data: $scope.newTournament.settings
+    	data: $scope.newTournament
     	})
     .success(function(result) {
       $scope.step4 = false;
   		$scope.step5 = true;
-  		$timeout(function() { 
+  		$timeout(function() {
   			$location.path('/tournament');
   		}, 2000);
     })

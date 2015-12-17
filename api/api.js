@@ -30,7 +30,7 @@ router.post('/login', passport.authenticate('local'), function(req, res, next) {
         if (err) {
             return next(err);
         }
-        res.send(200, 'Successfully Logged In');
+        res.status(200).send('Successfully Logged In');
     });
 });
 
@@ -76,49 +76,79 @@ for signup to front end
 (split into multiple endpoints if needed.)
 */
 router.post('/createTournament', function(req, res) {
+	console.log("HERE BODY", req.body);
 		var data = {};
 		// check data
-		if (config.spectateTypes.indexOf(req.body.spectatorType) <= -1) {
+		if (config.spectateTypes.indexOf(req.body.settings.spectatorType) <= -1) {
 			data.success = false;
 			data.message = "Invalid spectate type";
-		} else if (config.mapTypes.indexOf(req.body.mapType) <= -1) {
+		} else if (config.mapTypes.indexOf(req.body.settings.mapType) <= -1) {
 			data.success = false;
 			data.message = "Invalid map type";
-		} else if (config.pickTypes.indexOf(req.body.pickType) <= -1) {
+		} else if (config.pickTypes.indexOf(req.body.settings.pickType) <= -1) {
 			data.success = false;
 			data.message = "Invalid pick type";
-		} else if (req.body.teamSize > 5 || req.body.teamSize < 1) {
+		} else if (req.body.settings.teamSize > 5 || req.body.settings.teamSize < 1) {
 			data.success = false;
 			data.message = "Invalid team size";
-		} else if (req.body.name == "") {
+		} else if (req.body.settings.name == "") {
 			data.success = false;
 			data.message = "Invalid Tournament name";
-		} else if (config.supportedRegions.indexOf(req.body.region) <= -1) {
+		} else if (config.supportedRegions.indexOf(req.body.settings.region) <= -1) {
 			data.success = false;
 			data.message = "Invalid Region";
 		} else { // all cool now
 			// so request it from the riot api
-			providers.findOne({'region': req.body.region}, function(err, response) {
+			providers.findOne({'region': req.body.settings.region}, function(err, response) {
 				var data = {};
-				if (!err) {
-					riot.createTournament(req.body.name, response.providerId, function(err, response) {
+				if (!err && response) {
+					riot.createTournament(req.body.settings.name, response.providerId, function(err, response) {
 						if (!err) {
 							console.log(typeof req.body.visibility);
 							console.log(req.body.visibility);
-							console.log(typeof Boolean(req.body.visibility));
-							console.log(req.body.filter);
+							console.log(Boolean(req.body.visibility));
+							console.log(req.body.filters);
+							var filters = [];
+							// filters:
+							req.body.filters = req.body.filters[0];
+							var filterKeys = Object.keys(req.body.filters);
+							for (var i = 0; i < filterKeys.length; i++) {
+								console.log("Current Filters:", filterKeys[i]);
+								if (req.body.filters[filterKeys[i]].status) {
+									req.body.filters[filterKeys[i]].parameters = typeof req.body.filters[filterKeys[i]].parameters === 'undefined' ? "" : req.body.filters[filterKeys[i]].parameters;
+									console.log("Pushing: ", { type: filterKeys[i], parameters: req.body.filters[filterKeys[i]].parameters });
+									filters.push({ type: filterKeys[i], parameters: req.body.filters[filterKeys[i]].parameters });
+								}
+							}
+							console.log("filters now: ", filters);
+							var teamSize = req.body.settings.teamSize;
 							// update the correct item
-							tournaments.update({"tournamentId": response}, {"visibility": Boolean(req.body.visibility), "filter": req.body.filter, "tournamentId": response, "spectatorType": req.body.spectatorType, "pickType": req.body.pickType, "mapType": req.body.mapType, "teamSize": req.body.teamSize, "name": req.body.name ,"region": req.body.region, "teamSize": req.body.teamSize, "ownerId": req.session.username}, function (err, numAffected) {});
+							var tournament = new tournaments.tournaments({"tournamentId": response, "visibility": Boolean(req.body.settings.visibility), "filters": filters, "tournamentId": response, "spectatorType": req.body.settings.spectatorType, "pickType": req.body.settings.pickType, "mapType": req.body.settings.mapType, "teamSize": teamSize, "name": req.body.settings.name ,"region": req.body.settings.region, "teamSize": req.body.settings.teamSize, "ownerId": req.session.username});
 							data.success = true;
 							data.tournamentId = response;
 							data.region = req.body.region;
+							console.log("success");
+
+							tournament.save(function (err, saved) {
+								console.log("saving tournament");
+								if (!err) {
+									console.log("saved", saved);
+									res.json(data);
+									// do other stuff like game gen / team gen
+								} else {
+									console.log("Tournament Creation", err);
+									res.status(400).send("Something went wrong");
+								}
+							});
 						} else {
 							console.log(err);
 							data.success = false;
 							data.tournamentId = null;
 							data.region = null;
+							res.json(data);
 						}
-					res.json(data);
+					// now generate some new stuff (games etc.)
+
 					});
 				} else {
 					data.success = false;
@@ -137,7 +167,7 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 	var data = {};
 	// make sure tournament exists
 	var participants = req.body.participants.split(", ");
-	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, response) {
+	tournaments.tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, response) {
 		if (!err) {
 			// Create random teams
 			var numberOfParticipants = participants.length;
@@ -204,7 +234,7 @@ router.post('/createTeamsAndMatches',  function(req,  res) {
 });
 
 router.post('/generateTournamentCode', function(req,res) {
-	tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, data) {
+	tournaments.tournaments.findOne({"tournamentId": req.body.tournamentId, "region": req.body.region}, function(err, data) {
 		if (!err && data != null) {
 			riot.createCode(data.tournamentId, 1, data.region, function(err, response) {
 		        if (err) {
@@ -333,7 +363,7 @@ router.post('/currentTournamentState',  currentTournamentState);
 
 router.post('/findTournament',  function(req,  res) {
 	// find tournaments
-	tournaments.findOne({"name": req.body.name, "region": req.body.region}, function (err, response) {
+	tournaments.tournaments.findOne({"name": req.body.name, "region": req.body.region}, function (err, response) {
 		req.body.tournamentId = response.tournamentId;
 		console.log("Tournament Id", response.tournamentId);
 		if (!err) {

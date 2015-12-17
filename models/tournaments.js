@@ -26,7 +26,7 @@ var tournamentSchema = new mongoose.Schema({
   created: Date,
   modified: Date,
   visibility: Boolean,
-  filters: [Object], // object with filter type and parameters
+  filters: [], // object with filter type and parameters
   match: {}
 });
 var tournaments = mongoose.model('tournaments', tournamentSchema);
