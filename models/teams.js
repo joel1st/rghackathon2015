@@ -18,7 +18,7 @@ var teamSchema = new mongoose.Schema({
 function loadTeam(findCondition) {
 return new es6_promise.Promise(function (resolve, reject) {
   teams.findOne(findCondition, function (err, team) {
-    if (!err && team) {
+    if (!err) {
       console.log(team),
       resolve(team);
     } else {
