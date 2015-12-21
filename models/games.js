@@ -31,7 +31,20 @@ function loadGame(findCondition) {
       });
     });
   }
+
+  function saveGame(game) {
+    return new es6_promise.Promise(function(resolve, reject) {
+      game.save(function(err, resp)  {
+        if (!err) {
+          resolve();
+        } else {
+          reject(err);
+        }
+      });
+    });
+  }
   module.exports = {
     games: games,
-    loadGame: loadGame
+    loadGame: loadGame,
+    saveGame: saveGame
   };

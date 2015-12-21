@@ -55,6 +55,9 @@ function GET(options) {
 
 
 function POST(options) {
+    console.log("Using API key: ", key);
+    console.log("post to: " + options.url);
+    console.log("body: ", options.body);
     queue.push(function(done) {
 
         request.post({
@@ -149,7 +152,7 @@ module.exports = {
         for (var i = 0; i < summonerNames.length; i++) {
             url += summonerNames[i] + ',';
         }
-        console.log(url);
+        console.log("url in get summoners by name", url);
         GET({
             url: url,
             callback: callback

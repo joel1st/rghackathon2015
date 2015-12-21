@@ -107,7 +107,7 @@ app.post('/', function(req, res, next) {
           }
       }
       // load games / teams / tournament
-      games.loadGame({ _id: req.body.metadata.gameId}).then((internalGame) => { // load the game from the database
+      games.loadGame({ _id: req.body.metadata.gameId}).then(function(internalGame) { // load the game from the database
         if (internalGame.checked) { // first game counts
           return Promise.reject("Game was already checked");
         }
@@ -115,7 +115,7 @@ app.post('/', function(req, res, next) {
         internalGame.failedReason = []; // init failed reasons
         internalGameGlob = internalGame;
         return teams.loadTeam({_id: internalGame.blueTeam});
-      }).then ((blueTeam) => {
+      }).then (function(blueTeam) {
         if (checkTeamMembers(teamList['100'], blueTeam.members).length == 0) { // check if the correct members were given
           internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 100, valid: true});
         } else {
@@ -124,7 +124,7 @@ app.post('/', function(req, res, next) {
           internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 100, valid: false});
         }
         return teams.loadTeam({_id: internalGameGlob.redTeam});
-      }).then((redTeam) => {
+      }).then(function(redTeam) {
         if (checkTeamMembers(teamList['200'], redTeam.members).length == 0) {
           internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 200, valid: true});
         } else {
@@ -132,7 +132,7 @@ app.post('/', function(req, res, next) {
           internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 200, valid: false });
         }
         return tournaments.loadTournament({_id: req.body.metadata.tournamentId});
-      }).then((internalTournament) => {
+      }).then(function(internalTournament) {
         for (var i = 0; i < internalTournament.filters.length; i++) {
           var returnVal = filterToFunction[internalTournament.filters[i].type](riotGame, internalTournament.filters[i].parameters);
           returnVale.type = internalTournament.filters[i];

@@ -28,5 +28,16 @@ return new es6_promise.Promise(function (resolve, reject) {
 });
 }
 
+function saveTeam(teamSchema) {
+  return new es6_promise.Promise(function(resolve, reject) {
+    teamSchema.save(function(err, resp) {
+      if (!err) {
+        resolve();
+      } else {
+        reject(err);
+      }
+    })
+  })
+}
 var teams = mongoose.model('teams', teamSchema);
-module.exports = {teams: teams, loadTeam: loadTeam};
+module.exports = {teams: teams, loadTeam: loadTeam, saveTeam: saveTeam};
