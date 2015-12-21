@@ -64,18 +64,22 @@ function checkTeamMembers(participantList, teamMemberList) {
   var found = false;
   var failedParticipants = [];
   var blueTeamId = -1;
-  for (var i = 0; i < participantList.length;i++) {
+  for (var i = 0; i < participantList.length; i++) {
     var currentParticipant = participantList[i];
     found = false;
     for (var j = 0; j < teamMemberList.length; j++) {
       if (teamMemberList[i].summonerId == currentParticipant.summonerId && (currentParticipant.teamId == blueTeamId || blueTeamId == -1)) {
-          found = true;
-          blueTeamId = currentParticipant.teamId;
-          break; // stop looping we found someone who matches
+        found = true;
+        blueTeamId = currentParticipant.teamId;
+        break; // stop looping we found someone who matches
       }
     }
     if (!found) {
-      failedParticipants.push({participantId: currentParticipant.participantId, summonerId: currentParticipant.summonerId, summonerName: currentParticipant.summonerName});
+      failedParticipants.push({
+        participantId: currentParticipant.participantId,
+        summonerId: currentParticipant.summonerId,
+        summonerName: currentParticipant.summonerName
+      });
     }
   }
   return failedParticipants;
@@ -98,40 +102,64 @@ app.post('/', function(req, res, next) {
           teamList[currentParticipant.teamId] = [];
         }
         teamList[currentParticipant.teamId].push(currentParticipant);
-          for (var j = 0; j < riotGame.participantIdentities; j++) {
-              if (riotGame.participantIdentities[j].participantId == currentParticipant.participantId) {
-                currentParticipant.summonerId = riotGame.participantIdentities[j].player.summonerId;
-                currentParticipant.summonerName = riotGame.participantIdentities[j].player.summonerName;
-                break;
-              }
+        for (var j = 0; j < riotGame.participantIdentities; j++) {
+          if (riotGame.participantIdentities[j].participantId == currentParticipant.participantId) {
+            currentParticipant.summonerId = riotGame.participantIdentities[j].player.summonerId;
+            currentParticipant.summonerName = riotGame.participantIdentities[j].player.summonerName;
+            break;
           }
+        }
       }
       // load games / teams / tournament
-      games.loadGame({ _id: req.body.metadata.gameId}).then(function(internalGame) { // load the game from the database
+      games.loadGame({
+        _id: req.body.metadata.gameId
+      }).then(function(internalGame) { // load the game from the database
         if (internalGame.checked) { // first game counts
           return Promise.reject("Game was already checked");
         }
         internalGame.match = riotGame;
         internalGame.failedReason = []; // init failed reasons
         internalGameGlob = internalGame;
-        return teams.loadTeam({_id: internalGame.blueTeam});
-      }).then (function(blueTeam) {
+        return teams.loadTeam({
+          _id: internalGame.blueTeam
+        });
+      }).then(function(blueTeam) {
         if (checkTeamMembers(teamList['100'], blueTeam.members).length == 0) { // check if the correct members were given
-          internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 100, valid: true});
+          internalGameGlob.failedReasons.push({
+            type: "TEAM_MEMBERS",
+            team: 100,
+            valid: true
+          });
         } else {
           internalGameGlob.result = config.ResultTypes.RED_WIN;
           lastFailTime = -1;
-          internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 100, valid: false});
+          internalGameGlob.failedReasons.push({
+            type: "TEAM_MEMBERS",
+            team: 100,
+            valid: false
+          });
         }
-        return teams.loadTeam({_id: internalGameGlob.redTeam});
+        return teams.loadTeam({
+          _id: internalGameGlob.redTeam
+        });
       }).then(function(redTeam) {
         if (checkTeamMembers(teamList['200'], redTeam.members).length == 0) {
-          internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 200, valid: true});
+          internalGameGlob.failedReasons.push({
+            type: "TEAM_MEMBERS",
+            team: 200,
+            valid: true
+          });
         } else {
           internalGameGlob.result = internalGameGlob.result === config.ResultTypes.RED_WIN ? "BOTH_DISQ" : "BLUE_WIN";
-          internalGameGlob.failedReasons.push({type: "TEAM_MEMBERS", team: 200, valid: false });
+          internalGameGlob.failedReasons.push({
+            type: "TEAM_MEMBERS",
+            team: 200,
+            valid: false
+          });
         }
-        return tournaments.loadTournament({_id: req.body.metadata.tournamentId});
+        return tournaments.loadTournament({
+          _id: req.body.metadata.tournamentId
+        });
       }).then(function(internalTournament) {
         for (var i = 0; i < internalTournament.filters.length; i++) {
           var returnVal = filterToFunction[internalTournament.filters[i].type](riotGame, internalTournament.filters[i].parameters);
@@ -143,14 +171,45 @@ app.post('/', function(req, res, next) {
         }
         internalGameGlob.checked = true;
         // and now save the game
-        games.games.update({_id: internalGameGlob._id}, internalGameGlob, {multi: false, upsert: false}, function(err, numAffected) {
+        games.games.update({
+          _id: internalGameGlob._id
+        }, internalGameGlob, {
+          multi: false,
+          upsert: false
+        }, function(err, numAffected) {
           if (err || numAffected > 1) {
             console.log("Error", err, numAffected);
           } else {
+            if (order > 0) {
+              // now set the winner of the given game as the participant of the game with lower order
+              var nextGameOrder = order % 2 == 0 ? (order - 2) / 2 : (order - 1) / 2; // binary tree!
+              var team = internalGameGlob.result == "RED_WIN" ? {
+                redTeam: internalGameGlob.redTeam
+              } : {
+                blueTeam: internalGameGlob.blueTeam
+              };
+              update = {
+                $set: team
+              };
+
+              games.games.update({
+                tournamentId: internalTournament.tournamentId,
+                region: internalTournament.region,
+                order: nextGameOrder
+              }, update, function(err, numAffected) {
+                if (err || numAffected > 1) {
+                  console.log("Error in updating", err, numAffected);
+                } else {
+                  console.log("All cool");
+                }
+              });
+            } else {
+              console.log("We have a finals winner!");
+            }
             console.log("All cool. Saved the game");
           }
         });
-      }).catch(function (err) {
+      }).catch(function(err) {
         console.log("Error", err);
       });
     } else {
