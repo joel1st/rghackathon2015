@@ -14,6 +14,16 @@ var gamesModel = require('../models/games.js');
 var Champions = require('../models/champions.js');
 var Items = require('../models/items.js');
 var es6_promise = require('es6-promise');
+// checks login status (sends unsuccess and returns bool)
+function checkLogin(req, res) {
+  if (!req.user) {
+    res.status(401).send({sucess: false, message: "Unauthorized"});
+    return false;
+  }
+
+  return true;
+}
+
 // api -------------------------
 
 // Get notification from Riot when game ends
@@ -22,17 +32,44 @@ router.post('/riotNotification', function(req, res, next) {
   res.send(200, "All cool");
 });
 
-router.get('/isLoggedIn', passport.authenticate('local'), function(req, res, next) {
-  res.send(200, 'Logged In');
+router.get('/isLoggedIn', function(req, res, next) {
+    if (req.user) {
+        return res.send({
+            success: true,
+            user: req.user
+        });
+
+    }
+    res.send({
+        success: false,
+        message: 'not authorized'
+    });
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res, next) {
-  req.session.save(function(err) {
+router.post('/login', function(req, res, next) {
+  Account.authenticate()(req.body.username, req.body.password, function(err, user, options) {
+    if (err) {
+      console.log("Error in Login", err);
+      res.status(401).send("Login Failed");
+      return;
+    }
+
+    if (user === false) {
+      console.log("user is false");
+      res.status(402).send(options.message);
+    } else {
+      console.log("req user");
+      req.login(user, function(err) {
+        res.status(200).send("Successfully logged in");
+      });
+    }
+  });
+/*  req.session.save(function(err) {
     if (err) {
       return next(err);
     }
     res.status(200).send('Successfully Logged In');
-  });
+  });*/
 });
 
 router.post('/register', function(req, res, next) {
@@ -47,22 +84,12 @@ router.post('/register', function(req, res, next) {
     }), req.body.password, function(err, account) {
       console.log(req.body, err, account);
       if (err) {
-        return res.send(403, {
+        res.send(403, {
           error: "Sorry. That username already exists. Try again."
         });
+      } else {
+        res.status(200).send("Successfully created Account");
       }
-
-      passport.authenticate('local')(req, res, function() {
-        req.session.save(function(err) {
-          if (err) {
-            return next(err);
-          }
-          res.send(200, {
-            data: "Successfully Created Account."
-          });
-
-        });
-      });
     });
 
   }
@@ -85,6 +112,9 @@ for signup to front end
 (split into multiple endpoints if needed.)
 */
 router.post('/createTournament', function(req, res) {
+  if (!checkLogin(req, res)) {
+    return;
+  }
   console.log("HERE BODY", req.body);
   var data = {};
   // check data
@@ -227,7 +257,10 @@ function getTeamObjects(team, region, teamSchemas, tournamentId) {
 
 // Teams are [{name: String, members: [String]}]
 router.post('/createTeamsAndMatches', function(req, res) {
-  console.log("creating teams and matches");
+  if (!checkLogin(req, res)) {
+    return;
+  }
+console.log("creating teams and matches");
   var data = {};
   // make sure tournament exists
   var teams = JSON.parse(req.body.teams);
@@ -340,6 +373,9 @@ router.post('/createTeamsAndMatches', function(req, res) {
 });
 
 router.post('/generateTournamentCode', function(req, res) { // TODO maybe make it for a specific game?!
+  if (!checkLogin(req, res)) {
+    return;
+  }
   tournaments.tournaments.findOne({
     "tournamentId": req.body.tournamentId,
     "region": req.body.region
