@@ -15,13 +15,12 @@ var Champions = require('../models/champions.js');
 var Items = require('../models/items.js');
 var es6_promise = require('es6-promise');
 // checks login status (sends unsuccess and returns bool)
-function checkLogin(req, res) {
-  if (!req.user) {
+function checkLogin(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
     res.status(401).send({sucess: false, message: "Unauthorized"});
-    return false;
   }
-
-  return true;
 }
 
 // api -------------------------
@@ -32,44 +31,16 @@ router.post('/riotNotification', function(req, res, next) {
   res.send(200, "All cool");
 });
 
-router.get('/isLoggedIn', function(req, res, next) {
-    if (req.user) {
-        return res.send({
-            success: true,
-            user: req.user
-        });
-
-    }
+router.get('/isLoggedIn', checkLogin, function(req, res, next) {
     res.send({
-        success: false,
-        message: 'not authorized'
+        success: true,
+        message: 'authorized',
+        user: req.user.username
     });
 });
 
-router.post('/login', function(req, res, next) {
-  Account.authenticate()(req.body.username, req.body.password, function(err, user, options) {
-    if (err) {
-      console.log("Error in Login", err);
-      res.status(401).send("Login Failed");
-      return;
-    }
-
-    if (user === false) {
-      console.log("user is false");
-      res.status(402).send(options.message);
-    } else {
-      console.log("req user");
-      req.login(user, function(err) {
-        res.status(200).send("Successfully logged in");
-      });
-    }
-  });
-/*  req.session.save(function(err) {
-    if (err) {
-      return next(err);
-    }
+router.post('/login', passport.authenticate('local'), function(req, res, next) {
     res.status(200).send('Successfully Logged In');
-  });*/
 });
 
 router.post('/register', function(req, res, next) {
@@ -98,12 +69,7 @@ router.post('/register', function(req, res, next) {
 
 router.get('/logout', function(req, res, next) {
   req.logout();
-  req.session.save(function(err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/');
-  });
+  res.redirect('/');
 });
 
 /*
@@ -111,7 +77,7 @@ Send whatever data is needed
 for signup to front end
 (split into multiple endpoints if needed.)
 */
-router.post('/createTournament', function(req, res) {
+router.post('/createTournament', checkLogin, function(req, res) {
   if (!checkLogin(req, res)) {
     return;
   }
@@ -256,7 +222,7 @@ function getTeamObjects(team, region, teamSchemas, tournamentId) {
 }
 
 // Teams are [{name: String, members: [String]}]
-router.post('/createTeamsAndMatches', function(req, res) {
+router.post('/createTeamsAndMatches', checkLogin, function(req, res) {
   if (!checkLogin(req, res)) {
     return;
   }
